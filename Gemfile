@@ -43,6 +43,8 @@ group :development, :test do
   gem 'pry-rails'
   gem 'pry-doc'
   gem 'pry-byebug'
+  gem 'capybara'
+  gem 'selenium-webdriver'
 end
 
 group :development do

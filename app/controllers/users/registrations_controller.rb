@@ -4,15 +4,20 @@ class Users::RegistrationsController < Devise::RegistrationsController
   before_action :configure_sign_up_params
   # before_action :configure_account_update_params, only: [:update]
 
-  # GET /resource/sign_up
   def new
     @user = User.new
   end
 
-  # POST /resource
-  # def create
-  #   super
-  # end
+
+  def create
+    @user = User.new(sign_up_params)
+    if @user.save
+      flash[:success] = "Atrierへようこそ！！！"
+      redirect_to @user
+    else
+      render 'new'
+    end
+  end
 
   # GET /resource/edit
   # def edit

@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe "StaticPages", type: :request do
-  let(:base_title) { 'Egg' }
+  let(:base_title) { 'Atlier' }
 
   describe "GET /" do
     before do
@@ -17,14 +17,14 @@ RSpec.describe "StaticPages", type: :request do
     end
   end
 
-  describe "GET /help" do
-    let(:page_title) { 'Help' }
+  describe "GET /contact" do
+    let(:page_title) { 'Contact' }
 
     before do
-      get help_url
+      get contact_url
     end
 
-    it "render help" do
+    it "render contact" do
       expect(response.status).to eq 200
     end
 

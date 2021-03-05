@@ -1,7 +1,7 @@
 module ApplicationHelper
   def base_meta_tags
     {
-      site: 'Egg',
+      site: 'Atlier',
       reverse: true,
       charset: 'utf-8',
       description: "Create an account or log in to Egg - Let's refer other ideas to observe their works and

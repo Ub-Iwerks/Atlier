@@ -82,15 +82,40 @@ footer {
       text-decoration: none;
     }
   }
-  small {
-    float: left;
-  }
   ul {
-    float: right;
+    float: left;
     list-style: none;
+    padding-left: 0px;
     li {
       float: left;
-      margin-left: 15px;
+      margin-left: 20px;
+      &:first-child {
+        margin-left: 0px;
+      }
     }
+  }
+  small {
+    float: right;
+    list-style: none;
+    letter-spacing: 2px;
+  }
+}
+
+/* flash */
+.flash {
+  color: white;
+  text-align: center;
+  &-success{
+    background-color: blue;
+  }
+  &-danger {
+    background-color: red;
+  }
+}
+
+/* forms */
+.field_with_errors {
+  .f-control {
+    border-color: red;
   }
 }
