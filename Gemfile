@@ -30,6 +30,7 @@ gem 'bootsnap', '>= 1.4.4', require: false
 gem 'bootstrap-sass'
 
 gem 'meta-tags'
+gem 'config'
 gem "faker"
 gem "devise"
 gem "omniauth", '1.9.1'

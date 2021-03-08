@@ -1,3 +1,6 @@
-<% flash.each do |message_type, message| %>
-  <%= content_tag(:div, message, class: "flash flash-#{message_type}") %>
+<% if notice.present? %>
+  <p class="flash notice"><%= notice %></p>
+<% end %>
+<% if alert.present? %>
+  <p class="flash alert"><%= alert %></p>
 <% end %>

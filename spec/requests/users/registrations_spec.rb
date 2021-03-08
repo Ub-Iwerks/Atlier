@@ -32,7 +32,7 @@ RSpec.describe "Registrations", type: :request do
     end
 
     it "render show" do
-      expect(response).to redirect_to user_path(user)
+      expect(response).to redirect_to root_path
     end
   end
 end

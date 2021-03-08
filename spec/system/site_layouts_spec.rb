@@ -9,7 +9,7 @@ RSpec.describe 'Layouts', type: :system do
     visit root_path
     within("header") do
       expect(page).to have_link "Atlier", href: root_path
-      expect(page).to have_link "Home", href: root_path
+      expect(page).to have_link "ホーム", href: root_path
     end
     within("footer") do
       expect(page).to have_link "Contact", href: contact_path

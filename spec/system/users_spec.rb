@@ -25,9 +25,7 @@ RSpec.describe 'Users', type: :system do
           click_button "新規登録"
         end
         is_expected.to be_truthy
-        expect(page).to have_selector ".flash-success", text: "Atrierへようこそ！！！"
-        expect(page).to have_selector "h1", text: name
-        expect(page).to have_selector "p", text: email
+        expect(page).to have_selector ".notice", text: "本人確認用のメールを送信しました。メール内のリンクからアカウントを有効化させてください。"
         visit current_path
         expect(page).to_not have_selector ".flash-success"
       end

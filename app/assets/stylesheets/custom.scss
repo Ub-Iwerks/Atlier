@@ -105,12 +105,12 @@ footer {
 .flash {
   color: white;
   text-align: center;
-  &-success{
-    background-color: blue;
-  }
-  &-danger {
-    background-color: red;
-  }
+}
+.notice {
+  background-color: blue;
+}
+.alert {
+  background-color: red;
 }
 
 /* forms */
