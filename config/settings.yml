@@ -1,3 +1,8 @@
 google_account:
   email: "iwerks.dev@gmail.com"
   password: "ibwkyylfkuafudmd"
+password_length:
+  range: 8..128
+  minimum: 8
+regular_expressions:
+  email: /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i

@@ -1,51 +1,41 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
- let(:user) { build(:user) }
+  let(:user) { build(:user) }
 
-  describe "Validatioins Test" do
-    context "user has valid date" do
+  describe "Validatioins test" do
+    subject { user }
+
+    context "user has valid imformation" do
       let(:user) { build(:user, username: "example", email: "test@exmpale.com") }
-      it "is valid" do
-        expect(user).to be_valid
-      end
+      it { is_expected.to be_valid }
     end
 
     context "user doesnt have name" do
       let(:user) { build(:user, username: " ") }
-      it "is not valid" do
-        expect(user).not_to be_valid
-      end
+      it { is_expected.not_to be_valid }
     end
 
     context "user doesnt have email" do
       let(:user) { build(:user, email: " ") }
-      it "is not valid" do
-        expect(user).not_to be_valid
-      end
+      it { is_expected.not_to be_valid }
     end
 
     context "user has too long name" do
       let(:user) { build(:user, username: "a" * 51) }
-      it "is not valid" do
-        expect(user).not_to be_valid
-      end
+      it { is_expected.not_to be_valid }
     end
 
     context "user has too long email" do
       let(:user) { build(:user, email: "a" * 244 + "@example.com") }
-      it "is not valid" do
-        expect(user).not_to be_valid
-      end
+      it { is_expected.not_to be_valid }
     end
 
     context "user has valid email" do
       valid_emails = %w(user@example.com USER@foo.COM A_US-ER@foo.bar.org first.last@foo.jp alice+bob@baz.cn)
       valid_emails.each do |email|
         let(:user) { build(:user, email: email) }
-        it "is valid" do
-          expect(user).to be_valid
-        end
+        it { is_expected.to be_valid }
       end
     end
 
@@ -53,34 +43,33 @@ RSpec.describe User, type: :model do
       invalid_emails = %w(user@example,com user_at_foo.org user.name@example. foo@bar_baz.com foo@bar+baz.com)
       invalid_emails.each do |email|
         let(:user) { build(:user, email: email) }
-        it "is not valid" do
-          expect(user).not_to be_valid
-        end
+        it { is_expected.not_to be_valid }
       end
     end
 
     context "user has same email" do
-      let(:user) { create(:user, email: "test@exmpale.com") }
-      let(:dup_user) { build(:user, email: user.email) }
-      it "is not valid" do
-        expect(dup_user).not_to be_valid
-      end
+      let(:origin_user) { create(:user, email: "test@exmpale.com") }
+      let(:user) { build(:user, email: origin_user.email) }
+      it { is_expected.not_to be_valid }
     end
 
     context "user has blank password" do
-      password_text = " " * 6
-      let(:user) { build(:user, password: password_text, password_confirmation: password_text) }
-      it "is not valid" do
-        expect(user).not_to be_valid
-      end
+      let(:password) { " " * 8 }
+      let(:user) { build(:user, password: password, password_confirmation: password) }
+      it { is_expected.not_to be_valid }
     end
 
     context "user has short password" do
-      password_text = "a" * 5
-      let(:user) { build(:user, password: password_text, password_confirmation: password_text) }
-      it "is not valid" do
-        expect(user).not_to be_valid
-      end
+      let(:password) { "a" * 7 }
+      let(:user) { build(:user, password: password, password_confirmation: password) }
+      it { is_expected.not_to be_valid }
+    end
+
+    context "user has missmatch of password and password_confirmation" do
+      let(:password) { "password" }
+      let(:password_confirmation) { "abcd1234" }
+      let(:user) { build(:user, password: password, password_confirmation: password_confirmation) }
+      it { is_expected.not_to be_valid }
     end
   end
 end

@@ -23,3 +23,6 @@ RSpec/EmptyLineAfterFinalLet:
 
 Style/BlockComments:
   Enabled: false
+
+FirstHashElementLineBreak:
+  Enabled: false
