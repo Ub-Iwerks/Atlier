@@ -31,9 +31,14 @@ gem 'bootstrap-sass'
 
 gem 'meta-tags'
 gem 'config'
+gem 'dotenv-rails'
 gem "faker"
 gem "devise"
-gem "omniauth", '1.9.1'
+gem "omniauth"
+gem 'omniauth-facebook'
+gem 'omniauth-twitter'
+gem 'omniauth-google-oauth2'
+gem 'omniauth-github'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
