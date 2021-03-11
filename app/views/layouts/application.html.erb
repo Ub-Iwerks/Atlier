@@ -13,11 +13,6 @@
       <%= yield %>
       <%= render 'layouts/footer' %>
     </div>
-    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
-    <script type="text/javascript">
-      if (window.location.hash && window.location.hash == '#_=_') {
-          window.location.hash = '';
-      }
-    </script>
+    <%= render 'layouts/js_default' %>
   </body>
 </html>

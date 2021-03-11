@@ -1,3 +1,16 @@
 <% set_meta_tags title: "#{@user.username}" %>
-<h1><%= @user.username %></h1>
-<p><%= @user.email %></p>
+<div class="row">
+  <aside class="col-md-4">
+    <section class="user_info">
+      <% if @user.avatar.attached? %>
+        <%= image_tag @user.avatar, width: "150px" %>
+      <% else %>
+        <%= image_tag "avatar.png", alt: "プロフィール写真", class: "avatar", width: "150px" %>
+      <% end %>
+      <h1>
+        <%= @user.username %>
+        <p><%= @user.email %></p>
+      </h1>
+    </section>
+  </aside>
+</div>
