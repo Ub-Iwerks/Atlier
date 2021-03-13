@@ -73,7 +73,7 @@ RSpec.describe User, type: :model do
     end
   end
 
-  describe "Relationship test" do
+  describe "Test related to work" do
     context "destroyed user" do
       let!(:user) { create(:user) }
       let!(:work) { create(:work, user: user) }
@@ -81,6 +81,41 @@ RSpec.describe User, type: :model do
       it "work related to user are destroyed" do
         user.destroy
         expect(Work.count).to eq count - 1
+      end
+    end
+  end
+
+  describe "Method test" do
+    let(:user) { create(:user) }
+    let(:another_user) { create(:user) }
+    describe "follow method" do
+      subject { user.following?(another_user) }
+
+      context "user doesnt follow another_user" do
+        it "following? return false" do
+          is_expected.to be_falsey
+        end
+      end
+
+      context "user follow another_user" do
+        before { user.follow(another_user) }
+
+        it "following? return true" do
+          is_expected.to be_truthy
+        end
+
+        it "followed by user" do
+          expect(another_user.followers.include?(user)).to be_truthy
+        end
+      end
+
+      context "user unfollow another_user" do
+        before { user.follow(another_user) }
+
+        it "following? return true" do
+          user.unfollow(another_user)
+          is_expected.to be_falsey
+        end
       end
     end
   end
