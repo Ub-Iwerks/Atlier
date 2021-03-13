@@ -24,10 +24,14 @@ RSpec.describe "Registrations", type: :request do
     let(:password) { "password" }
     let(:user) { User.find_by(email: email) }
     before do
-      post user_registration_path, params: { user: { username: username,
-                                                     email: email,
-                                                     password: password,
-                                                     password_confirmation: password, } }
+      post user_registration_path, params: {
+        user: {
+          username: username,
+          email: email,
+          password: password,
+          password_confirmation: password,
+        },
+      }
     end
 
     it "create user" do
@@ -62,7 +66,12 @@ RSpec.describe "Registrations", type: :request do
     let(:changed_email) { "changed@exmple.com" }
     before do
       sign_in user
-      put user_registration_path, params: { user: { username: changed_username, email: changed_email } }
+      put user_registration_path, params: {
+        user: {
+          username: changed_username,
+          email: changed_email,
+        },
+      }
     end
 
     it "update successliy" do
@@ -79,7 +88,12 @@ RSpec.describe "Registrations", type: :request do
     let!(:count) { User.count }
     before do
       sign_in user
-      delete user_registration_path, params: { user: { username: user.username, email: user.email } }
+      delete user_registration_path, params: {
+        user: {
+          username: user.username,
+          email: user.email,
+        },
+      }
     end
 
     it "delete successliy" do

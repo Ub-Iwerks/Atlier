@@ -24,5 +24,5 @@ RSpec/EmptyLineAfterFinalLet:
 Style/BlockComments:
   Enabled: false
 
-FirstHashElementLineBreak:
+Airbnb/DefaultScope:
   Enabled: false

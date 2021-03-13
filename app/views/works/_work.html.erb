@@ -1,0 +1,20 @@
+<li id="work-<%= work.id %>">
+  <span class="avatar">
+    <%= link_to work.user do %>
+      <% if work.user.avatar.attached? %>
+        <%= image_tag(work.user.avatar, width: "50px") %>
+      <% else %>
+        <%= image_tag "avatar.png", alt: "プロフィール写真", class: "avatar", width: "50px" %>
+      <% end %>
+    <% end %>
+  </span>
+  <span class="user"><%= link_to work.user.username, work.user %></span>
+  <span class="title"><%= work.title %></span>
+  <span class="concept"><%= work.concept %></span>
+  <span class="timestamp">
+    <%= time_ago_in_words(work.created_at) %>
+  </span>
+  <% if current_user == work.user %>
+    <%= link_to "削除", work, method: :delete, data: { confirm: "削除してよろしいですか？" } %>
+  <% end %>
+</li>

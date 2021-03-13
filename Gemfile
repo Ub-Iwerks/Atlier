@@ -32,6 +32,9 @@ gem 'bootstrap-sass'
 gem 'meta-tags'
 gem 'config'
 gem 'dotenv-rails'
+gem 'rails-i18n'
+gem 'kaminari'
+gem 'kaminari-bootstrap'
 gem "faker"
 gem "devise"
 gem "omniauth"

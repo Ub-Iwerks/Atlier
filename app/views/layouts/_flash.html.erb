@@ -1,6 +1,9 @@
 <% if notice.present? %>
-  <p class="flash notice"><%= notice %></p>
+  <p class="flash success"><%= notice %></p>
 <% end %>
 <% if alert.present? %>
-  <p class="flash alert"><%= alert %></p>
+  <p class="flash dangaer"><%= alert %></p>
+<% end %>
+<% flash.each do |message_type, message| %>
+  <p class="flash <%= message_type %>"><%= message %></p>
 <% end %>

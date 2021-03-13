@@ -1,10 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  let(:user) { build(:user) }
-
   describe "Validatioins test" do
     subject { user }
+
+    let(:user) { build(:user) }
 
     context "user has valid imformation" do
       let(:user) { build(:user, username: "example", email: "test@exmpale.com") }
@@ -70,6 +70,18 @@ RSpec.describe User, type: :model do
       let(:password_confirmation) { "abcd1234" }
       let(:user) { build(:user, password: password, password_confirmation: password_confirmation) }
       it { is_expected.not_to be_valid }
+    end
+  end
+
+  describe "Relationship test" do
+    context "destroyed user" do
+      let!(:user) { create(:user) }
+      let!(:work) { create(:work, user: user) }
+      let!(:count) { Work.count }
+      it "work related to user are destroyed" do
+        user.destroy
+        expect(Work.count).to eq count - 1
+      end
     end
   end
 end

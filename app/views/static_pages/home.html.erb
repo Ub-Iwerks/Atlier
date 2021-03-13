@@ -1,9 +1,5 @@
-<div class="center jumbotron">
-  <h1>Atlierへようこそ！</h1>
-
-  <h2>
-    ここは作品記録型SNS・Atlierのホームページです。
-  </h2>
-
-  <%= link_to "新規登録する", new_user_registration_path, class: "btn btn-lg btn-primary" %>
-</div>
+<% if user_signed_in? %>
+  <%= render "static_pages/home_signin" %>
+<% else %>
+  <%= render "static_pages/home_no_signin" %>
+<% end %>
