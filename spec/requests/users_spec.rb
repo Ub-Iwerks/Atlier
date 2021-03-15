@@ -21,15 +21,15 @@ RSpec.describe "Users", type: :request do
     let(:another_user) { create(:user) }
     let(:title) { "フォロー" }
 
-    context "user dont sign_in" do
+    context "user doesnt sign in" do
       before { get following_user_path user }
 
-      it "redirect_to sign_in view" do
+      it "redirect_to sign in view" do
         expect(response).to redirect_to new_user_session_path
       end
     end
 
-    context "user sign_in" do
+    context "user sign in" do
       before do
         sign_in user
         get following_user_path user
@@ -50,15 +50,15 @@ RSpec.describe "Users", type: :request do
     let(:another_user) { create(:user) }
     let(:title) { "フォロワー" }
 
-    context "user dont sign_in" do
+    context "user doesnt sign in" do
       before { get followers_user_path user }
 
-      it "redirect_to sign_in view" do
+      it "redirect_to sign in view" do
         expect(response).to redirect_to new_user_session_path
       end
     end
 
-    context "user sign_in" do
+    context "user signed in" do
       before do
         sign_in user
         get followers_user_path user

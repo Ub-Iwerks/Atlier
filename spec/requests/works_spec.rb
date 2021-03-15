@@ -7,7 +7,7 @@ RSpec.describe "Works", type: :request do
     let(:user) { create(:user) }
     let(:title) { "TITLE" }
     let(:concept) { "This is concept text" }
-    context "user who not sign_in" do
+    context "user doesnt sign in" do
       before do
         post works_path, params: {
           work: {
@@ -18,12 +18,12 @@ RSpec.describe "Works", type: :request do
         }
       end
 
-      it "redirect to sign_in page" do
+      it "redirect to sign in page" do
         expect(response).to redirect_to new_user_session_path
       end
     end
 
-    context "user who sign_in" do
+    context "user signed in" do
       before do
         sign_in user
         post works_path, params: {
@@ -47,12 +47,12 @@ RSpec.describe "Works", type: :request do
     let!(:work) { create(:work, user: user) }
     let!(:count) { Work.count }
 
-    context "user who not sign_in" do
+    context "user doesnt sig in" do
       before do
         delete work_path work
       end
 
-      it "redirect to sign_in page" do
+      it "redirect to sign in page" do
         expect(response).to redirect_to new_user_session_path
       end
     end
@@ -68,7 +68,7 @@ RSpec.describe "Works", type: :request do
       end
     end
 
-    context "correct user who sign_in" do
+    context "correct user sign in" do
       before do
         sign_in user
         delete work_path work
