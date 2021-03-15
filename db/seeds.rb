@@ -23,3 +23,10 @@ users = User.order(:created_at).take(6)
   title = Faker::Movie.title
   users.each { |user| user.works.create!(title: title, concept: concept) }
 end
+
+user = User.first
+users = User.all
+following = users[2..50]
+followers = users[3..40]
+following.each { |followed| user.follow(followed) }
+followers.each { |follower| follower.follow(user) }

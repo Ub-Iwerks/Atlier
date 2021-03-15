@@ -146,6 +146,49 @@ aside {
     }
   }
 }
+.users {
+  list-style: none;
+  padding: 0;
+  li {
+    padding: 10px 0;
+    border-top: 1px solid #e8e8e8;
+    display: flex;
+  }
+  .user_right {
+    padding-left: 10px;
+    .username {
+      display: block;
+      font-size: 15px;
+    }
+    .email {
+      display: block;
+      font-size: 15px;
+    }
+  }
+}
+
+.stats {
+  overflow: auto;
+  margin-top: 0;
+  padding: 0;
+  a {
+    float: left;
+    padding: 0 10px;
+    border-left: 1px solid $gray-lighter;
+    color: gray;
+    &:first-child {
+      padding-left: 0;
+      border: 0;
+    }
+    &:hover {
+      text-decoration: none;
+      color: blue;
+    }
+  }
+  strong {
+    display: block;
+  }
+}
 
 /* works */
 
@@ -155,6 +198,10 @@ aside {
   li {
     padding: 10px 0;
     border-top: 1px solid #e8e8e8;
+  }
+  .avatar {
+    float: left;
+    margin: 5px 10px 5px 0px;
   }
   .user {
     margin-top: 5em;
@@ -175,10 +222,6 @@ aside {
     color: $gray-light;
     display: block;
     margin-left: 60px;
-  }
-  .avatar {
-    float: left;
-    margin: 5px 10px 5px 0px;
   }
 }
 

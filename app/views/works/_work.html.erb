@@ -14,7 +14,7 @@
   <span class="timestamp">
     <%= time_ago_in_words(work.created_at) %>
   </span>
-  <% if current_user == work.user %>
+  <% if current_user?(work.user) %>
     <%= link_to "削除", work, method: :delete, data: { confirm: "削除してよろしいですか？" } %>
   <% end %>
 </li>

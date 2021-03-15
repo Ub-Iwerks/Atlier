@@ -1,0 +1,28 @@
+<% set_meta_tags title: "#{@user.username}の#{@title}" %>
+<div class="row">
+  <aside class="col-md-4">
+    <section class="user_info">
+      <% if @user.avatar.attached? %>
+        <%= image_tag @user.avatar, alt: "プロフィール写真", class: "avatar", width: "150px" %>
+      <% else %>
+        <%= image_tag "avatar.png", alt: "プロフィール写真", class: "avatar", width: "150px" %>
+      <% end %>
+      <h1>
+        <p><%= @user.username %></p>
+        <p><%= @user.email %></p>
+      </h1>
+    </section>
+    <section class="stats">
+      <%= render 'shared/stats' %>
+    </section>
+  </aside>
+  <div class="col-md-8">
+    <h3><%= @title %></h3>
+    <% if @users.present? %>
+      <ul class="users follow">
+        <%= render @users %>
+      </ul>
+      <%= paginate @users %>
+    <% end %>
+  </div>
+</div>

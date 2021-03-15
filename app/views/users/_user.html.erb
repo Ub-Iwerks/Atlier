@@ -1,0 +1,17 @@
+<li id="user-<%= user.id %>">
+  <div class="user_left">
+    <span class="avatar">
+      <%= link_to user do %>
+        <% if user.avatar.attached? %>
+          <%= image_tag user.avatar, alt: "プロフィール写真", class: "avatar", width: "50px" %>
+        <% else %>
+          <%= image_tag "avatar.png", alt: "プロフィール写真", class: "avatar", width: "50px" %>
+        <% end %>
+      <% end %>
+    </span>
+  </div>
+  <div class="user_right">
+    <span class="username"><%= link_to user.username, user %></span>
+    <span class="email"><%= user.email %></span>
+  </div>
+</li>

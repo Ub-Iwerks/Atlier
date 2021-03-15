@@ -8,6 +8,11 @@ Rails.application.routes.draw do
   }
   root 'static_pages#home'
   get  '/contact', to: 'static_pages#contact'
-  resources :users, only: [:show]
+  resources :users, only: [:show] do
+    member do
+      get :following, :followers
+    end
+  end
   resources :works, only: [:create, :destroy]
+  resources :relationships, only: [:create, :destroy]
 end

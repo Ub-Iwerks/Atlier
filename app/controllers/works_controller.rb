@@ -8,7 +8,7 @@ class WorksController < ApplicationController
       flash[:success] = "投稿しました！"
       redirect_to root_url
     else
-      @feed_items = current_user.feed.page(params[:page]).per(20)
+      @feed_items = current_user.feed.page(params[:page])
       render 'static_pages/home'
     end
   end
