@@ -34,7 +34,7 @@ class User < ApplicationRecord
   end
 
   def feed
-    Work.where("user_id = ?", id)
+    Work.where("user_id = ? OR user_id IN (?)", id, Relationship.where(follower_id: id).select(:followed_id))
   end
 
   def follow(other_user)

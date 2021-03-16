@@ -86,10 +86,11 @@ RSpec.describe User, type: :model do
   end
 
   describe "Method test" do
-    let(:user) { create(:user) }
-    let(:another_user) { create(:user) }
     describe "follow method" do
       subject { user.following?(another_user) }
+
+      let(:user) { create(:user) }
+      let(:another_user) { create(:user) }
 
       context "user doesnt follow another_user" do
         it "following? return false" do
@@ -115,6 +116,40 @@ RSpec.describe User, type: :model do
         it "following? return true" do
           user.unfollow(another_user)
           is_expected.to be_falsey
+        end
+      end
+    end
+
+    describe "feed method" do
+      subject { user1.feed }
+
+      let!(:user1) { create(:user) }
+      let!(:user2) { create(:user) }
+      let!(:user3) { create(:user) }
+      let!(:works_by_user1) { create_list(:work, 20, user: user1) }
+      let!(:works_by_user2) { create_list(:work, 20, user: user2) }
+      let!(:works_by_user3) { create_list(:work, 20, user: user3) }
+
+      before do
+        sign_in user1
+        user1.follow(user2)
+      end
+
+      it "include my works" do
+        user1.works.each do |work|
+          expect(user1.feed).to include(work)
+        end
+      end
+
+      it "include followed works" do
+        user2.works.each do |work|
+          expect(user1.feed).to include(work)
+        end
+      end
+
+      it "not include not followed works" do
+        user3.works.each do |work|
+          expect(user1.feed).not_to include(work)
         end
       end
     end
