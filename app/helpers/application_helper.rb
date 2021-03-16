@@ -18,6 +18,15 @@ module ApplicationHelper
     user == current_user
   end
 
+  def text_url_to_link(text)
+    URI.extract(text, ["http", "https"]).uniq.each do |url|
+      sub_text = ""
+      sub_text << "<a href=" << url << " target=\"_blank\" rel=\"noopener\">" << url << "</a>"
+      text.gsub!(url, sub_text)
+    end
+    text
+  end
+
   private
 
   def base_og

@@ -124,6 +124,23 @@ footer {
 aside {
   section.user_info {
     margin-top: 20px;
+    .username {
+      padding-top: 5px;
+      padding-bottom: 20px;
+    }
+    ul {
+      margin-top: 20px;
+      list-style: none;
+      padding: 0;
+      .website {
+        font-size: 15px;
+        text-decoration: none;
+      }
+      .description {
+        padding-top: 5px;
+        font-size: 15px;
+      }
+    }
   }
   section {
     padding: 10px 0;

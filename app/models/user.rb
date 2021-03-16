@@ -1,5 +1,6 @@
 class User < ApplicationRecord
   before_save { self.email = email.downcase }
+  before_create :default_avatar
   has_one_attached :avatar
   has_many :works, dependent: :destroy
   has_many :active_relationships, class_name: "Relationship",
@@ -19,6 +20,9 @@ class User < ApplicationRecord
   validates :password, presence: true, on: :create
   validates :avatar, content_type: { in: %w(image/jpeg image/gif image/png), message: "有効なファイルを選択してください" },
                      size: { less_than: 5.megabytes, message: "5MB以下を選択してください" }
+  validates :description, length: { maximum: 250 }
+  VALID_URL_REGEX = %r{https?://[\w!?/\+\-_~=;\.,*&@#$%\(\)\'\[\]]+}.freeze
+  validates :website, format: { with: VALID_URL_REGEX, allow_nil: true }, length: { maximum: 150 }
 
   def self.find_for_oauth(auth)
     user = User.where(uid: auth.uid, provider: auth.provider).first
@@ -31,6 +35,12 @@ class User < ApplicationRecord
       confirmed_at: Time.current
     )
     user
+  end
+
+  def default_avatar
+    if !avatar.attached?
+      avatar.attach(io: File.open('app/assets/images/avatar.png'), filename: 'avatar.png', content_type: 'image/png')
+    end
   end
 
   def feed

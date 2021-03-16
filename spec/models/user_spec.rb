@@ -71,6 +71,34 @@ RSpec.describe User, type: :model do
       let(:user) { build(:user, password: password, password_confirmation: password_confirmation) }
       it { is_expected.not_to be_valid }
     end
+
+    context "user has too long description" do
+      let(:description) { "a" * 251 }
+      let(:user) { build(:user, description: description) }
+      it { is_expected.not_to be_valid }
+    end
+
+    context "user has too long url" do
+      let(:website) { "https://" + "a" * 143 }
+      let(:user) { build(:user, website: website) }
+      it { is_expected.not_to be_valid }
+    end
+
+    context "user has invalid url" do
+      invalid_url = %w(hhtps://abc //abc https:/aaaa)
+      invalid_url.each do |website|
+        let(:user) { build(:user, website: website) }
+        it { is_expected.not_to be_valid }
+      end
+    end
+
+    context "user has valid url" do
+      valid_url = %w(http://example.com/ http://example/example http://example?q=ABC&oq=ABC)
+      valid_url.each do |website|
+        let(:user) { build(:user, website: website) }
+        it { is_expected.to be_valid }
+      end
+    end
   end
 
   describe "Test related to work" do
@@ -86,6 +114,14 @@ RSpec.describe User, type: :model do
   end
 
   describe "Method test" do
+    describe "before create method" do
+      let!(:user) { create(:user) }
+
+      it "attached user to avatar.png" do
+        expect(user.avatar.attached?).to be_truthy
+      end
+    end
+
     describe "follow method" do
       subject { user.following?(another_user) }
 

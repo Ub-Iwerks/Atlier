@@ -4,6 +4,8 @@ ja:
       user:
         avatar: プロフィール写真
         username: ユーザーネーム
+        website: ウェブサイト
+        description: 自己紹介
         confirmation_sent_at: パスワード確認送信時刻
         confirmation_token: パスワード確認用トークン
         confirmed_at: パスワード確認時刻

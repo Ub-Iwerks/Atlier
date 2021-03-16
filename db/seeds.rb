@@ -1,6 +1,8 @@
 User.create!(
   username:  "Test_User",
   email: "test@example.com",
+  description: "My name is Test_User",
+  website: "http://example.com/",
   password:              "password",
   password_confirmation: "password",
   confirmed_at: Time.current)
@@ -9,9 +11,13 @@ User.create!(
 49.times do |n|
 username  = "Test#{n+1}"
 email = "test#{n+1}@example.com"
+description = "My name is #{Faker::Movies::StarWars.character}"
+website = "http://example.com/"
 password = "password"
 User.create!(username:  username,
     email: email,
+    description: description,
+    website: website,
     password:              password,
     password_confirmation: password,
     confirmed_at: Time.current)

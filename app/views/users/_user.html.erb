@@ -2,11 +2,7 @@
   <div class="user_left">
     <span class="avatar">
       <%= link_to user do %>
-        <% if user.avatar.attached? %>
-          <%= image_tag user.avatar, alt: "プロフィール写真", class: "avatar", width: "50px" %>
-        <% else %>
-          <%= image_tag "avatar.png", alt: "プロフィール写真", class: "avatar", width: "50px" %>
-        <% end %>
+        <%= image_tag user.avatar, alt: "プロフィール写真", class: "avatar", width: "50px" %>
       <% end %>
     </span>
   </div>
