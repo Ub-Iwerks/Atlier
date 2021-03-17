@@ -17,9 +17,10 @@
   <div class="field">
     <%= f.label :email %><br>
     <%= f.email_field :email, autocomplete: "email" %>
+    <p>メールアドレス変更後、認証メールを送信します。</p>
   </div>
   <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+    <div>現在<%= resource.unconfirmed_email %>の認証待ちです</div>
   <% end %>
   <div class="field">
     <%= f.label :avatar %><br>
