@@ -104,4 +104,71 @@ RSpec.describe "Registrations", type: :request do
       expect(User.count).to eq count - 1
     end
   end
+
+  describe "GET /users/:id/edit_password" do
+    let(:user) { create(:user) }
+    let(:page_title) { "パスワードを変更" }
+
+    context "user not sign in" do
+      before { get edit_password_path }
+
+      it "redirect to sign in view" do
+        expect(response).to redirect_to new_user_session_path
+      end
+    end
+
+    context "user signed in" do
+      before do
+        sign_in user
+        get edit_password_path
+      end
+
+      it "render edit_password" do
+        expect(response.status).to eq 200
+      end
+
+      it 'have page_title of title tag' do
+        expect(response.body).to match(/<title>#{page_title} | #{base_title}<\/title>/i)
+      end
+    end
+  end
+
+  describe "PUT /users/edit_password" do
+    let(:user) { create(:user) }
+    let(:current_password) { "#{user.password}" }
+    let(:new_password) { "new_password" }
+
+    context "user not sign in" do
+      before do
+        put update_password_path, params: {
+          user: {
+            current_password: current_password,
+            password: new_password,
+            password_confirmation: new_password,
+          },
+        }
+      end
+
+      it "redirect to sign in view" do
+        expect(response).to redirect_to new_user_session_path
+      end
+    end
+
+    context "user signed in and has correct imformation" do
+      before do
+        sign_in user
+        put update_password_path, params: {
+          user: {
+            current_password: current_password,
+            password: new_password,
+            password_confirmation: new_password,
+          },
+        }
+      end
+
+      it "render edit_password" do
+        expect(response.status).to eq 302
+      end
+    end
+  end
 end

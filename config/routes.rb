@@ -6,6 +6,10 @@ Rails.application.routes.draw do
     registrations: 'users/registrations',
     sessions: 'users/sessions',
   }
+  devise_scope :user do
+    get "users/edit_password", to: 'users/registrations#edit_password', as: 'edit_password'
+    put 'users/edit_password', to: 'users/registrations#update_password', as: 'update_password'
+  end
   root 'static_pages#home'
   get  '/contact', to: 'static_pages#contact'
   resources :users, only: [:show] do
