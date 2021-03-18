@@ -19,7 +19,7 @@ RSpec.describe 'User signup', type: :system do
       expect(page).to have_selector "h2", text: "新規登録"
       within("form") do
         fill_in "ユーザーネーム", with: username
-        fill_in "Eメール", with: email
+        fill_in "メールアドレス", with: email
         fill_in "パスワード", with: password
         fill_in "パスワード（確認用）", with: password
         click_button "新規登録"
@@ -41,7 +41,7 @@ RSpec.describe 'User signup', type: :system do
       expect(page).to have_selector "h2", text: "新規登録"
       within("form") do
         fill_in "ユーザーネーム", with: username
-        fill_in "Eメール", with: email
+        fill_in "メールアドレス", with: email
         fill_in "パスワード", with: password
         fill_in "パスワード（確認用）", with: password
         click_button "新規登録"

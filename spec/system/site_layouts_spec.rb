@@ -16,7 +16,8 @@ RSpec.describe 'Layouts', type: :system do
         expect(page).to have_link "ログイン", href: new_user_session_path
       end
       within("footer") do
-        expect(page).to have_link "Contact", href: contact_path
+        expect(page).to have_link "お問い合わせ", href: contact_path
+        expect(page).to have_link "利用規約", href: terms_path
         expect(page).to have_link "Atlier", href: root_path
       end
     end
@@ -33,7 +34,8 @@ RSpec.describe 'Layouts', type: :system do
         expect(page).to have_link "#{user.username}", href: user_path(user)
       end
       within("footer") do
-        expect(page).to have_link "Contact", href: contact_path
+        expect(page).to have_link "お問い合わせ", href: contact_path
+        expect(page).to have_link "利用規約", href: terms_path
         expect(page).to have_link "Atlier", href: root_path
       end
     end

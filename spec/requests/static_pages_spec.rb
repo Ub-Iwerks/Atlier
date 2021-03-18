@@ -4,9 +4,7 @@ RSpec.describe "StaticPages", type: :request do
   let(:base_title) { 'Atlier' }
 
   describe "GET /" do
-    before do
-      get root_url
-    end
+    before { get root_url }
 
     it "render home" do
       expect(response.status).to eq 200
@@ -18,13 +16,25 @@ RSpec.describe "StaticPages", type: :request do
   end
 
   describe "GET /contact" do
-    let(:page_title) { 'Contact' }
+    let(:page_title) { 'お問い合わせ' }
 
-    before do
-      get contact_url
-    end
+    before { get contact_url }
 
     it "render contact" do
+      expect(response.status).to eq 200
+    end
+
+    it 'have page_title of title tag' do
+      expect(response.body).to match(/<title>#{page_title} - #{base_title}<\/title>/i)
+    end
+  end
+
+  describe "GET /tos" do
+    let(:page_title) { '利用規約' }
+
+    before { get terms_url }
+
+    it "render terms" do
       expect(response.status).to eq 200
     end
 

@@ -13,7 +13,7 @@ RSpec.describe 'User signin', type: :system do
       click_link "ログイン"
       expect(page).to have_selector "h2", text: "ログイン"
       within("form") do
-        fill_in "Eメール", with: user.email
+        fill_in "メールアドレス", with: user.email
         fill_in "パスワード", with: user.password
         click_button "ログイン"
       end
@@ -31,12 +31,12 @@ RSpec.describe 'User signin', type: :system do
       click_link "ログイン"
       expect(page).to have_selector "h2", text: "ログイン"
       within("form") do
-        fill_in "Eメール", with: user.email
+        fill_in "メールアドレス", with: user.email
         fill_in "パスワード", with: invalid_password
         click_button "ログイン"
       end
       expect(current_path).to eq new_user_session_path
-      expect(page).to have_selector ".alert", text: "Eメールまたはパスワードが違います。"
+      expect(page).to have_selector ".alert", text: "メールアドレスまたはパスワードが違います。"
       visit current_path
       expect(page).not_to have_selector ".alert"
     end

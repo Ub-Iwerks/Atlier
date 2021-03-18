@@ -27,7 +27,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       sign_in @user
       redirect_to user_path @user
     else
-      session["devise.#{provider}_data"] = request.env['omniauth.auth']
+      flash[:danger] = "認証に失敗致しました。他の方法をお試しください。"
       redirect_to new_user_registration_url
     end
   end

@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   end
   root 'static_pages#home'
   get  '/contact', to: 'static_pages#contact'
+  get  '/tos', to: 'static_pages#terms', as: 'terms'
   resources :users, only: [:show] do
     member do
       get :following, :followers

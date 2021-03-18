@@ -20,7 +20,7 @@ RSpec.describe 'User edit imformation', type: :system do
         fill_in "ユーザーネーム", with: changed_name
         fill_in "ウェブサイト", with: changed_website
         fill_in "自己紹介", with: changed_description
-        fill_in "Eメール", with: user.email
+        fill_in "メールアドレス", with: user.email
         click_button "変更を保存する"
       end
       expect(current_path).to eq user_path(user)
