@@ -4,8 +4,7 @@ RSpec.describe Work, type: :model do
   describe "Validations test" do
     subject { work }
 
-    let(:user) { create(:user) }
-    let(:work) { build(:work, user: user) }
+    let(:work) { build(:work) }
 
     context "work has valid imformatioin" do
       it { is_expected.to be_valid }
@@ -31,6 +30,19 @@ RSpec.describe Work, type: :model do
     context "work has too long concept" do
       let(:concept) { "a" * 301 }
       let(:work) { build(:work, concept: concept) }
+      it { is_expected.not_to be_valid }
+    end
+
+    context "work have too long description" do
+      let(:description) { "a" * 301 }
+      let(:work) { build(:work, description: description) }
+      it { is_expected.not_to be_valid }
+    end
+
+    context "work doesnt have image" do
+      before { work.image = nil }
+
+      let(:work) { build(:work) }
       it { is_expected.not_to be_valid }
     end
 
