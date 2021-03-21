@@ -8,15 +8,13 @@
     <span class="user"><%= link_to work.user.username, work.user %></span>
   </div>
   <div class="works_detail">
-    <span class="title"><%= work.title %></span>
-    <span class="concept"><%= work.concept %></span>
-    <span class="timestamp">
-      <%= time_ago_in_words(work.created_at) %>
-    </span>
-  </div>
-  <span class="delete_btn">
-    <% if current_user?(work.user) %>
-      <%= link_to "削除", work, method: :delete, data: { confirm: "削除してよろしいですか？" } %>
+    <%= link_to work_path(work) do %>
+      <span class="image"><%= image_tag(work.image, width: "200px") %></span>
+      <span class="title"><%= work.title %></span>
+      <span class="concept"><%= work.concept %></span>
+      <span class="timestamp">
+        <%= time_ago_in_words(work.created_at) %>
+      </span>
     <% end %>
-  </span>
+  </div>
 </li>

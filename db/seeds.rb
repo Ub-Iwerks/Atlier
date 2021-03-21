@@ -7,7 +7,6 @@ User.create!(
   password_confirmation: "password",
   confirmed_at: Time.current)
 
-# 追加のユーザーをまとめて生成する
 49.times do |n|
 username  = "Test#{n+1}"
 email = "test#{n+1}@example.com"
@@ -25,9 +24,14 @@ end
 
 users = User.order(:created_at).take(6)
 50.times do
-  concept = Faker::Lorem.sentence(word_count: 10)
   title = Faker::Movie.title
-  users.each { |user| user.works.create!(title: title, concept: concept) }
+  concept = Faker::Lorem.sentence(word_count: 10)
+  description = Faker::Lorem.sentence(word_count: 10)
+  users.each do |user|
+    work = user.works.build(title: title, concept: concept, description: description)
+    work.image.attach(io: File.open("app/assets/images/sample.png"), filename: 'sample.png', content_type: "image/png")
+    work.save
+  end
 end
 
 user = User.first

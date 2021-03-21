@@ -1,15 +1,26 @@
 class WorksController < ApplicationController
-  before_action :authenticate_user!, only: [:create, :destroy]
+  before_action :authenticate_user!, only: [:create, :destroy, :new, :show]
   before_action :correct_user, only: [:destroy]
 
+  def show
+    @work = Work.find(params[:id])
+    @user = @work.user
+    @illustrations = @work.illustrations
+  end
+
+  def new
+    @work_create_form = WorkCreateForm.new
+  end
+
   def create
-    @work = current_user.works.build(work_params)
-    if @work.save
-      flash[:success] = "投稿しました！"
-      redirect_to root_url
+    @work_create_form = WorkCreateForm.new(work_create_form_params)
+    if @work_create_form.save
+      flash[:success] = "投稿に成功しました。"
+      work = Work.first
+      redirect_to work_path work
     else
-      @feed_items = current_user.feed.page(params[:page])
-      render 'static_pages/home'
+      flash[:danger] = "投稿に失敗しました。"
+      render "new"
     end
   end
 
@@ -21,8 +32,17 @@ class WorksController < ApplicationController
 
   private
 
-  def work_params
-    params.require(:work).permit(:title, :concept, :description, :image)
+  def work_create_form_params
+    params.require(:work_create_form).permit(
+      :title,
+      :concept,
+      :description,
+      :image,
+      :illustration_name,
+      :illustration_description,
+      :illustration_photo,
+      :current_user_id
+    )
   end
 
   def correct_user

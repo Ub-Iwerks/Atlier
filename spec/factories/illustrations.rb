@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :illustration do
     after(:build) do |illustration|
-      illustration.photo.attach(io: File.open('spec/fixture/files/test400*400.jpeg'), filename: 'test400*400.jpeg')
+      illustration.photo.attach(io: File.open('spec/fixture/files/test.jpeg'), filename: 'test.jpeg')
     end
 
     association :work, factory: :work, strategy: :create
