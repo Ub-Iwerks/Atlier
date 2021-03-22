@@ -1,5 +1,5 @@
 <%= link_to current_user do %>
-  <%= image_tag current_user.avatar, alt: "プロフィール写真", class: "avatar", width: "150px" %>
+  <%= display_avatar_for current_user, size: Settings.avatar_size[:in_aside] %>
 <% end %>
 <span><%= link_to "プロフィールへ進む", current_user %></span>
 <span><%= pluralize(current_user.works.count, "work") %></span>

@@ -3,7 +3,7 @@
   <aside class="col-md-4">
     <section class="user_info">
       <%= link_to @user do %>
-        <%= image_tag @user.avatar, alt: "プロフィール写真", class: "avatar", width: "150px" %>
+        <%= display_avatar_for @user %>
         <h1 class="username">
           <%= @user.username %>
         </h1>

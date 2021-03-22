@@ -2,7 +2,7 @@
 <div class="row">
   <aside class="col-md-4">
     <section class="user_info">
-      <%= image_tag @user.avatar, alt: "プロフィール写真", class: "avatar", width: "150px" %>
+      <%= display_avatar_for @user, size: Settings.avatar_size[:in_profile] %>
       <h1 class="username">
         <%= @user.username %>
       </h1>

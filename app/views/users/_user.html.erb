@@ -2,7 +2,7 @@
   <div class="user_left">
     <span class="avatar">
       <%= link_to user do %>
-        <%= image_tag user.avatar, alt: "プロフィール写真", class: "avatar", width: "50px" %>
+        <%= display_avatar_for user %>
       <% end %>
     </span>
   </div>

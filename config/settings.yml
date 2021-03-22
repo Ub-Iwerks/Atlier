@@ -6,3 +6,11 @@ attached_count:
   addition: 1
 regular_expressions:
   email: /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
+avatar_size:
+  in_like: 20
+  in_header: 22
+  in_feed: 32
+  in_aside: 48
+  in_profile: 150
+default_avatar:
+  file_name: 'avatar.png'

@@ -14,4 +14,8 @@ class Work < ApplicationRecord
   def image_presence
     errors.add(:image, "ファイルを添付してください。") unless image.attached?
   end
+
+  def display_image
+    image.variant(resize_to_limit: [250, 250])
+  end
 end

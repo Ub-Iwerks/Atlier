@@ -27,6 +27,16 @@ module ApplicationHelper
     text
   end
 
+  def display_avatar_for(user, size: Settings.avatar_size[:in_feed])
+    default_avatar = Settings.default_avatar[:file_name]
+    if user.avatar.attached?
+      avatar = user.avatar
+    else
+      avatar = default_avatar
+    end
+    image_tag(avatar, alt: "#{user.username}", class: "avatar", width: "#{size}px")
+  end
+
   private
 
   def base_og

@@ -1,6 +1,5 @@
 class User < ApplicationRecord
   before_save { self.email = email.downcase }
-  before_create :default_avatar
   has_one_attached :avatar
   has_many :works, dependent: :destroy
   has_many :active_relationships, class_name: "Relationship",
@@ -35,12 +34,6 @@ class User < ApplicationRecord
       confirmed_at: Time.current
     )
     user
-  end
-
-  def default_avatar
-    if !avatar.attached?
-      avatar.attach(io: File.open('app/assets/images/avatar.png'), filename: 'avatar.png', content_type: 'image/png')
-    end
   end
 
   def feed

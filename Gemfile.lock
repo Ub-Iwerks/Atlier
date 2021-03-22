@@ -173,6 +173,9 @@ GEM
     hashie (4.1.0)
     i18n (1.8.9)
       concurrent-ruby (~> 1.0)
+    image_processing (1.12.1)
+      mini_magick (>= 4.9.5, < 5)
+      ruby-vips (>= 2.0.17, < 3)
     jaro_winkler (1.5.4)
     jbuilder (2.11.2)
       activesupport (>= 5.0.0)
@@ -207,6 +210,7 @@ GEM
       actionpack (>= 3.2.0, < 6.2)
     method_source (1.0.0)
     mimemagic (0.3.5)
+    mini_magick (4.11.0)
     mini_mime (1.0.2)
     mini_portile2 (2.5.0)
     minitest (5.14.4)
@@ -353,6 +357,8 @@ GEM
     rubocop-rspec (1.30.1)
       rubocop (>= 0.60.0)
     ruby-progressbar (1.11.0)
+    ruby-vips (2.1.0)
+      ffi (~> 1.12)
     ruby2_keywords (0.0.4)
     rubyzip (2.3.0)
     sass-rails (6.0.0)
@@ -420,11 +426,13 @@ DEPENDENCIES
   dotenv-rails
   factory_bot_rails
   faker
+  image_processing
   jbuilder (~> 2.7)
   kaminari
   kaminari-bootstrap
   listen (~> 3.3)
   meta-tags
+  mini_magick
   mysql2 (~> 0.5)
   omniauth
   omniauth-facebook
