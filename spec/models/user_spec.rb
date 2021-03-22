@@ -114,14 +114,6 @@ RSpec.describe User, type: :model do
   end
 
   describe "Method test" do
-    describe "before create method" do
-      let!(:user) { create(:user) }
-
-      it "attached user to avatar.png" do
-        expect(user.avatar.attached?).to be_truthy
-      end
-    end
-
     describe "follow method" do
       subject { user.following?(another_user) }
 

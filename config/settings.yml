@@ -13,4 +13,4 @@ avatar_size:
   in_aside: 48
   in_profile: 150
 default_avatar:
-  file_name: 'avatar.png'
+  file_name: "avatar.png"

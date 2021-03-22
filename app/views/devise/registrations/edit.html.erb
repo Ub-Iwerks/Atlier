@@ -23,8 +23,18 @@
     <div>現在<%= resource.unconfirmed_email %>の認証待ちです</div>
   <% end %>
   <div class="field">
-    <%= f.label :avatar %><br>
-    <%= f.file_field :avatar, accept: "image/jpeg,image/gif,image/png" %>
+    <%= f.label :avatar, class: 'image_label' do %><br>
+      <div class="prev-contents">
+        <div class="prev-content">
+          <% if current_user.avatar.attached? %>
+            <%= image_tag(current_user.avatar, alt: "preview", class: "prev-image", width: "150px") %>
+          <% else %>
+            <%= image_tag(Settings.default_avatar[:file_name], alt: "preview", class: "prev-image", width: "150px") %>
+          <% end %>
+          <%= f.file_field :avatar, class: 'image_form__contents__field hidden_file' %>
+        </div>
+      </div>
+    <% end %>
   </div>
   <div class="actions">
     <%= f.submit "変更を保存する" %>

@@ -31,7 +31,7 @@ RSpec.describe 'Works interface', type: :system do
     expect(current_path).to eq work_path(current_work)
     within(".user_info") do
       expect(page).to have_link href: user_path(current_work.user)
-      expect(page).to have_selector "img[src$='avatar.png']"
+      expect(page).to have_selector "img[alt$='#{user.username}']"
       expect(page).to have_selector "h1.username", text: "#{current_work.user.username}"
     end
     within(".work_info") do
