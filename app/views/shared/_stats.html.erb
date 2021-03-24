@@ -12,4 +12,10 @@
     </strong>
     フォロワー
   <% end %>
+  <%= link_to user_path @user do %>
+    <strong id="works_count" class="stat">
+      <%= @user.works.count %>
+    </strong>
+    作品
+  <% end %>
 </div>

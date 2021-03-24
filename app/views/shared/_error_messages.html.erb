@@ -1,10 +1,10 @@
 <% if object.errors.any? %>
-  <div id="error_explanation">
-    <div class="danger flash">
+  <div class="error_explanation">
+    <h2>
       <%= object.errors.count %>つのエラーが確認されました。
-    </div>
+    </h2>
     <ul>
-    <% object.errors.full_messages.each do |msg| %>
+  <% object.errors.full_messages.each do |msg| %>
       <li><%= msg %></li>
     <% end %>
     </ul>

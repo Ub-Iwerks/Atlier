@@ -1,13 +1,15 @@
 <li id="user-<%= user.id %>">
-  <div class="user_left">
+  <div class="user__left">
     <span class="avatar">
       <%= link_to user do %>
         <%= display_avatar_for user %>
       <% end %>
     </span>
   </div>
-  <div class="user_right">
+  <div class="user__right">
     <span class="username"><%= link_to user.username, user %></span>
-    <span class="email"><%= user.email %></span>
+    <% if user.works.present? %>
+      <span class="user--work">作品：<%= link_to user.works.first.title, work_path(user.works.first) %>など</span>
+    <% end %>
   </div>
 </li>

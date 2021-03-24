@@ -14,12 +14,11 @@ RSpec.describe 'Users profile', type: :system do
 
     it "profile imformation display correctly" do
       visit user_path user
-      within(".user_info") do
+      within(".user--info") do
         expect(page).to have_selector "img"
         expect(page).to have_selector "h1", text: "#{user.username}"
       end
-      within(".user_works") do
-        expect(page).to have_selector "h3", text: "#{user.works.count}"
+      within(".user--works") do
         user.works.page(1) do |work|
           expect(page).to have_selector "img.avatar"
           expect(page).to have_selector ".user", text: "#{work.user.name}"

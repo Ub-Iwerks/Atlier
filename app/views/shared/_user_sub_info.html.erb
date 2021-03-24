@@ -1,0 +1,7 @@
+<span class="user--work">
+  <% if user.works.present? %>
+    作品：<%= link_to user.works.first.title, work_path(user.works.first) %> など
+  <% end %>
+</span>
+<span class="website"><%= text_url_to_link(h(@user.website)).html_safe %></span>
+<span class="description"><%= user.description %></span>

@@ -16,12 +16,11 @@ class User < ApplicationRecord
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i.freeze
   validates :email, presence: true, length: { maximum: 255 }, uniqueness: true,
                     format: { with: VALID_EMAIL_REGEX }
-  validates :password, presence: true, on: :create
   validates :avatar, content_type: { in: %w(image/jpeg image/gif image/png), message: "有効なファイルを選択してください" },
                      size: { less_than: 5.megabytes, message: "5MB以下を選択してください" }
   validates :description, length: { maximum: 250 }
   VALID_URL_REGEX = %r{https?://[\w!?/\+\-_~=;\.,*&@#$%\(\)\'\[\]]+}.freeze
-  validates :website, format: { with: VALID_URL_REGEX, allow_nil: true }, length: { maximum: 150 }
+  validates :website, format: { with: VALID_URL_REGEX }, length: { maximum: 150 }, allow_blank: true
 
   def self.find_for_oauth(auth)
     user = User.where(uid: auth.uid, provider: auth.provider).first

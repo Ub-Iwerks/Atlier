@@ -1,29 +1,36 @@
 <% set_meta_tags title: "#{@user.username}" %>
 <div class="row">
-  <aside class="col-md-4">
-    <section class="user_info">
-      <%= display_avatar_for @user, size: Settings.avatar_size[:in_profile] %>
-      <h1 class="username">
-        <%= @user.username %>
-      </h1>
-      <%= render "shared/stats" %>
-      <ul>
-        <li class="website"><%= text_url_to_link(h(@user.website)).html_safe %></li>
-        <li class="description"><%= @user.description %></li>
-      </ul>
+  <div class="col-md-10  col-md-offset-1">
+    <section class="user--info">
+      <div class="user__main">
+        <%= display_avatar_for @user, size: Settings.avatar_size[:in_profile] %>
+        <h1 class="username"><%= @user.username %></h1>
+      </div>
+      <div class="user__detail">
+        <div class="user__relation">
+          <%= render "shared/stats" %>
+          <%= render 'follow_form' if user_signed_in? %>
+          <% if current_user?(@user) %>
+            <%= link_to '編集する', edit_user_registration_path, class: "btn__edit" %>
+          <% end %>
+        </div>
+        <ul class="user__profile">
+          <li class="website"><%= text_url_to_link(h(@user.website)).html_safe %></li>
+          <li class="description"><%= @user.description %></li>
+        </ul>
+      </div>
     </section>
-  </aside>
-  <div class="col-md-8">
-    <%= render 'follow_form' if user_signed_in? %>
-    <section class="user_works">
-      <h3>ワークス<%= "(#{@user.works.count})" if @user.works.present? %></h3>
+    <section class="user--works">
+      <h3>作品</h3>
       <% if @user.works.present? %>
         <ol class="works">
           <%= render @works %>
         </ol>
         <%= paginate @works %>
-      <% else %>
+      <% elsif current_user?(@user) %>
         <h4>自分の作品を記録しよう！</h4>
+      <% else %>
+        <h4>作品の登録がまだありません</h4>
       <% end %>
     </section>
   </div>

@@ -24,7 +24,7 @@ RSpec.describe 'User edit imformation', type: :system do
         click_button "変更を保存する"
       end
       expect(current_path).to eq user_path(user)
-      within(".user_info") do
+      within(".user--info") do
         expect(page).to have_selector "h1", text: changed_name
         expect(page).to have_link text: changed_website
         expect(page).to have_selector "li.description", text: changed_description
@@ -72,9 +72,9 @@ RSpec.describe 'User edit imformation', type: :system do
         click_button "変更する"
       end
       expect(current_path).to eq edit_password_path
-      expect(page).to have_selector "#error_explanation"
+      expect(page).to have_selector ".error_explanation"
       visit current_path
-      expect(page).not_to have_selector "#error_explanation"
+      expect(page).not_to have_selector ".error_explanation"
     end
   end
 end

@@ -16,6 +16,6 @@ class Work < ApplicationRecord
   end
 
   def display_image
-    image.variant(resize_to_limit: [250, 250])
+    image.variant(gravity: :center, resize: "600x600^", crop: "600x600+0+0").processed
   end
 end

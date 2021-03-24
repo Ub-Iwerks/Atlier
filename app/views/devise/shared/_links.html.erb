@@ -1,21 +1,48 @@
-<%- if controller_name != 'sessions' %>
-  <%= link_to "Log in", new_session_path(resource_name) %><br />
-<% end %>
-
-<%- if devise_mapping.registerable? && controller_name != 'registrations' %>
-  <%= link_to "Sign up", new_registration_path(resource_name) %><br />
-<% end %>
-
-<%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
-  <%= link_to "Forgot your password?", new_password_path(resource_name) %><br />
-<% end %>
-
-<%- if devise_mapping.confirmable? && controller_name != 'confirmations' %>
-  <%= link_to "Didn't receive confirmation instructions?", new_confirmation_path(resource_name) %><br />
-<% end %>
-
-<%- if devise_mapping.omniauthable? %>
+<%- if devise_mapping.omniauthable? && controller_name == 'registrations' %>
   <%- resource_class.omniauth_providers.each do |provider| %>
-    <%= link_to "Sign in with #{OmniAuth::Utils.camelize(provider)}", omniauth_authorize_path(resource_name, provider) %><br />
+    <div class="field__oauth">
+      <%= link_to omniauth_authorize_path(resource_name, provider), class: "#{provider}" do %>
+        <% provider = :google if provider == :google_oauth2 %>
+        <span class="logo__oauth"></span><%= "#{OmniAuth::Utils.camelize(provider)}で登録" %>
+      <% end %>
+    </div>
   <% end %>
+<% end %>
+<%- if devise_mapping.omniauthable? && controller_name == 'sessions' %>
+  <%- resource_class.omniauth_providers.each do |provider| %>
+    <div class="field__oauth">
+      <%= link_to omniauth_authorize_path(resource_name, provider), class: "#{provider}" do %>
+        <% provider = :google if provider == :google_oauth2 %>
+        <span class="logo__oauth"></span><%= "#{OmniAuth::Utils.camelize(provider)}でログイン" %>
+      <% end %>
+    </div>
+  <% end %>
+<% end %>
+<%- if devise_mapping.registerable? && controller_name != 'registrations' %>
+  <div class="field__positive">
+    <%= link_to new_registration_path(resource_name) do %>
+      新規登録する<i class="fas fa-chevron-right right"></i>
+    <% end %>
+  </div>
+<% end %>
+<%- if controller_name != 'sessions' %>
+  <div class="field__positive">
+    <%= link_to new_session_path(resource_name) do %>
+      アカウントをお持ちの方<i class="fas fa-chevron-right right"></i>
+    <% end %>
+  </div>
+<% end %>
+<%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
+  <div class="field__positive">
+    <%= link_to new_password_path(resource_name) do %>
+      パスワードを忘れた場合<i class="fas fa-chevron-right right"></i>
+    <% end %>
+  </div>
+<% end %>
+<%- if devise_mapping.confirmable? && controller_name != 'confirmations' %>
+  <div class="field__positive">
+    <%= link_to new_confirmation_path(resource_name) do %>
+      メールアドレスの再送信する<i class="fas fa-chevron-right right"></i>
+    <% end %>
+  </div>
 <% end %>

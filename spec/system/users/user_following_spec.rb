@@ -24,7 +24,7 @@ RSpec.describe 'User following', type: :system do
         users_in_page.each do |member|
           within("#user-#{member.id}") do
             expect(page).to have_link href: user_path(member.id), text: "#{member.username}"
-            expect(page).to have_selector "span.email", text: "#{member.email}"
+            expect(page).to have_selector "img[alt$='#{member.username}']"
           end
         end
       end
@@ -44,7 +44,7 @@ RSpec.describe 'User following', type: :system do
         users_in_page.each do |member|
           within("#user-#{member.id}") do
             expect(page).to have_link href: user_path(member.id), text: "#{member.username}"
-            expect(page).to have_selector "span.email", text: "#{member.email}"
+            expect(page).to have_selector "img[alt$='#{member.username}']"
           end
         end
       end
@@ -65,7 +65,7 @@ RSpec.describe 'User following', type: :system do
       expect(current_path).to eq user_path another_user
       expect(user.following.count).to eq following + 1
       within("form") do
-        click_button "アンフォロー"
+        click_button "フォロー中"
       end
       expect(current_path).to eq user_path another_user
       expect(user.following.count).to eq following

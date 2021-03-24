@@ -1,18 +1,19 @@
 <% set_meta_tags title: "#{@user.username}の#{@title}" %>
 <div class="row">
-  <aside class="col-md-4">
-    <section class="user_info">
-      <%= display_avatar_for @user %>
-      <h1>
-        <p><%= @user.username %></p>
-        <p><%= @user.email %></p>
-      </h1>
+  <aside class="col-md-3">
+    <section class="user--info__aside">
+      <%= render "shared/user_info", { user: @user} %>
     </section>
     <section class="stats">
       <%= render 'shared/stats' %>
     </section>
+    <% unless current_user?(@user) %>
+      <section class="user--sub-info__aside">
+        <%= render "shared/user_sub_info", { user: @user} %>
+      </section>
+    <% end %>
   </aside>
-  <div class="col-md-8">
+  <div class="col-md-9">
     <h3><%= @title %></h3>
     <% if @users.present? %>
       <ul class="users follow">

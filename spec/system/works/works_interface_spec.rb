@@ -19,7 +19,7 @@ RSpec.describe 'Works interface', type: :system do
     within("ol.works") do
       works[1..20].each do |work|
         within("li#work-#{work.id}") do
-          expect(page).to have_selector ".title", text: "#{work.title}"
+          expect(page).to have_selector ".work--title", text: "#{work.title}"
           expect(page).to have_selector ".concept", text: "#{work.concept}"
           expect(page).to have_link href: work_path(work)
         end

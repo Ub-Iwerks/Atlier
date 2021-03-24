@@ -48,7 +48,7 @@ RSpec.describe 'User signup', type: :system do
       end
       is_expected.to be_falsey
       within("form") do
-        expect(page).to have_selector "#error_explanation"
+        expect(page).to have_selector ".error_explanation"
         expect(page).to have_selector "div.field_with_errors"
       end
     end

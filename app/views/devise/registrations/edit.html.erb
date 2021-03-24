@@ -1,50 +1,66 @@
 <% set_meta_tags title: "プロフィールを編集" %>
-<h2>プロフィールを編集</h2>
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
-  <div class="field">
-    <%= f.label :username %><br>
-    <%= f.text_field :username, autofocus: true, autocomplete: "username" %>
-  </div>
-  <div class="field">
-    <%= f.label :website %><br>
-    <%= f.text_field :website, autocomplete: "website" %>
-  </div>
-  <div class="field">
-    <%= f.label :description %><br>
-    <%= f.text_area :description, autocomplete: "description" %>
-  </div>
-  <div class="field">
-    <%= f.label :email %><br>
-    <%= f.email_field :email, autocomplete: "email" %>
-    <p>メールアドレス変更後、認証メールを送信します。</p>
-  </div>
-  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-    <div>現在<%= resource.unconfirmed_email %>の認証待ちです</div>
-  <% end %>
-  <div class="field">
-    <%= f.label :avatar, class: 'image_label' do %><br>
-      <div class="prev-contents">
-        <div class="prev-content">
-          <% if current_user.avatar.attached? %>
-            <%= image_tag(current_user.avatar, alt: "preview", class: "prev-image", width: "150px") %>
-          <% else %>
-            <%= image_tag(Settings.default_avatar[:file_name], alt: "preview", class: "prev-image", width: "150px") %>
-          <% end %>
-          <%= f.file_field :avatar, class: 'image_form__contents__field hidden_file' %>
-        </div>
+<div class="row">
+  <div class="col-md-6  col-md-offset-3">
+    <h2>プロフィールを編集</h2>
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, class: "form--common"}) do |f| %>
+      <%= render "devise/shared/error_messages", resource: resource %>
+      <div class="field field__positive">
+        <%= link_to user_path resource do %>
+          <i class="fas fa-chevron-left left"></i>戻る
+        <% end %>
+      </div>
+      <div class="field">
+        <%= f.label :avatar, class: 'image_label f-control' do %>
+          <div class="prev-contents">
+            <div class="prev-content">
+              <% if current_user.avatar.attached? %>
+                <%= image_tag(current_user.avatar, alt: "preview", class: "prev-image", width: "150px") %>
+              <% else %>
+                <%= image_tag(Settings.default_avatar[:file_name], alt: "preview", class: "prev-image", width: "150px") %>
+              <% end %>
+              <%= f.file_field :avatar, accept: "image/jpeg,image/gif,image/png", class: 'hidden_file' %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+      <div class="field">
+        <%= f.label :username, class: "f-control" %>
+        <%= f.text_field :username, autofocus: true, autocomplete: "username" %>
+        <div class="form__underline"></div>
+      </div>
+      <div class="field">
+        <%= f.label :website, class: "f-control" %>
+        <%= f.text_field :website, autocomplete: "website" %>
+        <div class="form__underline"></div>
+      </div>
+      <div class="field">
+        <%= f.label :description, class: "f-control" %>
+        <%= f.text_area :description, autocomplete: "description" %>
+        <div class="form__underline"></div>
+      </div>
+      <div class="field">
+        <%= f.label :email, class: "f-control" %>
+        <%= f.email_field :email, autocomplete: "email" %>
+        <div class="form__underline"></div>
+        <p class="form__message">メールアドレス変更後、認証メールを送信します。</p>
+      </div>
+      <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+        <div>現在<%= resource.unconfirmed_email %>の認証待ちです</div>
+      <% end %>
+      <div class="field field__positive">
+        <%= link_to edit_password_path do %>
+          パスワードを変更する<i class="fas fa-chevron-right right"></i>
+        <% end %>
+      </div>
+      <div class="actions">
+        <%= f.submit "変更を保存する" %>
+      </div>
+      <div class="field field__negative">
+        <%= link_to "アカウントを削除する", registration_path(resource_name), data: { confirm: "削除してよろしいですか？" }, method: :delete %>
       </div>
     <% end %>
   </div>
-  <div class="actions">
-    <%= f.submit "変更を保存する" %>
-  </div>
-<% end %>
-<%= link_to  "パスワードを変更する", edit_password_path %>
-<h3>アカウントの削除</h3>
-<p><%= button_to "アカウントの削除", registration_path(resource_name), data: { confirm: "削除してよろしいですか？" }, method: :delete %></p>
-<%= link_to "戻る", :back %>
-
+</div>
 <script type="text/javascript">
   $("#user_avatar").bind("change", function() {
     var size_in_megabytes = this.files[0].size/1024/1024;

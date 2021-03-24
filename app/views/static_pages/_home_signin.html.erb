@@ -1,14 +1,13 @@
 <div class="row">
-  <aside class="col-md-4">
-    <section class="user_info">
-      <%= render "shared/user_info" %>
+  <aside class="col-md-3">
+    <section class="user--info__aside">
+      <%= render "shared/user_info", { user: current_user} %>
     </section>
-    <section class="work_form">
-      <%= render "shared/work_form" %>
+    <section class="stats">
+      <%= render "shared/stats" %>
     </section>
   </aside>
-  <div class="col-md-8">
-    <h3>ギャラリー</h3>
+  <div class="col-md-9">
     <%= render "shared/feed" %>
   </div>
 </div>

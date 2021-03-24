@@ -1,20 +1,33 @@
-<li id="work-<%= work.id %>">
-  <div class="works_user">
-    <span class="avatar">
-      <%= link_to work.user do %>
-        <%= display_avatar_for work.user %>
-      <% end %>
-    </span>
-    <span class="user"><%= link_to work.user.username, work.user %></span>
-  </div>
-  <div class="works_detail">
+<li class="work--card" id="work-<%= work.id %>">
+  <div class="work--title">
     <%= link_to work_path(work) do %>
-      <span class="image"><%= image_tag work.display_image %></span>
-      <span class="title"><%= work.title %></span>
-      <span class="concept"><%= work.concept %></span>
-      <span class="timestamp">
-        <%= time_ago_in_words(work.created_at) %>
-      </span>
+      <%= work.title %>
     <% end %>
+  </div>
+  <div class="work--overview">
+    <div class="work--image">
+      <span class="image"><%= image_tag work.display_image %></span>
+    </div>
+    <div class="work--element">
+      <div class="work__short">
+        <span class="concept"><%= work.concept %></span>
+      </div>
+      <div class="work__other">
+        <div class="work__user">
+            <%= link_to work.user do %>
+              <span class="avatar"><%= display_avatar_for work.user %></span>
+              <span class="username"><%= link_to work.user.username, work.user %></span>
+            <% end %>
+        </div>
+        <div class="work__assessment">
+          <span>イイネ数</span>
+          <span>返信数</span>
+          <span>閲覧数</span>
+          <span class="timestamp">
+            <%= time_ago_in_words(work.created_at) %>
+          </span>
+        </div>
+      </div>
+    </div>
   </div>
 </li>
