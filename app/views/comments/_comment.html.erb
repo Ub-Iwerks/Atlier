@@ -1,0 +1,11 @@
+<li class="comment" id="comment-<%= comment.id %>">
+  <span class="username"><%= comment.user.username %></span>
+  <span class="avatar"><%= display_avatar_for comment.user %></span>
+  <span class="content"><%= comment.content %></span>
+  <span class="timestamp"><%= time_ago_in_words(comment.created_at) %></span>
+  <% if current_user?(comment.user) %>
+    <span class="delete">
+      <%= link_to "削除する", comment_path(comment), method: :delete, data: { confirm: "削除してよろしいですか？" } %>
+    </span>
+  <% end %>
+</li>

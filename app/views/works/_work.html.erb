@@ -21,7 +21,7 @@
         </div>
         <div class="work__assessment">
           <span>イイネ数</span>
-          <span>返信数</span>
+          <span class="work__comments"><i class="far fa-comment"></i><%= work.comments.count if work.comments.present? %></span>
           <span>閲覧数</span>
           <span class="timestamp">
             <%= time_ago_in_words(work.created_at) %>

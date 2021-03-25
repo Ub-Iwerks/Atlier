@@ -1,5 +1,6 @@
 class Work < ApplicationRecord
   belongs_to :user
+  has_many :comments, dependent: :destroy
   has_one_attached :image
   has_many :illustrations, dependent: :destroy
   default_scope -> { order(created_at: :desc) }

@@ -6,6 +6,8 @@ class WorksController < ApplicationController
     @work = Work.find(params[:id])
     @user = @work.user
     @illustrations = @work.illustrations
+    @comments = @work.comments.order(created_at: "ASC")
+    @comment = current_user.comments.build
   end
 
   def new

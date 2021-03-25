@@ -482,7 +482,7 @@ section.user--sub-info__aside {
 }
 
 
-/* works */
+/* Work */
 .works {
   list-style: none;
   padding: 0;
@@ -529,6 +529,9 @@ section.user--sub-info__aside {
           display: flex;
           justify-content: space-between;
           padding-bottom: 5px;
+          .work__comments i {
+            padding-right: 5px;
+          }
         }
       }
     }

@@ -59,4 +59,26 @@ RSpec.describe Work, type: :model do
       end
     end
   end
+
+  describe "Test related to other model" do
+    context "destroyed work has illustration" do
+      let!(:work) { create(:work) }
+      let!(:illustration) { create(:illustration, work: work) }
+      let!(:count) { Illustration.count }
+      it "work related to user are destroyed" do
+        work.destroy
+        expect(Illustration.count).to eq count - 1
+      end
+    end
+
+    context "destroyed work has comment" do
+      let!(:work) { create(:work) }
+      let!(:comment) { create(:comment, work: work) }
+      let!(:count) { Comment.count }
+      it "comment related to user are destroyed" do
+        work.destroy
+        expect(Comment.count).to eq count - 1
+      end
+    end
+  end
 end

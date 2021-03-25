@@ -101,14 +101,24 @@ RSpec.describe User, type: :model do
     end
   end
 
-  describe "Test related to work" do
-    context "destroyed user" do
+  describe "Test related to other model" do
+    context "destroyed user has work" do
       let!(:user) { create(:user) }
       let!(:work) { create(:work, user: user) }
       let!(:count) { Work.count }
       it "work related to user are destroyed" do
         user.destroy
         expect(Work.count).to eq count - 1
+      end
+    end
+
+    context "destroyed user has comment" do
+      let!(:user) { create(:user) }
+      let!(:comment) { create(:comment, user: user) }
+      let!(:count) { Comment.count }
+      it "comment related to user are destroyed" do
+        user.destroy
+        expect(Comment.count).to eq count - 1
       end
     end
   end

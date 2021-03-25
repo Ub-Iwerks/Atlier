@@ -1,6 +1,6 @@
 <% set_meta_tags title: "#{@work.title}" %>
 <div class="row">
-  <aside class="col-md-4">
+  <aside class="col-md-3">
     <section class="user_info">
       <%= link_to @user do %>
         <%= display_avatar_for @user %>
@@ -9,8 +9,26 @@
         </h1>
       <% end %>
     </section>
+    <section>
+      <h2>コメントをする</h2>
+      <%= form_with(model:@comment, url: comments_path, html: { method: :post, class: "form--comment"}, local: true) do |f| %>
+        <% if @comment_errors.present? %>
+          <%= @comment_errors.count %>
+        <% end %>
+        <%= f.text_area :content %>
+        <%= f.hidden_field :work_id, value: @work.id %>
+        <%= f.submit 'コメントする' %>
+      <% end %>
+    </section>
+    <section class="comment_info">
+      <% if @comments.present? %>
+        <ol class="comments">
+          <%= render @comments %>
+        </ol>
+      <% end %>
+    </section>
   </aside>
-  <div class="col-md-8">
+  <div class="col-md-9">
     <section class="work_info">
       <h3><%= @work.title %></h3>
       <%= image_tag @work.image, alt: "メイン写真", class: "image", width: "150px" %>
