@@ -191,5 +191,20 @@ RSpec.describe User, type: :model do
         end
       end
     end
+
+    describe "already_liked? method" do
+      let(:user) { create(:user) }
+      let(:work_liked) { create(:work) }
+      let(:work_not_liked) { create(:work) }
+      let!(:like) { create(:like, user_id: user.id, work_id: work_liked.id) }
+
+      it "return true because user liked" do
+        expect(user.already_liked?(work_liked)).to be_truthy
+      end
+
+      it "return false because user doesnt liked yet" do
+        expect(user.already_liked?(work_not_liked)).to be_falsey
+      end
+    end
   end
 end

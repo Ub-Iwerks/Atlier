@@ -27,6 +27,15 @@
         </ol>
       <% end %>
     </section>
+    <section class="comment_info">
+      <h2>イイねの数</h2>
+      <%= @work.likes.count %>
+      <% if current_user.already_liked?(@work) %>
+        <%= button_to 'いいねを取り消す', work_like_path(@work), method: :delete %>
+      <% else %>
+        <%= button_to 'いいね', work_likes_path(@work) %>
+    <% end %>
+    </section>
   </aside>
   <div class="col-md-9">
     <section class="work_info">
