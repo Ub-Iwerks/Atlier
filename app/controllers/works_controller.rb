@@ -9,6 +9,7 @@ class WorksController < ApplicationController
     @comments = @work.comments.order(created_at: "ASC")
     @comment = current_user.comments.build
     @like = Like.new
+    @liked = Like.find_by(user_id: current_user.id, work_id: params[:id])
   end
 
   def new

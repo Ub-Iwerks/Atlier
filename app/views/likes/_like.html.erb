@@ -1,0 +1,14 @@
+<% if current_user.already_liked?(work) %>
+  <span class="unlike">
+    <%= link_to(work_like_path(work.id, @liked), method: :delete, remote: true) do %>
+      いいねを取り消す
+    <% end %>
+  </span>
+<% else %>
+  <span class="like">
+    <%= link_to(work_likes_path(work), method: :post, remote: true) do %>
+      いいね
+    <% end %>
+  </span>
+<% end %>
+<span class="likes_count"><%= work.likes.count %></span>
