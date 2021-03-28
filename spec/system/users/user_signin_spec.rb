@@ -18,9 +18,9 @@ RSpec.describe 'User signin', type: :system do
         click_button "ログイン"
       end
       expect(current_path).to eq root_path
-      expect(page).to have_selector ".notice", text: "ログインしました。"
+      expect(page).to have_selector ".success", text: "ログインしました。"
       visit current_path
-      expect(page).not_to have_selector ".notice"
+      expect(page).not_to have_selector ".success"
     end
   end
 
@@ -36,9 +36,9 @@ RSpec.describe 'User signin', type: :system do
         click_button "ログイン"
       end
       expect(current_path).to eq new_user_session_path
-      expect(page).to have_selector ".alert", text: "メールアドレスまたはパスワードが違います。"
+      expect(page).to have_selector ".danger", text: "メールアドレスまたはパスワードが違います。"
       visit current_path
-      expect(page).not_to have_selector ".alert"
+      expect(page).not_to have_selector ".danger"
     end
   end
 end

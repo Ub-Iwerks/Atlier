@@ -25,9 +25,9 @@ RSpec.describe 'User signup', type: :system do
         click_button "新規登録"
       end
       is_expected.to be_truthy
-      expect(page).to have_selector ".notice", text: "本人確認用のメールを送信しました。メール内のリンクからアカウントを有効化させてください。"
+      expect(page).to have_selector ".success", text: "本人確認用のメールを送信しました。メール内のリンクからアカウントを有効化させてください。"
       visit current_path
-      expect(page).not_to have_selector ".notice"
+      expect(page).not_to have_selector ".success"
     end
   end
 

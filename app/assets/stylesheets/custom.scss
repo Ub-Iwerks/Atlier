@@ -134,14 +134,17 @@ footer {
 
 /* flash */
 .flash {
+  padding: 1vh 2vw;
   color: white;
   text-align: center;
+  border-radius: 4px;
+  border: 1px solid $light-gray;
 }
 .danger {
-  background-color: red;
+  background-color: $accent-orange;
 }
 .success {
-  background-color: blue;
+  background-color: $accent-green;
 }
 
 

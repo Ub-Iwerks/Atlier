@@ -29,9 +29,9 @@ RSpec.describe 'User edit imformation', type: :system do
         expect(page).to have_link text: changed_website
         expect(page).to have_selector "li.description", text: changed_description
       end
-      expect(page).to have_selector ".notice", text: "アカウント情報を変更しました"
+      expect(page).to have_selector ".success", text: "アカウント情報を変更しました"
       visit current_path
-      expect(page).not_to have_selector ".notice"
+      expect(page).not_to have_selector ".success"
     end
   end
 

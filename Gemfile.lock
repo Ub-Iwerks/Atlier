@@ -202,6 +202,14 @@ GEM
       kaminari (>= 0.13.0)
       rails
     kaminari-core (1.2.1)
+    launchy (2.5.0)
+      addressable (~> 2.7)
+    letter_opener (1.7.0)
+      launchy (~> 2.2)
+    letter_opener_web (1.4.0)
+      actionmailer (>= 3.2)
+      letter_opener (~> 1.0)
+      railties (>= 3.2)
     listen (3.4.1)
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
@@ -438,6 +446,7 @@ DEPENDENCIES
   jquery-rails
   kaminari
   kaminari-bootstrap
+  letter_opener_web
   listen (~> 3.3)
   meta-tags
   mini_magick

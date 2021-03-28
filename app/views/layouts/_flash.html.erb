@@ -1,9 +1,9 @@
-<% if notice.present? %>
+<%  if notice.present? %>
   <p class="flash success"><%= notice %></p>
-<% end %>
-<% if alert.present? %>
+<% elsif alert.present? %>
   <p class="flash danger"><%= alert %></p>
-<% end %>
-<% flash.each do |message_type, message| %>
-  <p class="flash <%= message_type %>"><%= message %></p>
+<% else %>
+  <% flash.each do |message_type, message| %>
+    <p class="flash <%= message_type %>"><%= message %></p>
+  <% end %>
 <% end %>
