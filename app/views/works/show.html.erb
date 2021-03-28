@@ -1,37 +1,35 @@
 <% set_meta_tags title: "#{@work.title}" %>
 <div class="row">
   <aside class="col-md-3">
-    <section class="user_info">
-      <%= link_to @user do %>
-        <%= display_avatar_for @user %>
-        <h1 class="username">
-          <%= @user.username %>
-        </h1>
-      <% end %>
+    <section class="user--info__aside">
+      <%= render "shared/user_info", user: @user %>
     </section>
-    <section>
-      <h2>コメントをする</h2>
-      <%= form_with(model:@comment, url: comments_path, html: { method: :post, class: "form--comment"}, local: true) do |f| %>
-        <% if @comment_errors.present? %>
-          <%= @comment_errors.count %>
-        <% end %>
-        <%= f.text_area :content %>
-        <%= f.hidden_field :work_id, value: @work.id %>
-        <%= f.submit 'コメントする' %>
-      <% end %>
+    <section class="user--sub-info__aside">
+      <%= render "shared/user_sub_info", user: @user %>
     </section>
-    <section class="comment_info">
-      <% if @comments.present? %>
-        <ol class="comments">
-          <%= render @comments %>
-        </ol>
-      <% end %>
-    </section>
-    <section class="like_info">
-      <h2>イイねの数</h2>
+    <section class="work--assessment__aside">
       <div id="likes_button-<%= @work.id %>">
         <%= render "likes/like", work: @work, liked: @liked %>
       </div>
+      <div class="work__comment">
+        <%= render "shared/comment_count", work: @work %>
+      </div>
+      <div>閲覧数</div>
+      <div class="timestamp">
+        <%= time_ago_in_words(@work.created_at) %>前
+      </div>
+    </section>
+    <section>
+      <div class="work--comment__aside">
+        <%= render "shared/comment_form", work: @work, comment: @comment %>
+      </div>
+      <% if @comments.present? %>
+        <div class="comment--info__aside">
+          <ol class="comments">
+            <%= render @comments %>
+          </ol>
+        </div>
+      <% end %>
     </section>
   </aside>
   <div class="col-md-9">

@@ -20,8 +20,8 @@
             <% end %>
         </div>
         <div class="work__assessment">
-          <span>イイネ数</span>
-          <span class="work__comments"><i class="far fa-comment"></i><%= work.comments.count if work.comments.present? %></span>
+          <span class="work__likes"><i class="far fa-thumbs-up"></i></i><%= work.likes.count if work.likes.present? %></span>
+          <span class="work__comment"><i class="far fa-comment"></i><%= work.comments.count if work.comments.present? %></span>
           <span>閲覧数</span>
           <span class="timestamp">
             <%= time_ago_in_words(work.created_at) %>

@@ -9,7 +9,7 @@
     </section>
     <% unless current_user?(@user) %>
       <section class="user--sub-info__aside">
-        <%= render "shared/user_sub_info", { user: @user} %>
+        <%= render "shared/user_sub_info", user: @user %>
       </section>
     <% end %>
   </aside>

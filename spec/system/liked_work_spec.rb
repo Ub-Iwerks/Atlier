@@ -18,12 +18,12 @@ RSpec.describe "Liked work", type: :system do
     within("div#likes_button-#{work.id}") do
       expect(page).to have_link href: work_likes_path(work)
       expect(page).to have_selector ".likes_count", text: "#{current_count}"
-      click_link "いいね"
+      find(".like_btn").click
     end
     within("div#likes_button-#{work.id}") do
       expect(page).to have_link href: work_like_path(work, liked)
       expect(page).to have_selector ".likes_count", text: "#{current_count + 1}"
-      click_link "いいねを取り消す"
+      find(".like_btn").click
     end
     within("div#likes_button-#{work.id}") do
       expect(page).to have_link href: work_likes_path(work)

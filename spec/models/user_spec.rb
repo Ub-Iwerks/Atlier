@@ -192,6 +192,21 @@ RSpec.describe User, type: :model do
       end
     end
 
+    describe "already_commented? method" do
+      let(:user) { create(:user) }
+      let(:work_commented) { create(:work) }
+      let(:work_not_commented) { create(:work) }
+      let!(:comment) { create(:comment, user_id: user.id, work_id: work_commented.id) }
+
+      it "return true because user commented" do
+        expect(user.already_commented?(work_commented)).to be_truthy
+      end
+
+      it "return false because user doesnt commented yet" do
+        expect(user.already_commented?(work_not_commented)).to be_falsey
+      end
+    end
+
     describe "already_liked? method" do
       let(:user) { create(:user) }
       let(:work_liked) { create(:work) }

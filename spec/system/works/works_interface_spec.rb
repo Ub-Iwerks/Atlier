@@ -29,10 +29,10 @@ RSpec.describe 'Works interface', type: :system do
       click_link "#{current_work.title}"
     end
     expect(current_path).to eq work_path(current_work)
-    within(".user_info") do
+    within(".user--info__aside") do
       expect(page).to have_link href: user_path(current_work.user)
       expect(page).to have_selector "img[alt$='#{user.username}']"
-      expect(page).to have_selector "h1.username", text: "#{current_work.user.username}"
+      expect(page).to have_selector ".username", text: "#{current_work.user.username}"
     end
     within(".work_info") do
       expect(page).to have_selector "img[src$='#{current_work.image.filename}']"

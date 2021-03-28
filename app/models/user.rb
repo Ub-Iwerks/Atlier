@@ -54,6 +54,10 @@ class User < ApplicationRecord
     following.include?(other_user)
   end
 
+  def already_commented?(work)
+    comments.exists?(work_id: work.id)
+  end
+
   def already_liked?(work)
     likes.exists?(work_id: work.id)
   end

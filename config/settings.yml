@@ -7,7 +7,7 @@ attached_count:
 regular_expressions:
   email: /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 avatar_size:
-  in_like: 20
+  in_part: 20
   in_header: 22
   in_feed: 32
   in_aside: 78

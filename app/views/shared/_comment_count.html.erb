@@ -1,0 +1,8 @@
+<% if current_user.already_commented?(work) %>
+  <span class="commented"><i class="fas fa-comment"></i></span>
+<% else %>
+  <span class="uncommented"><i class="far fa-comment"></i></span>
+<% end %>
+<span class="comments_count">
+  <%= work.comments.count %>
+</span>

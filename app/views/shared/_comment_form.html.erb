@@ -1,0 +1,10 @@
+<%= form_with(model:comment, url: comments_path, html: { method: :post, class: "form--comment"}, local: true) do |f| %>
+  <%= f.hidden_field :work_id, value: work.id %>
+  <div class="field__comment">
+    <%= f.text_area :content, placeholder: "コメントする..." %>
+  </div>
+  <div class="actions">
+    <%= f.submit '投稿', class: "field__positive" %>
+  </div>
+<% end %>
+

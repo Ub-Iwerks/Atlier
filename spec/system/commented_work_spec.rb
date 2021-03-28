@@ -33,7 +33,7 @@ RSpec.describe "Commenred work", type: :system do
     visit current_path
     expect(page).not_to have_selector "p.success"
     within("li#comment-#{current_comment.id}") do
-      click_link "削除する"
+      click_link "削除"
     end
     expect(page).to have_selector "p.success"
     within("ol.comments") do

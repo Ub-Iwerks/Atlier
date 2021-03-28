@@ -31,6 +31,7 @@ section {
 }
 textarea {
   resize: vertical;
+  white-space: pre-wrap;
 }
 .center {
   text-align: center;
@@ -322,11 +323,117 @@ footer {
     }
   }
 }
-
 .form--remember_me {
   padding-bottom: 4vh;
   input, label {
     display: inline-block;
+  }
+}
+.form--comment {
+  display: flex;
+  align-items: flex-end;
+  .field__comment {
+    width: 80%;
+    textarea {
+      width: 100%;
+      display: block;
+      border: 1px solid $light-gray;
+      border-radius: 4px;
+      background-color: white;
+      outline: none;
+      box-sizing: border-box;
+      resize: none;
+      margin-bottom: 0px;
+      padding: 2px 2px;
+      height: calc( 1.6em * 2 );
+      line-height: 1.5;
+    }
+  }
+  .actions {
+    width: 20%;
+    input {
+      padding-top: 1px;
+      padding-bottom: 1px;
+      border: 1px solid $light-gray;
+      border-radius: 4px;
+      background-color: $accent-green;
+      color: $heavy-gray;
+      &:hover {
+        border: 1px solid $light-gray;
+        background-color: $light-gray;
+        color: $middle-gray;
+      }
+    }
+  }
+}
+.work--assessment__aside {
+  display: flex;
+  align-items: center;
+  div {
+    display: flex;
+    align-items: center;
+    padding: 0vw 1vw;
+    border-right: 1px solid $gray;
+    color: gray;
+    a {
+      color: gray;
+      &:hover {
+        color: $accent-orange;
+      }
+    }
+    &:first-child {
+      padding-left: 0;
+    }
+    &:last-child {
+      padding-right: 0;
+      border: 0;
+    }
+    .commented, .liked {
+      color: $accent-orange;
+    }
+  }
+  span {
+    margin-bottom: 0px;
+    i {
+      margin-right: 5px;
+    }
+  }
+}
+.comment--info__aside {
+  padding-top: 15px;
+  border-top: 1px solid $light-gray;
+  margin-top: 15px;
+  .comments {
+    padding-inline-start: 0px;
+    .comment {
+      padding-bottom: 10px;
+      display: flex;
+      align-items: flex-end;
+      .comment__main {
+        width: 80%;
+        box-sizing: border-box;
+        border: 1px solid $light-gray;
+        border-radius: 4px;
+        background-color: white;
+        padding: 2px 1px;
+        .comment__user {
+          display: flex;
+          align-items: center;
+          padding-bottom: 3px;
+          .username {
+            padding-left: 5px;
+            font-size: 1.0em;
+            font-weight: bold;
+          }
+        }
+      }
+      .comment__sub {
+        font-size: 0.9em;
+        .timestamp {
+          color: $gray;
+        }
+      }
+    }
   }
 }
 
@@ -411,11 +518,11 @@ footer {
 aside {
   section {
     padding: 10px 0;
-    margin-top: 20px;
+    margin-top: 10px;
     &:first-child {
       border: 0;
+      margin-top: 20px;
       padding-top: 0;
-      padding-bottom: 20px;
     }
     span {
       display: block;
@@ -443,7 +550,7 @@ section.user--info__aside {
 }
 section.user--sub-info__aside {
   span {
-    padding-bottom: 10px;
+    padding-bottom: 5px;
   }
   .user--work a {
     color: $heavy-gray;
@@ -529,8 +636,8 @@ section.user--sub-info__aside {
           display: flex;
           justify-content: space-between;
           padding-bottom: 5px;
-          .work__comments i {
-            padding-right: 5px;
+          span i {
+            margin-right: 5px;
           }
         }
       }
