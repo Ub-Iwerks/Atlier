@@ -38,6 +38,9 @@
       <%= image_tag @work.image, alt: "メイン写真", class: "image", width: "150px" %>
       <h4><%= @work.concept %></h4>
       <p><%= @work.description %></p>
+      <p class="work__category">
+        ジャンル：<%= @work.category.parent.name %>：<%= @work.category.name %>
+      </p>
     </section>
     <section class="work_sub_info">
       <% if @illustrations.present? %>

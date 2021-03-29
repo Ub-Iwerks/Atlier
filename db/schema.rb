@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_25_064112) do
+ActiveRecord::Schema.define(version: 2021_03_29_033038) do
 
   create_table "active_storage_attachments", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
@@ -38,6 +38,14 @@ ActiveRecord::Schema.define(version: 2021_03_25_064112) do
     t.bigint "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
+  end
+
+  create_table "categories", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "ancestry"
+    t.index ["ancestry"], name: "index_categories_on_ancestry"
   end
 
   create_table "comments", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -109,6 +117,8 @@ ActiveRecord::Schema.define(version: 2021_03_25_064112) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.text "description"
+    t.bigint "category_id"
+    t.index ["category_id"], name: "index_works_on_category_id"
     t.index ["user_id", "created_at"], name: "index_works_on_user_id_and_created_at"
     t.index ["user_id"], name: "index_works_on_user_id"
   end
@@ -120,5 +130,6 @@ ActiveRecord::Schema.define(version: 2021_03_25_064112) do
   add_foreign_key "illustrations", "works"
   add_foreign_key "likes", "users"
   add_foreign_key "likes", "works"
+  add_foreign_key "works", "categories"
   add_foreign_key "works", "users"
 end
