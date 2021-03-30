@@ -23,7 +23,7 @@ RSpec.describe 'Layouts', type: :system do
     end
   end
 
-  context "user sign in" do
+  context "user signed in" do
     it "check layouts has the number of links correctly" do
       sign_in user
       visit root_path
@@ -32,6 +32,8 @@ RSpec.describe 'Layouts', type: :system do
         expect(page).to have_link "ホーム", href: root_path
         expect(page).to have_link "ログアウト", href: destroy_user_session_path
         expect(page).to have_link "プロフィール", href: user_path(user)
+        expect(page).to have_link "アカウント編集", href: edit_user_registration_path
+        expect(page).to have_link "新規作品", href: new_work_path
       end
       within("footer") do
         expect(page).to have_link "お問い合わせ", href: contact_path

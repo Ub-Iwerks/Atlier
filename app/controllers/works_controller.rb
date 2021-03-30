@@ -1,6 +1,7 @@
 class WorksController < ApplicationController
   before_action :authenticate_user!, only: [:create, :destroy, :new, :show]
   before_action :correct_user, only: [:destroy]
+  before_action :set_categories, only: [:new, :create]
 
   def show
     @work = Work.find(params[:id])
@@ -14,6 +15,10 @@ class WorksController < ApplicationController
 
   def new
     @work_create_form = WorkCreateForm.new
+  end
+
+  def get_category_children
+    @category_children = Category.find("#{params[:parent_id]}").children
   end
 
   def create
@@ -45,12 +50,18 @@ class WorksController < ApplicationController
       :illustration_name,
       :illustration_description,
       :illustration_photo,
-      :current_user_id
+      :current_user_id,
+      :parent_category_id,
+      :category_id
     )
   end
 
   def correct_user
     @work = current_user.works.find_by(id: params[:id])
     redirect_to root_url if @work.nil?
+  end
+
+  def set_categories
+    @category_parent_array = Category.where(ancestry: nil)
   end
 end

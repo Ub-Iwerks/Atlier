@@ -252,6 +252,25 @@ footer {
     padding-right: 0.5vw;
   }
 }
+.field__negative {
+  text-align: center;
+  margin-top: 8vh;
+  a {
+    display: block;
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 6px;
+    padding-bottom: 6px;
+    border: 1px solid $accent-orange;
+    border-radius: 4px;
+    color: $accent-orange;
+    &:hover {
+      color: $light-gray;
+      background-color: $accent-orange;
+    }
+  }
+}
 .field__oauth {
   text-align: center;
   margin-top: 4px;
@@ -307,25 +326,6 @@ footer {
     }
   }
 }
-.field__negative {
-  text-align: center;
-  margin-top: 8vh;
-  a {
-    display: block;
-    width: 60%;
-    margin-left: auto;
-    margin-right: auto;
-    padding-top: 6px;
-    padding-bottom: 6px;
-    border: 1px solid $accent-orange;
-    border-radius: 4px;
-    color: $accent-orange;
-    &:hover {
-      color: $light-gray;
-      background-color: $accent-orange;
-    }
-  }
-}
 .form--remember_me {
   padding-bottom: 4vh;
   input, label {
@@ -369,6 +369,9 @@ footer {
     }
   }
 }
+
+
+  /* aside */
 .work--assessment__aside {
   display: flex;
   align-items: center;

@@ -4,6 +4,8 @@ class WorkCreateForm
   include ActiveModel::Validations
 
   attribute :current_user_id, :integer
+  attribute :parent_category_id, :integer
+  attribute :category_id, :integer
   attribute :title, :string
   attribute :concept, :string
   attribute :description, :string
@@ -15,10 +17,9 @@ class WorkCreateForm
   def save
     # return false if invalid?
     user = User.find(current_user_id)
-    work = user.works.new(title: title, concept: concept, description: description)
+    work = user.works.new(title: title, concept: concept, description: description, category_id: category_id)
     work.image.attach(image)
     work.save
-
     illustration = work.illustrations.build(name: illustration_name, description: illustration_description)
     illustration.photo.attach(illustration_photo)
     illustration.save

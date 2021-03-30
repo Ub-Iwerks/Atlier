@@ -51,7 +51,7 @@
     </section>
     <span class="edit_btn">
       <% if current_user?(@user) %>
-        <%= link_to "編集する", edit_work_path(@work) %>
+        <%= link_to "編集する", "#" %>
         <%= link_to "削除する", work_path(@work), method: :delete, data: { confirm: "削除してよろしいですか？" } %>
       <% end %>
     </span>

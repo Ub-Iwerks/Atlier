@@ -1,33 +1,49 @@
 <% set_meta_tags title: "新規投稿" %>
-<%= form_with(model: @work_create_form, url: works_path, local: true) do |f| %>
-  <%= f.hidden_field :current_user_id, value: current_user.id %>
-  <div class="field">
-    <%= f.label :title %>
-    <%= f.text_field :title %>
+<div class="row">
+  <div class="col-md-6  col-md-offset-3">
+    <%= form_with(model: @work_create_form, url: works_path, local: true, html: { class: "form--common"}) do |f| %>
+      <%= f.hidden_field :current_user_id, value: current_user.id %>
+      <div class="field--category">
+        <%= f.label :category_id, class: "f-control" %>
+        <div class="category__parent">
+          <%= f.collection_select :parent_category_id, @category_parent_array, :id, :name, { include_blank: "選択してください"}, class:"select_field" %>
+        </div>
+      </div>
+      <div class="field">
+        <%= f.label :title, class: "f-control" %>
+        <%= f.text_field :title %>
+        <div class="form__underline"></div>
+      </div>
+      <div class="field">
+        <%= f.label :concept, class: "f-control" %>
+        <%= f.text_area :concept %>
+        <div class="form__underline"></div>
+      </div>
+      <div class="field">
+        <%= f.label :description, class: "f-control" %>
+        <%= f.text_area :description %>
+        <div class="form__underline"></div>
+      </div>
+      <div class="field">
+        <%= f.label :image, class: "f-control" %>
+        <%= f.file_field :image, accept: "image/jpeg,image/gif,image/png" %>
+      </div>
+      <div class="field">
+        <%= f.label :illustration_name, class: "f-control" %>
+        <%= f.text_field :illustration_name %>
+        <div class="form__underline"></div>
+      </div>
+      <div class="field">
+        <%= f.label :illustration_description, class: "f-control" %>
+        <%= f.text_area :illustration_description %>
+        <div class="form__underline"></div>
+      </div>
+      <div class="field">
+        <%= f.label :illustration_photo, class: "f-control" %>
+        <%= f.file_field :illustration_photo, accept: "image/jpeg,image/gif,image/png" %>
+      </div>
+      <%= f.submit %>
+    <% end %>
   </div>
-  <div class="field">
-    <%= f.label :concept %>
-    <%= f.text_area :concept %>
-  </div>
-  <div class="field">
-    <%= f.label :description %>
-    <%= f.text_area :description %>
-  </div>
-  <div class="field">
-    <%= f.label :image %>
-    <%= f.file_field :image, accept: "image/jpeg,image/gif,image/png" %>
-  </div>
-  <div class="field">
-    <%= f.label :illustration_name %>
-    <%= f.text_field :illustration_name %>
-  </div>
-  <div class="field">
-    <%= f.label :illustration_description %>
-    <%= f.text_area :illustration_description %>
-  </div>
-  <div class="field">
-    <%= f.label :illustration_photo %>
-    <%= f.file_field :illustration_photo, accept: "image/jpeg,image/gif,image/png" %>
-  </div>
-  <%= f.submit %>
-<% end %>
+</div>
+

@@ -20,6 +20,9 @@ Rails.application.routes.draw do
   end
   resources :works do
     resources :likes, only: [:create, :destroy]
+    collection do
+      get 'get_category_children', defaults: { fomat: 'json' }
+    end
   end
   resources :comments, only: [:create, :destroy]
   resources :relationships, only: [:create, :destroy]

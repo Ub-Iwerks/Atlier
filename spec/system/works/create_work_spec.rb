@@ -10,6 +10,8 @@ RSpec.describe 'Create work', type: :system do
   let(:title) { 'TITLE' }
   let(:concept) { 'This is a concept' }
   let(:description) { 'This is a description' }
+  let(:parent_category) { create(:category) }
+  let!(:category) { parent_category.children.create(name: "category") }
   let(:illustration_name) { 'This is a illustrations name' }
   let(:illustration_description) { 'This is a illustrations description' }
   let(:current_work) { Work.first }
@@ -18,6 +20,8 @@ RSpec.describe 'Create work', type: :system do
     sign_in user
     visit new_work_path
     within("form") do
+      find("option[value='1']").select_option
+      # fill_in "work_create_form[category_id]", with: category.id
       fill_in "work_create_form[title]", with: title
       fill_in "work_create_form[concept]", with: concept
       fill_in "work_create_form[description]", with: description
