@@ -24,4 +24,8 @@ class Illustration < ApplicationRecord
   def works_attached_limit
     errors.add(:work, "1つの作品添付可能なファイルは8つまでです。") if attached_count >= Settings.attached_count[:maximum]
   end
+
+  def display_photo_square(size: 600)
+    photo.variant(gravity: :center, resize: "#{size}x#{size}^", crop: "#{size}x#{size}+0+0").processed
+  end
 end

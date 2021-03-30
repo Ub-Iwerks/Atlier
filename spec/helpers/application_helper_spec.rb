@@ -13,7 +13,7 @@ RSpec.describe ApplicationHelper, type: :helper do
   end
 
   describe "display_avatar_for helper_method" do
-    let(:default_avatar) { Settings.default_avatar[:file_name] }
+    let(:default_avatar) { Settings.default_image[:avatar] }
     let(:default_size) { Settings.avatar_size[:in_feed] }
     let(:specified_size) { Settings.avatar_size[:in_profile] }
 

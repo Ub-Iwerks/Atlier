@@ -25,8 +25,14 @@
         <div class="form__underline"></div>
       </div>
       <div class="field">
-        <%= f.label :image, class: "f-control" %>
-        <%= f.file_field :image, accept: "image/jpeg,image/gif,image/png" %>
+        <%= f.label :image, class: 'image_label f-control' do %>
+          <div class="prev-contents">
+            <div class="prev-content">
+              <%= image_tag(Settings.default_image[:work], alt: "preview", class: "prev-work") %>
+              <%= f.file_field :image, class: 'hidden_work', accept: "image/jpeg,image/gif,image/png" %>
+            </div>
+          </div>
+        <% end %>
       </div>
       <div class="field">
         <%= f.label :illustration_name, class: "f-control" %>
@@ -39,8 +45,14 @@
         <div class="form__underline"></div>
       </div>
       <div class="field">
-        <%= f.label :illustration_photo, class: "f-control" %>
-        <%= f.file_field :illustration_photo, accept: "image/jpeg,image/gif,image/png" %>
+        <%= f.label :illustration_photo, class: 'image_label f-control' do %>
+          <div class="prev-contents">
+            <div class="prev-content">
+              <%= image_tag(Settings.default_image[:work], alt: "preview", class: "prev-illustration") %>
+              <%= f.file_field :illustration_photo, class: 'hidden_illustration1', accept: "image/jpeg,image/gif,image/png" %>
+            </div>
+          </div>
+        <% end %>
       </div>
       <%= f.submit %>
     <% end %>

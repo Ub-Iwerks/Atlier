@@ -9,7 +9,7 @@
           <li><%= link_to "通知", "#" %></li>
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">
-              <%= current_user.username %> <b class="caret"></b>
+              <%= display_avatar_for(current_user, size: Settings.avatar_size[:in_header]) %> <b class="caret"></b>
             </a>
             <ul class="dropdown-menu">
               <li><%= link_to "プロフィール", user_path(current_user) %></li>

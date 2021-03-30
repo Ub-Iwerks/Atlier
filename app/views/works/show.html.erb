@@ -35,7 +35,7 @@
   <div class="col-md-9">
     <section class="work_info">
       <h3><%= @work.title %></h3>
-      <%= image_tag @work.image, alt: "メイン写真", class: "image", width: "150px" %>
+      <%= image_tag @work.display_image_square(main: true), alt: "メイン写真", class: "image" %>
       <h4><%= @work.concept %></h4>
       <p><%= @work.description %></p>
       <p class="work__category">

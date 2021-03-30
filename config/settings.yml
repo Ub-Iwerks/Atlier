@@ -12,5 +12,6 @@ avatar_size:
   in_feed: 32
   in_aside: 78
   in_profile: 150
-default_avatar:
-  file_name: "avatar.png"
+default_image:
+  avatar: "avatar.png"
+  work: "choice_image.png"

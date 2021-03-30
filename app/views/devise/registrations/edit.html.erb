@@ -11,12 +11,12 @@
       </div>
       <div class="field">
         <%= f.label :avatar, class: 'image_label f-control' do %>
-          <div class="prev-contents">
+          <div class="prev-contents choice--avatar">
             <div class="prev-content">
               <% if current_user.avatar.attached? %>
-                <%= image_tag(current_user.avatar, alt: "preview", class: "prev-image", width: "150px") %>
+                <%= image_tag(current_user.avatar, alt: "preview", class: "prev-image avatar") %>
               <% else %>
-                <%= image_tag(Settings.default_avatar[:file_name], alt: "preview", class: "prev-image", width: "150px") %>
+                <%= image_tag(Settings.default_image[:avatar], alt: "preview", class: "prev-image  avatar") %>
               <% end %>
               <%= f.file_field :avatar, accept: "image/jpeg,image/gif,image/png", class: 'hidden_file' %>
             </div>

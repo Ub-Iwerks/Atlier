@@ -39,8 +39,11 @@ textarea {
 .center h1 {
   margin-bottom: 10px;
 }
-ul, ol, li{
+ul, ol, li {
   list-style: none;
+}
+.avatar {
+  border-radius: 50%;
 }
 
 /* typography */
@@ -205,8 +208,16 @@ footer {
       padding-top: 0.2em;
       padding-left: 1em;
     }
-    .prev-contents {
+    .choice--avatar {
       text-align: center;
+      .prev-image {
+        width: 150px;
+        height: 150px;
+        object-fit: cover;
+        &:hover {
+          cursor: pointer;
+        }
+      }
       .hidden_file {
         display: none;
       }
@@ -368,6 +379,16 @@ footer {
       }
     }
   }
+}
+.prev-work {
+  width: 17vw;
+  height: 12vw;
+  object-fit: cover;
+}
+.prev-illustration {
+  width: 12vw;
+  height: 12vw;
+  object-fit: cover;
 }
 
 

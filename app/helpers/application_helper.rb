@@ -28,13 +28,15 @@ module ApplicationHelper
   end
 
   def display_avatar_for(user, size: Settings.avatar_size[:in_feed])
-    default_avatar = Settings.default_avatar[:file_name]
+    default_avatar = Settings.default_image[:avatar]
+    resize = "#{size}x#{size}^"
+    crop = "#{size}x#{size}+0+0"
     if user.avatar.attached?
       avatar = user.avatar
+      image_tag(avatar.variant(gravity: :center, resize: resize, crop: crop).processed, alt: "#{user.username}", class: "avatar")
     else
-      avatar = default_avatar
+      image_tag(default_avatar, alt: "#{user.username}", class: "avatar", width: "#{size}px")
     end
-    image_tag(avatar, alt: "#{user.username}", class: "avatar", width: "#{size}px")
   end
 
   private
