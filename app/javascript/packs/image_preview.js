@@ -35,7 +35,7 @@ $(document).on('turbolinks:load', function () {
         `
       return html;
     }
-    $(document).on('change', '.hidden_work', function () {
+    $(document).on('change', '#work_create_image', function () {
       var file = this.files[0];
       var reader = new FileReader();
       reader.readAsDataURL(file);
@@ -56,12 +56,12 @@ $(document).on('turbolinks:load', function () {
       var html =
         `
         <div class="prev-content">
-          <img src="${image}", alt="preview" class="prev-illustration">
+          <img src="${image}", alt="preview" class="prev-0">
         </div>
         `
       return html;
     }
-    $(document).on('change', '.hidden_illustration1', function () {
+    $(document).on('change', '#work_create_illustrations_attributes_0_photo', function () {
       var file = this.files[0];
       var reader = new FileReader();
       reader.readAsDataURL(file);
@@ -71,10 +71,113 @@ $(document).on('turbolinks:load', function () {
           var html = buildHTML(image)
           $('.prev-contents').prepend(html);
         } else {
-          $('.prev-content .prev-illustration').attr({ src: image });
+          $('.prev-content .prev-0').attr({ src: image });
         }
       }
     });
   });
 
+  $(function () {
+    function buildHTML(image) {
+      var html =
+        `
+        <div class="prev-content">
+          <img src="${image}", alt="preview" class="prev-1">
+        </div>
+        `
+      return html;
+    }
+    $(document).on('change', '#work_create_illustrations_attributes_1_photo', function () {
+      var file = this.files[0];
+      var reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = function () {
+        var image = this.result;
+        if ($('.prev-content').length == 0) {
+          var html = buildHTML(image)
+          $('.prev-contents').prepend(html);
+        } else {
+          $('.prev-content .prev-1').attr({ src: image });
+        }
+      }
+    });
+  });
+
+  $(function () {
+    function buildHTML(image) {
+      var html =
+        `
+        <div class="prev-content">
+          <img src="${image}", alt="preview" class="prev-2">
+        </div>
+        `
+      return html;
+    }
+    $(document).on('change', '#work_create_illustrations_attributes_2_photo', function () {
+      var file = this.files[0];
+      var reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = function () {
+        var image = this.result;
+        if ($('.prev-content').length == 0) {
+          var html = buildHTML(image)
+          $('.prev-contents').prepend(html);
+        } else {
+          $('.prev-content .prev-2').attr({ src: image });
+        }
+      }
+    });
+  });
+
+  $(function () {
+    function buildHTML(image) {
+      var html =
+        `
+        <div class="prev-content">
+          <img src="${image}", alt="preview" class="prev-3">
+        </div>
+        `
+      return html;
+    }
+    $(document).on('change', '#work_create_illustrations_attributes_3_photo', function () {
+      var file = this.files[0];
+      var reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = function () {
+        var image = this.result;
+        if ($('.prev-content').length == 0) {
+          var html = buildHTML(image)
+          $('.prev-contents').prepend(html);
+        } else {
+          $('.prev-content .prev-3').attr({ src: image });
+        }
+      }
+    });
+  });
+
+  $(function () {
+    function buildHTML(image) {
+      var html =
+        `
+        <div class="prev-content">
+          <img src="${image}", alt="preview" class="prev-4">
+        </div>
+        `
+      return html;
+    }
+    $(document).on('change', '#work_create_illustrations_attributes_4_photo', function () {
+      var file = this.files[0];
+      var reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = function () {
+        var image = this.result;
+        if ($('.prev-content').length == 0) {
+          var html = buildHTML(image)
+          $('.prev-contents').prepend(html);
+        } else {
+          $('.prev-content .prev-4').attr({ src: image });
+        }
+      }
+    });
+  });
 });

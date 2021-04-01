@@ -13,22 +13,23 @@ class WorksController < ApplicationController
     @liked = Like.find_by(user_id: current_user.id, work_id: params[:id])
   end
 
-  def new
-    @work_create_form = WorkCreateForm.new
-  end
-
   def get_category_children
     @category_children = Category.find("#{params[:parent_id]}").children
   end
 
+  def new
+    @form = WorkCreate.new
+  end
+
   def create
-    @work_create_form = WorkCreateForm.new(work_create_form_params)
-    if @work_create_form.save
-      flash[:success] = "投稿に成功しました。"
-      work = Work.first
-      redirect_to work_path work
+    @form = WorkCreate.new(work_create_params)
+    answer = @form.save
+    # binding.pry
+    if answer[0]
+      flash[:success] = "投稿に成功しました"
+      redirect_to work_path(answer[1])
     else
-      flash[:danger] = "投稿に失敗しました。"
+      @crete_errors = answer[1]
       render "new"
     end
   end
@@ -41,18 +42,19 @@ class WorksController < ApplicationController
 
   private
 
-  def work_create_form_params
-    params.require(:work_create_form).permit(
+  def work_create_params
+    params.require(:work_create).permit(
+      :category_id,
       :title,
+      :image,
+      :user_id,
       :concept,
       :description,
-      :image,
-      :illustration_name,
-      :illustration_description,
-      :illustration_photo,
-      :current_user_id,
-      :parent_category_id,
-      :category_id
+      illustrations_attributes: [
+        :name,
+        :description,
+        :photo,
+      ]
     )
   end
 

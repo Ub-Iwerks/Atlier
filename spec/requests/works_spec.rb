@@ -61,11 +61,11 @@ RSpec.describe "Works", type: :request do
 
   describe "POST /works" do
     let(:user) { create(:user) }
-    let(:work_create_form_params) { attributes_for(:work_create_form, current_user_id: user.id) }
+    let(:work_create_params) { attributes_for(:work_create, user_id: user.id) }
     context "user doesnt sign in" do
       before do
         post works_path, params: {
-          work_create_form: work_create_form_params,
+          work_create: work_create_params,
         }
       end
 
@@ -78,7 +78,7 @@ RSpec.describe "Works", type: :request do
       before do
         sign_in user
         post works_path, params: {
-          work_create_form: work_create_form_params,
+          work_create: work_create_params,
         }
       end
 

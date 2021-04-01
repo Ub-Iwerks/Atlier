@@ -1,61 +1,77 @@
 <% set_meta_tags title: "新規投稿" %>
 <div class="row">
   <div class="col-md-6  col-md-offset-3">
-    <%= form_with(model: @work_create_form, url: works_path, local: true, html: { class: "form--common"}) do |f| %>
-      <%= f.hidden_field :current_user_id, value: current_user.id %>
+    <%= form_with model: @form, url: works_path, method: :post, local: true, class: "form--common" do |form| %>
+      <% if @crete_errors %>
+        <%= render "shared/error_messages", object: @crete_errors %>
+      <% end %>
+      <%= form.hidden_field :user_id, value: current_user.id %>
+
       <div class="field--category">
-        <%= f.label :category_id, class: "f-control" %>
+        <%= form.label :category_id, class: "f-control" %>
         <div class="category__parent">
-          <%= f.collection_select :parent_category_id, @category_parent_array, :id, :name, { include_blank: "選択してください"}, class:"select_field" %>
+          <%= select_tag "parent_category_id", options_from_collection_for_select(@category_parent_array, :id, :name), include_blank: "選択してください", class:"select_field" %>
         </div>
       </div>
+
       <div class="field">
-        <%= f.label :title, class: "f-control" %>
-        <%= f.text_field :title %>
-        <div class="form__underline"></div>
-      </div>
-      <div class="field">
-        <%= f.label :concept, class: "f-control" %>
-        <%= f.text_area :concept %>
-        <div class="form__underline"></div>
-      </div>
-      <div class="field">
-        <%= f.label :description, class: "f-control" %>
-        <%= f.text_area :description %>
-        <div class="form__underline"></div>
-      </div>
-      <div class="field">
-        <%= f.label :image, class: 'image_label f-control' do %>
+        <%= form.label :image, class: 'image_label f-control' do %>
           <div class="prev-contents">
             <div class="prev-content">
               <%= image_tag(Settings.default_image[:work], alt: "preview", class: "prev-work") %>
-              <%= f.file_field :image, class: 'hidden_work', accept: "image/jpeg,image/gif,image/png" %>
+              <%= form.file_field :image, class: 'hidden_work', accept: "image/jpeg,image/gif,image/png" %>
             </div>
           </div>
         <% end %>
       </div>
+
       <div class="field">
-        <%= f.label :illustration_name, class: "f-control" %>
-        <%= f.text_field :illustration_name %>
+        <%= form.label :title, class: "f-control" %>
+        <%= form.text_field :title %>
         <div class="form__underline"></div>
       </div>
+
       <div class="field">
-        <%= f.label :illustration_description, class: "f-control" %>
-        <%= f.text_area :illustration_description %>
+        <%= form.label :concept, class: "f-control" %>
+        <%= form.text_area :concept %>
         <div class="form__underline"></div>
       </div>
+
       <div class="field">
-        <%= f.label :illustration_photo, class: 'image_label f-control' do %>
-          <div class="prev-contents">
-            <div class="prev-content">
-              <%= image_tag(Settings.default_image[:work], alt: "preview", class: "prev-illustration") %>
-              <%= f.file_field :illustration_photo, class: 'hidden_illustration1', accept: "image/jpeg,image/gif,image/png" %>
+        <%= form.label :description, class: "f-control" %>
+        <%= form.text_area :description %>
+        <div class="form__underline"></div>
+      </div>
+
+      <% count = 0 %>
+      <%= form.fields_for :illustrations do |f| %>
+
+        <div class="field">
+          <%= f.label :photo, class: 'image_label f-control' do %>
+            <div class="prev-contents">
+              <div class="prev-content">
+                <%= image_tag(Settings.default_image[:work], alt: "preview", class: "prev-#{count}") %>
+                <%= f.file_field :photo, class: "hidden_photo#{count}", accept: "image/jpeg,image/gif,image/png" %>
+              </div>
             </div>
-          </div>
-        <% end %>
-      </div>
-      <%= f.submit %>
+          <% end %>
+          <% count += 1 %>
+        </div>
+
+        <div class="field">
+          <%= f.label :name, class: "f-control" %>
+          <%= f.text_field :name %>
+          <div class="form__underline"></div>
+        </div>
+
+        <div class="field">
+          <%= f.label :description, class: "f-control" %>
+          <%= f.text_area :description %>
+          <div class="form__underline"></div>
+        </div>
+        <br>
+      <% end %>
+      <%= form.submit %>
     <% end %>
   </div>
 </div>
-

@@ -7,15 +7,15 @@ $(document).on('turbolinks:load', function () {
     function appendChildrenBox(insertHTML){
       var childSelectHtml = "";
       childSelectHtml = `<div class="category__child" id="children_wrapper">
-                          <select class="select_field" name="work_create_form[category_id]" id="child__category">
+                          <select class="select_field" name="work_create[category_id]" id="child__category">
                             <option value="">---</option>
                             ${insertHTML}
                           </select>
                         </div>`;
       $('.field--category').append(childSelectHtml);
     }
-    $("#work_create_form_parent_category_id").on('change',function(){
-      var parentId = document.getElementById('work_create_form_parent_category_id').value;
+    $("#parent_category_id").on('change',function(){
+      var parentId = document.getElementById('parent_category_id').value;
       if (parentId != ""){
         $.ajax({
           url: '/works/get_category_children/',

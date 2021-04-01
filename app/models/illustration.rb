@@ -22,7 +22,9 @@ class Illustration < ApplicationRecord
   end
 
   def works_attached_limit
-    errors.add(:work, "1つの作品添付可能なファイルは8つまでです。") if attached_count >= Settings.attached_count[:maximum]
+    if attached_count >= Settings.attached_count[:maximum]
+      errors.add(:work, "1つの作品添付可能なファイルは#{Settings.attached_count[:maximum]}つまでです。")
+    end
   end
 
   def display_photo_square(size: 600)

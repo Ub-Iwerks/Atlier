@@ -2,7 +2,7 @@ password_length:
   range: 8..128
   minimum: 8
 attached_count:
-  maximum: 8
+  maximum: 5
   addition: 1
 regular_expressions:
   email: /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
