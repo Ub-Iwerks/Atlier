@@ -7,8 +7,8 @@ RSpec.describe 'Works interface', type: :system do
 
   let(:user) { create(:user) }
   let!(:works) { create_list(:work, 21, user: user) }
-  let(:current_work) { works[20] }
-  let(:illustrations) { create_list(:illustration, 8, work: current_work) }
+  let!(:current_work) { works[20] }
+  let!(:illustrations) { create_list(:illustration, 5, work: current_work) }
 
   it "check work feed has links correctly" do
     sign_in user
@@ -34,18 +34,20 @@ RSpec.describe 'Works interface', type: :system do
       expect(page).to have_selector "img[alt$='#{user.username}']"
       expect(page).to have_selector ".username", text: "#{current_work.user.username}"
     end
-    within(".work_info") do
-      expect(page).to have_selector "img[src$='#{current_work.image.filename}']"
-      expect(page).to have_selector "h3", text: "#{current_work.title}"
-      expect(page).to have_selector "h4", text: "#{current_work.concept}"
-      expect(page).to have_selector "p", text: "#{current_work.description}"
-    end
-    within(".work_sub_info") do
-      current_work.illustrations.each do |illustration|
-        within("li#illustration-#{illustration.id}") do
-          expect(page).to have_selector "img[src$='#{illustration.photo.filename}']"
-          expect(page).to have_selector ".name", text: "#{illustration.name}"
-          expect(page).to have_selector ".description", text: "#{illustration.description}"
+    within(".work--all__information") do
+      within(".work--main_info") do
+        expect(page).to have_selector "h3", text: "#{current_work.title}"
+        expect(page).to have_selector "p", text: "#{current_work.concept}"
+        expect(page).to have_selector "img[src$='#{current_work.image.filename}']"
+        expect(page).to have_selector "p", text: "#{current_work.description}"
+      end
+      within(".work--sub_info") do
+        current_work.illustrations.each do |illustration|
+          within("li#illustration-#{illustration.id}") do
+            expect(page).to have_selector "img[src$='#{illustration.photo.filename}']"
+            expect(page).to have_selector ".name", text: "#{illustration.name}"
+            expect(page).to have_selector ".description", text: "#{illustration.description}"
+          end
         end
       end
     end

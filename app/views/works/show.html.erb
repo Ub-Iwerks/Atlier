@@ -8,18 +8,27 @@
       <%= render "shared/user_sub_info", user: @user %>
     </section>
     <section class="work--assessment__aside">
-      <div id="likes_button-<%= @work.id %>">
-        <%= render "likes/like", work: @work, liked: @liked %>
+      <div class="assessment__by_user">
+        <div id="likes_button-<%= @work.id %>">
+          <%= render "likes/like", work: @work, liked: @liked %>
+        </div>
+        <div class="work__comment">
+          <%= render "shared/comment_count", work: @work %>
+        </div>
+        <div>閲覧数</div>
+        <div class="timestamp">
+          <%= time_ago_in_words(@work.created_at) %>前
+        </div>
       </div>
-      <div class="work__comment">
-        <%= render "shared/comment_count", work: @work %>
-      </div>
-      <div>閲覧数</div>
-      <div class="timestamp">
-        <%= time_ago_in_words(@work.created_at) %>前
+      <div class="work__category">
+        <ul class="category_names">
+          <% @work.category.path.each do |category| %>
+            <li class="category_name"><%= category.name %></li>
+          <% end %>
+        </ul>
       </div>
     </section>
-    <section>
+    <section class="comments_to_work_aside">
       <div class="work--comment__aside">
         <%= render "shared/comment_form", work: @work, comment: @comment %>
       </div>
@@ -33,27 +42,47 @@
     </section>
   </aside>
   <div class="col-md-9">
-    <section class="work_info">
-      <h3><%= @work.title %></h3>
-      <%= image_tag @work.display_image_square(main: true), alt: "メイン写真", class: "image" %>
-      <h4><%= @work.concept %></h4>
-      <p><%= @work.description %></p>
-      <p class="work__category">
-        ジャンル：<%= @work.category.parent.name %>：<%= @work.category.name %>
-      </p>
-    </section>
-    <section class="work_sub_info">
+    <div class="work--all__information">
+      <section class="work--main_info">
+        <div class="work__title">
+          <h3><%= @work.title %></h3>
+        </div>
+        <div class="work__concept">
+          <p><%= @work.concept %></p>
+        </div>
+        <div class="work__image">
+          <%= image_tag @work.display_image_square(main:true) %>
+        </div>
+        <div class="work__description">
+          <p><%= @work.description %></p>
+        </div>
+      </section>
       <% if @illustrations.present? %>
-        <ol class="illustrations">
-          <%= render @illustrations %>
-        </ol>
+        <section class="work--sub_info">
+          <ol class="illustrations">
+            <%= render @illustrations %>
+          </ol>
+        </section>
+      <% end %>
+    </div>
+    <section class="comments_to_work_bottom">
+      <div class="work--comment__aside">
+        <%= render "shared/comment_form", work: @work, comment: @comment %>
+      </div>
+      <% if @comments.present? %>
+        <div class="comment--info__aside">
+          <ol class="comments">
+            <%= render @comments %>
+          </ol>
+        </div>
       <% end %>
     </section>
-    <span class="edit_btn">
-      <% if current_user?(@user) %>
-        <%= link_to "編集する", "#" %>
+    <% if current_user?(@user) %>
+    <div class="work--settings">
+      <span class="delete_btn field__negative">
         <%= link_to "削除する", work_path(@work), method: :delete, data: { confirm: "削除してよろしいですか？" } %>
-      <% end %>
-    </span>
+      </span>
+    </div>
+    <% end %>
   </div>
 </div>

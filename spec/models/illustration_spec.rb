@@ -43,7 +43,7 @@ RSpec.describe Illustration, type: :model do
 
     context "work has too many illustrations" do
       let(:work) { create(:work) }
-      let!(:illustrations) { create_list(:illustration, 8, work: work) }
+      let!(:illustrations) { create_list(:illustration, 5, work: work) }
       let(:illustration) { build(:illustration, work: work) }
       it { is_expected.not_to be_valid }
     end

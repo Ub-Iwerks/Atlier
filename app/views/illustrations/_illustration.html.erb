@@ -1,5 +1,19 @@
-<li id="illustration-<%= illustration.id %>" >
-  <span class="photo"><%= image_tag(illustration.display_photo_square, alt: "#{illustration.name}", class: "image") %></span>
-  <span class="name"><%= illustration.name %></span>
-  <span class="description"><%= illustration.description %></span>
+<li class="illustration--info" id="illustration-<%= illustration.id %>" >
+  <div class="illustration__photo">
+    <span class="photo">
+      <%= image_tag(illustration.display_photo_square, alt: "#{illustration.name}", class: "image") %>
+    </span>
+  </div>
+  <div class="illustration__text">
+    <div class="illustration__name">
+      <span class="name">
+        <%= illustration.name %>
+      </span>
+    </div>
+    <div class="illustration__description">
+      <span class="description">
+        <%= illustration.description %>
+      </span>
+    </div>
+  </div>
 </li>

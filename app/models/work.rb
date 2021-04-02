@@ -21,7 +21,7 @@ class Work < ApplicationRecord
 
   def display_image_square(size: 600, main: false)
     if main
-      image.variant(gravity: :center, resize: "848x848^", crop: "848x600+0+0").processed
+      image.variant(gravity: :center, resize: "600x600^", crop: "848x600+0+0").processed
     else
       image.variant(gravity: :center, resize: "#{size}x#{size}^", crop: "#{size}x#{size}+0+0").processed
     end

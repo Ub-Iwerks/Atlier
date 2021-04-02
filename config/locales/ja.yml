@@ -33,16 +33,17 @@ ja:
         title: タイトル
         concept: コンセプト
         description: 説明
-        image: メイン写真
+        image: メイン画像
         user: ユーザー
         user_id: ユーザーID
+        category: カテゴリー
         created_at: 作成日
         updated_at: 更新日
       illustration:
-        photo: 挿し図
-        name: 挿し図タイトル
-        description: 挿し図説明
-        position: 挿し図番号
+        photo: イラスト
+        name: イラストタイトル
+        description: イラスト説明
+        position: イラスト番号
         work_id: ワークID
         created_at: 作成日
         updated_at: 更新日

@@ -4,30 +4,53 @@
       <%= work.title %>
     <% end %>
   </div>
-  <div class="work--overview">
-    <div class="work--image">
-      <span class="image"><%= image_tag work.display_image_square %></span>
-    </div>
-    <div class="work--element">
-      <div class="work__short">
-        <span class="concept"><%= work.concept %></span>
-      </div>
-      <div class="work__other">
-        <div class="work__user">
-            <%= link_to work.user do %>
-              <span class="avatar"><%= display_avatar_for work.user %></span>
-              <span class="username"><%= link_to work.user.username, work.user %></span>
+  <div class="work--images">
+    <span class="main__image">
+      <%= link_to work_path(work) do %>
+        <%= image_tag work.display_image_square(main: true) %>
+      <% end %>
+    </span>
+    <% if work.illustrations.present? %>
+      <ol class="sub__images">
+        <% work.illustrations.each do |illustration| %>
+          <li class="sub__image">
+            <%= link_to work_path(work) do %>
+              <%= image_tag illustration.display_photo_square %>
             <% end %>
-        </div>
-        <div class="work__assessment">
-          <span class="work__likes"><i class="far fa-thumbs-up"></i></i><%= work.likes.count if work.likes.present? %></span>
-          <span class="work__comment"><i class="far fa-comment"></i><%= work.comments.count if work.comments.present? %></span>
-          <span>閲覧数</span>
-          <span class="timestamp">
-            <%= time_ago_in_words(work.created_at) %>
-          </span>
-        </div>
+          </li>
+        <% end %>
+      </ol>
+    <% end %>
+  </div>
+  <div class="work--other_information">
+    <div class="work__user">
+      <%= link_to work.user do %>
+        <span class="avatar"><%= display_avatar_for work.user %></span>
+        <span class="username"><%= link_to work.user.username, work.user %></span>
+      <% end %>
+    </div>
+    <div class="assessment__by_user">
+      <div>
+        <span class="work__likes">
+          <i class="far fa-thumbs-up"></i><%= work.likes.count if work.likes.present? %>
+        </span>
+      </div>
+      <div>
+        <span class="work__comment"><i class="far fa-comment"></i><%= work.comments.count if work.comments.present? %></span>
+      </div>
+      <div>
+        <span>閲覧数</span>
+      </div>
+      <div>
+        <span class="timestamp">
+          <%= time_ago_in_words(work.created_at) %>
+        </span>
       </div>
     </div>
   </div>
+  <% if work.concept.present? %>
+    <div class="work--concept">
+      <span class="concept"><%= work.concept %></span>
+    </div>
+  <% end %>
 </li>

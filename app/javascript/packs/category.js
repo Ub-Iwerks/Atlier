@@ -6,9 +6,9 @@ $(document).on('turbolinks:load', function () {
     }
     function appendChildrenBox(insertHTML){
       var childSelectHtml = "";
-      childSelectHtml = `<div class="category__child" id="children_wrapper">
+      childSelectHtml = `<div class="category__child category__select" id="children_wrapper">
                           <select class="select_field" name="work_create[category_id]" id="child__category">
-                            <option value="">---</option>
+                            <option value="">&emsp;サブカテゴリー&emsp;</option>
                             ${insertHTML}
                           </select>
                         </div>`;
