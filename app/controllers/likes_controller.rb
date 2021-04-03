@@ -3,6 +3,7 @@ class LikesController < ApplicationController
   def create
     @liked = current_user.likes.create(work_id: params[:work_id])
     @work = Work.find_by(id: params[:work_id])
+    @work.create_notification_like(current_user)
     respond_to do |format|
       format.html { redirect_to @work }
       format.js

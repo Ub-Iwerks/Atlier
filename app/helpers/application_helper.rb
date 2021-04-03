@@ -39,6 +39,10 @@ module ApplicationHelper
     end
   end
 
+  def unchecked_notifications
+    current_user.passive_notifications.where(checked: false)
+  end
+
   private
 
   def base_og

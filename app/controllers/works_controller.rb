@@ -24,7 +24,6 @@ class WorksController < ApplicationController
   def create
     @form = WorkCreate.new(work_create_params)
     answer = @form.save
-    # binding.pry
     if answer[0]
       flash[:success] = "投稿に成功しました"
       redirect_to work_path(answer[1])

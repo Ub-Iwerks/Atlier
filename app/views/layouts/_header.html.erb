@@ -3,10 +3,25 @@
     <%= link_to "Atlier", root_path, id: "logo" %>
     <nav>
       <ul class="nav navbar-nav navbar-right header--nav">
-        <li><%= link_to "ホーム",   root_path %></li>
         <% if user_signed_in? %>
-          <li><%= link_to "検索", "#" %></li>
-          <li><%= link_to "通知", "#" %></li>
+          <li>
+            <%= link_to root_path do %>
+              <i class="fas fa-th-large"></i>
+            <% end %>
+          </li>
+          <li>
+            <%= link_to "#" do %>
+              <i class="fas fa-search"></i>
+            <% end %>
+          </li>
+          <li>
+            <%= link_to notifications_path do %>
+              <i class="far fa-bell"></i>
+              <% if unchecked_notifications.present? %>
+                <span class="unchecked"><i class="fas fa-circle"></i></span>
+              <% end %>
+            <% end %>
+          </li>
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">
               <%= display_avatar_for(current_user, size: Settings.avatar_size[:in_header]) %> <b class="caret"></b>
@@ -22,6 +37,7 @@
             </ul>
           </li>
         <% else %>
+          <li><%= link_to "ホーム",   root_path %></li>
           <li><%= link_to "ログイン", new_user_session_path %></li>
         <% end %>
       </ul>

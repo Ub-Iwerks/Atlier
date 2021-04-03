@@ -1,0 +1,16 @@
+<% set_meta_tags title: "通知" %>
+<h2>通知一覧</h2>
+<div class="row">
+  <div class="col-md-6  col-md-offset-3 white">
+    <div class="notifications--wrapper">
+      <% if @notifications.present? %>
+        <ul class="notifications">
+          <%= render @notifications %>
+        </ul>
+        <%= paginate @notifications %>
+      <% else %>
+        <p class="notification--none">通知はありません</p>
+      <% end %>
+    </div>
+  </div>
+</div>

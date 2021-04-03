@@ -1,8 +1,10 @@
 <li class="comment" id="comment-<%= comment.id %>">
   <div class="comment__main">
     <div class="comment__user">
-      <span class="avatar"><%= display_avatar_for comment.user, size: Settings.avatar_size[:in_part] %></span>
-      <span class="username"><%= comment.user.username %></span>
+      <%= link_to user_path comment.user do %>
+        <span class="avatar"><%= display_avatar_for comment.user, size: Settings.avatar_size[:in_part] %></span>
+        <span class="username"><%= comment.user.username %></span>
+      <% end %>
     </div>
     <span class="content"><%= comment.content %></span>
   </div>

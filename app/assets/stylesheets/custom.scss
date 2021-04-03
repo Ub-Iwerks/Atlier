@@ -43,6 +43,7 @@ textarea {
 }
 ul, ol, li {
   list-style: none;
+  padding-left: 0px;
 }
 .avatar {
   border-radius: 50%;
@@ -74,19 +75,33 @@ a {
     text-decoration: none;
   }
 }
-
+.white {
+  background-color: white;
+  border: 1px solid $light-gray;
+  border-radius: 4px;
+}
 
 
 /* ---- header ---- */
 .header {
-  background-color: #fff;
+  background-color: white;
   border-bottom: 1px solid $light-gray;
   position: fixed;
   z-index: 1;
   width: 100%;
   .header--nav {
-    a  {
-      color : $heavy-gray;
+    float: right;
+    display: flex;
+    align-items: center;
+    a  { color : $heavy-gray; }
+    i  { font-size : 18px; }
+    .fa-bell { position: relative; }
+    .unchecked {
+      position: absolute;
+      left: 12px;
+      top: 12%;
+      color: $accent-orange;
+      i { font-size: 5px; }
     }
   }
 }
@@ -586,13 +601,17 @@ section.user--sub-info__aside {
         background-color: white;
         padding: 2px 1px;
         .comment__user {
-          display: flex;
-          align-items: center;
-          padding-bottom: 3px;
-          .username {
-            padding-left: 5px;
-            font-size: 1.0em;
-            font-weight: bold;
+          a {
+            color: $heavy-gray;
+            display: flex;
+            align-items: center;
+            padding-bottom: 3px;
+            &:hover { color: #551A8B; }
+            .username {
+              padding-left: 5px;
+              font-size: 1.0em;
+              font-weight: bold;
+            }
           }
         }
       }
@@ -708,7 +727,6 @@ section.user--sub-info__aside {
     }
     .work--images {
       .main__image {
-        margin: 0 auto;
         img {
           width: 100%;
           border: 1px solid $light-gray;
@@ -834,6 +852,7 @@ span.image {
   }
   .work--images {
     display: flex;
+    justify-content: center;
     .main__image {
       width: calc( 100% * 7/8);
     }
@@ -871,5 +890,47 @@ span.image {
   .illustration__photo {
     padding-left: 4vw;
     padding-right: 4vw;
+  }
+}
+
+/* ---- Notification ---- */
+.notifications--wrapper {
+  padding: 6vh 5vw;
+  .notification--none {
+    text-align: center;
+    color: $heavy-gray;
+  }
+  li {
+    a {
+      font-weight: bold;
+    }
+    img { padding-bottom: 3px; }
+    position: relative;
+    border-bottom: 1px solid $light-gray;
+    padding: 20px 5px 30px 15px;
+    &:last-child {
+      border-bottom: none;
+      padding-bottom: 0px;
+    }
+    .notification__comment {
+      display: block;
+      padding-top: 5px;
+      padding-left: 25px;
+      color: $middle-gray;
+    }
+    .notification__time {
+      position: absolute;
+      right: 5px;
+      bottom: 5px;
+      color: $gray;
+      font-size: 12px;
+    }
+    .notification__unchecked {
+      position: absolute;
+      left: 0px;
+      top: 25px;
+      color: $accent-orange;
+      font-size: 10px;
+    }
   }
 }

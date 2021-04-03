@@ -1,0 +1,41 @@
+<% visitor = notification.visitor %>
+<% visited = notification.visited %>
+
+<li class="notification notification-<%= notification.id %>">
+  <div class="notification__info">
+    <%= link_to user_path(visitor) do %>
+      <%= display_avatar_for visitor, size: Settings.avatar_size[:in_part] %>
+      <%= visitor.username %>
+    <% end %>
+    さんが
+    <% case notification.action %>
+    <%  when 'follow' then %>
+      あなたをフォローしました
+    <%  when 'like' then %>
+      <%= link_to "#{notification.work.title}", work_path(notification.work) %>にいいねしました
+    <%  when 'comment' then %>
+      <% if notification.work.user_id == visited.id %>
+        <%= link_to "#{notification.work.title}", work_path(notification.work) %>
+      <% else %>
+        <%= link_to user_path(notification.work.user) do %>
+          <%= display_avatar_for notification.work.user, size: Settings.avatar_size[:in_part] %>
+          <%= notification.work.user.username %>
+        <% end %>
+        さんの
+        <%= link_to "#{notification.work.title}", work_path(notification.work) %>
+      <% end %>
+      にコメントしました
+      <span class="notification__comment">
+        <%= Comment.find_by(id: notification.comment_id).content %>
+      </span>
+    <% end %>
+    <span class="notification__time">
+      <%= time_ago_in_words(notification.created_at).upcase %>
+    </span>
+    <% if notification.checked == false %>
+      <span class="notification__unchecked">
+        <i class="fas fa-circle"></i>
+      </span>
+    <% end %>
+  </div>
+</li>

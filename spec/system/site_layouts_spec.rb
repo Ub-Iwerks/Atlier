@@ -29,7 +29,11 @@ RSpec.describe 'Layouts', type: :system do
       visit root_path
       within("header") do
         expect(page).to have_link "Atlier", href: root_path
-        expect(page).to have_link "ホーム", href: root_path
+        expect(page).to have_link href: root_path
+        expect(page).to have_selector ".fa-th-large"
+        expect(page).to have_selector ".fa-search"
+        expect(page).to have_link href: notifications_path
+        expect(page).to have_selector ".fa-bell"
         expect(page).to have_link "ログアウト", href: destroy_user_session_path
         expect(page).to have_link "プロフィール", href: user_path(user)
         expect(page).to have_link "アカウント編集", href: edit_user_registration_path
