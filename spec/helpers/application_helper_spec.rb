@@ -27,4 +27,24 @@ RSpec.describe ApplicationHelper, type: :helper do
       end
     end
   end
+
+  describe "unchecked_notifications helper_method" do
+    subject { unchecked_notifications.present? }
+
+    let(:current_user) { create(:user) }
+    let!(:notification) { create(:notification, visited_id: current_user.id) }
+
+    before do
+      sign_in current_user
+    end
+
+    it "return true when user not checked notification" do
+      is_expected.to eq true
+    end
+
+    it "return false when user checked notification" do
+      notification.update(checked: true)
+      is_expected.to eq false
+    end
+  end
 end

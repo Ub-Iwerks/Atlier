@@ -221,5 +221,24 @@ RSpec.describe User, type: :model do
         expect(user.already_liked?(work_not_liked)).to be_falsey
       end
     end
+
+    describe "create_notification_follow method" do
+      let(:user) { create(:user) }
+      let(:another_user) { create(:user) }
+      let(:notification) { Notification.find_by(visitor_id: another_user.id, visited_id: user.id, action: "follow") }
+
+      before do
+        another_user.follow(user)
+        user.create_notification_follow(another_user)
+      end
+
+      it "create notification to user" do
+        expect(notification).to be_truthy
+      end
+
+      it "not create notification to user twice" do
+        expect(user.create_notification_follow(another_user)).to be_nil
+      end
+    end
   end
 end
