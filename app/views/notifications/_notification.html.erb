@@ -1,7 +1,7 @@
 <% visitor = notification.visitor %>
 <% visited = notification.visited %>
 
-<li class="notification notification-<%= notification.id %>">
+<li class="notification" id="notification-<%= notification.id %>">
   <div class="notification__info">
     <%= link_to user_path(visitor) do %>
       <%= display_avatar_for visitor, size: Settings.avatar_size[:in_part] %>
@@ -10,20 +10,22 @@
     さんが
     <% case notification.action %>
     <%  when 'follow' then %>
-      あなたをフォローしました
+      <span>あなたをフォローしました</span>
     <%  when 'like' then %>
       <%= link_to "#{notification.work.title}", work_path(notification.work) %>にいいねしました
     <%  when 'comment' then %>
-      <% if notification.work.user_id == visited.id %>
-        <%= link_to "#{notification.work.title}", work_path(notification.work) %>
-      <% else %>
-        <%= link_to user_path(notification.work.user) do %>
-          <%= display_avatar_for notification.work.user, size: Settings.avatar_size[:in_part] %>
-          <%= notification.work.user.username %>
+      <span class="commented_work">
+        <% if notification.work.user_id == visited.id %>
+          <%= link_to "#{notification.work.title}", work_path(notification.work) %>
+        <% else %>
+          <%= link_to user_path(notification.work.user) do %>
+            <%= display_avatar_for notification.work.user, size: Settings.avatar_size[:in_part] %>
+            <%= notification.work.user.username %>
+          <% end %>
+          さんの
+          <%= link_to "#{notification.work.title}", work_path(notification.work) %>
         <% end %>
-        さんの
-        <%= link_to "#{notification.work.title}", work_path(notification.work) %>
-      <% end %>
+      </span>
       にコメントしました
       <span class="notification__comment">
         <%= Comment.find_by(id: notification.comment_id).content %>

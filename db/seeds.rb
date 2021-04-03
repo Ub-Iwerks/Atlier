@@ -7,7 +7,7 @@ User.create!(
   password_confirmation: "password",
   confirmed_at: Time.current)
 
-49.times do |n|
+21.times do |n|
 username  = "Test#{n+1}"
 email = "test#{n+1}@example.com"
 description = "My name is #{Faker::Movies::StarWars.character}"
@@ -24,8 +24,8 @@ end
 
 user = User.first
 users = User.all
-following = users[2..50]
-followers = users[3..40]
+following = users[2..20]
+followers = users[3..10]
 following.each { |followed| user.follow(followed) }
 followers.each { |follower| follower.follow(user) }
 
@@ -78,7 +78,7 @@ product_children = product_design.children.create(
 )
 
 users = User.order(:created_at).take(6)
-50.times do
+5.times do
   title = Faker::Movie.title
   concept = Faker::Lorem.sentence(word_count: 10)
   description = Faker::Lorem.sentence(word_count: 10)
