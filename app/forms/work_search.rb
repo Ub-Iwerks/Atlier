@@ -18,9 +18,10 @@ class WorkSearch
     end
     if keyword.present?
       if serarch_category.present?
-        Work.where('title like ?', "%#{keyword}%").where(category_id: serarch_category)
+        Work.where('title like ? OR concept like ?', "%#{keyword}%", "%#{keyword}%").
+          where(category_id: serarch_category)
       else
-        Work.where('title like ?', "%#{keyword}%")
+        Work.where('title like ? OR concept like ?', "%#{keyword}%", "%#{keyword}%")
       end
     else
       Work.where(category_id: serarch_category)

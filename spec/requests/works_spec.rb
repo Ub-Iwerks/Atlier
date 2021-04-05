@@ -130,4 +130,31 @@ RSpec.describe "Works", type: :request do
       end
     end
   end
+
+  describe "GET /works" do
+    let(:title) { "検索結果" }
+    let!(:work_search_params) { attributes_for(:work_search) }
+    before { get works_path, params: { work_search: work_search_params } }
+
+    it "render index" do
+      expect(response.status).to eq 200
+    end
+
+    it "has page title correctly" do
+      expect(response.body).to match(/<title>#{title} | #{base_title}<\/title>/i)
+    end
+  end
+
+  describe "GET /works/search" do
+    let(:title) { "作品検索" }
+    before { get search_works_path }
+
+    it "render search" do
+      expect(response.status).to eq 200
+    end
+
+    it "has page title correctly" do
+      expect(response.body).to match(/<title>#{title} | #{base_title}<\/title>/i)
+    end
+  end
 end

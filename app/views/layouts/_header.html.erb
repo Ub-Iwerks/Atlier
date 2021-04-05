@@ -5,14 +5,10 @@
       <ul class="nav navbar-nav navbar-right header--nav">
         <% if user_signed_in? %>
           <li>
-            <%= link_to root_path do %>
-              <i class="fas fa-th-large"></i>
-            <% end %>
+            <%= link_to "", root_path, class: "fas fa-th-large" %>
           </li>
           <li>
-            <%= link_to search_works_path do %>
-              <i class="fas fa-search"></i>
-            <% end %>
+            <%= link_to "", search_works_path, class: "fas fa-search" %>
           </li>
           <li>
             <%= link_to notifications_path do %>
@@ -38,6 +34,7 @@
           </li>
         <% else %>
           <li><%= link_to "ホーム",   root_path %></li>
+          <li><%= link_to "検索", search_works_path %></li>
           <li><%= link_to "ログイン", new_user_session_path %></li>
         <% end %>
       </ul>

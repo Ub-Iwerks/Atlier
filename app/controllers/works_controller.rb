@@ -2,7 +2,6 @@ class WorksController < ApplicationController
   before_action :authenticate_user!, only: [:create, :destroy, :new, :show]
   before_action :correct_user, only: [:destroy]
   before_action :set_categories, only: [:new, :create, :index, :search]
-  # before_action :set_search, only: :index
 
   def show
     @work = Work.find(params[:id])
