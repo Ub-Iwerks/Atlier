@@ -1,7 +1,8 @@
 class WorksController < ApplicationController
   before_action :authenticate_user!, only: [:create, :destroy, :new, :show]
   before_action :correct_user, only: [:destroy]
-  before_action :set_categories, only: [:new, :create]
+  before_action :set_categories, only: [:new, :create, :index, :search]
+  # before_action :set_search, only: :index
 
   def show
     @work = Work.find(params[:id])
@@ -39,6 +40,15 @@ class WorksController < ApplicationController
     redirect_back(fallback_location: root_url)
   end
 
+  def index
+    @work_search = WorkSearch.new(work_search_params)
+    @works = @work_search.search.page(params[:page])
+  end
+
+  def search
+    @work_search = WorkSearch.new
+  end
+
   private
 
   def work_create_params
@@ -54,6 +64,14 @@ class WorksController < ApplicationController
         :description,
         :photo,
       ]
+    )
+  end
+
+  def work_search_params
+    params.require(:work_search).permit(
+      :keyword,
+      :category_id,
+      :parent_category_id,
     )
   end
 

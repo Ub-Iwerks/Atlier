@@ -87,7 +87,7 @@ RSpec.describe "Confirm notification", type: :system do
     it "confirm notification and change site layouts" do
       sign_in third_user
       visit work_path work
-      within("section.comments_to_work_aside") do
+      within("section.comments_to_work__aside") do
         fill_in "comment[content]", with: comment_content
         click_button "投稿"
       end

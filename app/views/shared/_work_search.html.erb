@@ -1,0 +1,18 @@
+<div>
+  <%= form_for work_search, url: works_path, method: :get, html: { class: "form--common form__search" } do |f| %>
+    <div class="field">
+      <%= f.label :keyword, "キーワード" %>
+      <%= f.search_field :keyword %>
+      <span class="form__underline"></span>
+    </div>
+    <div class="field--category">
+      <%= f.label :category_id, "作品カテゴリー", class: "f-control" %>
+      <span class="category__parent category__select">
+        <%= select_tag "work_search[parent_category_id]", options_from_collection_for_select(category_parent_array, :id, :name), include_blank: "指定なし", class:"select_field", id: "work_search_parent_category_id" %>
+      </span>
+    </div>
+    <div class="actions">
+      <%= f.submit "検索" %>
+    </div>
+  <% end %>
+</div>

@@ -34,6 +34,8 @@ RSpec.describe 'Layouts', type: :system do
         expect(page).to have_selector ".fa-search"
         expect(page).to have_link href: notifications_path
         expect(page).to have_selector ".fa-bell"
+        expect(page).to have_link href: search_works_path
+        expect(page).to have_selector ".fa-search"
         expect(page).to have_link "ログアウト", href: destroy_user_session_path
         expect(page).to have_link "プロフィール", href: user_path(user)
         expect(page).to have_link "アカウント編集", href: edit_user_registration_path

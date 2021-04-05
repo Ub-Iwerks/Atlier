@@ -1,0 +1,17 @@
+<div class="row">
+  <aside class="col-md-3">
+    <section class="work_search__aside">
+      <%= render "shared/work_search", work_search: @work_search, category_parent_array: @category_parent_array %>
+    </section>
+  </aside>
+  <div class="col-md-9">
+    <% if @works.present? %>
+      <ol class="works">
+        <%= render @works %>
+      </ol>
+      <%= paginate @works %>
+    <% else %>
+      <h2>検索結果に該当する作品がありません</h2>
+    <% end %>
+  </div>
+</div>
