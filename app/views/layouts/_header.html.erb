@@ -1,43 +1,62 @@
 <header class="header">
-  <div class="container">
-    <%= link_to "Atlier", root_path, id: "logo" %>
-    <nav>
-      <ul class="nav navbar-nav navbar-right header--nav">
-        <% if user_signed_in? %>
-          <li>
-            <%= link_to "", root_path, class: "fas fa-th-large" %>
-          </li>
-          <li>
-            <%= link_to "", search_works_path, class: "fas fa-search" %>
-          </li>
-          <li>
-            <%= link_to notifications_path do %>
-              <i class="far fa-bell"></i>
-              <% if unchecked_notifications.present? %>
-                <span class="unchecked"><i class="fas fa-circle"></i></span>
+  <div class="container header--container">
+    <div class="header--container__item">
+      <%= link_to "Atlier", root_path, id: "logo" %>
+    </div>
+    <div class="header--container__item">
+      <%= form_for @work_search, url: works_path, method: :get, html: { class: "form__header" } do |f| %>
+          <%= f.label :keyword, "キーワード" %>
+          <%= f.search_field :keyword, placeholder: "検索", class: "search_box__header" %>
+          <%= f.button type: 'submit', class: "search_btn__header" do %>
+            <i class="fas fa-search"></i>
+          <% end %>
+      <% end %>
+    </div>
+    <nav class="header--container__item navbar">
+      <button class="navbar-toggler navbar--header__first" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="nav navbar-nav navbar-right header--nav">
+          <% if user_signed_in? %>
+            <li>
+              <%= link_to "", root_path, class: "fas fa-th-large" %>
+            </li>
+            <li>
+              <%= link_to "", users_path, class: "fas fa-list-ul" %>
+            </li>
+            <li>
+              <%= link_to "", search_works_path, class: "fas fa-search" %>
+            </li>
+            <li>
+              <%= link_to notifications_path do %>
+                <i class="far fa-bell"></i>
+                <% if unchecked_notifications.present? %>
+                  <span class="unchecked"><i class="fas fa-circle"></i></span>
+                <% end %>
               <% end %>
-            <% end %>
-          </li>
-          <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">
-              <%= display_avatar_for(current_user, size: Settings.avatar_size[:in_header]) %> <b class="caret"></b>
-            </a>
-            <ul class="dropdown-menu">
-              <li><%= link_to "プロフィール", user_path(current_user) %></li>
-              <li><%= link_to "アカウント編集", edit_user_registration_path %></li>
-              <li><%= link_to "新規作品", new_work_path %></li>
-              <li class="divider"></li>
-              <li>
-                <li><%= link_to "ログアウト", destroy_user_session_path, method: :delete %></li>
-              </li>
-            </ul>
-          </li>
-        <% else %>
-          <li><%= link_to "ホーム",   root_path %></li>
-          <li><%= link_to "検索", search_works_path %></li>
-          <li><%= link_to "ログイン", new_user_session_path %></li>
-        <% end %>
-      </ul>
+            </li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">
+                <%= display_avatar_for(current_user, size: Settings.avatar_size[:in_header]) %>
+              </a>
+              <ul class="dropdown-menu  dropdown-menu-right">
+                <li><%= link_to "プロフィール", user_path(current_user) %></li>
+                <li><%= link_to "アカウント編集", edit_user_registration_path %></li>
+                <li><%= link_to "新規作品", new_work_path %></li>
+                <li class="divider"></li>
+                <li>
+                  <li><%= link_to "ログアウト", destroy_user_session_path, method: :delete %></li>
+                </li>
+              </ul>
+            </li>
+          <% else %>
+            <li><%= link_to "ホーム",   root_path %></li>
+            <li><%= link_to "検索", search_works_path %></li>
+            <li><%= link_to "ログイン", new_user_session_path %></li>
+          <% end %>
+        </ul>
+      </div>
     </nav>
   </div>
 </header>

@@ -1,8 +1,12 @@
 class UsersController < ApplicationController
-  before_action :authenticate_user!, only: [:following, :followers]
+  before_action :authenticate_user!, only: [:following, :followers, :index]
   def show
     @user = User.find(params[:id])
     @works = @user.works.page(params[:page])
+  end
+
+  def index
+    @users = User.all.page(params[:page])
   end
 
   def following

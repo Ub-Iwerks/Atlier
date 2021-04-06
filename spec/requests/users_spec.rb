@@ -73,4 +73,32 @@ RSpec.describe "Users", type: :request do
       end
     end
   end
+
+  describe "GET /users/index" do
+    let(:title) { "ユーザー一覧" }
+    let(:user) { create(:user) }
+
+    context "user doesnt sign in" do
+      before { get users_path }
+
+      it "redirect_to sign in view" do
+        expect(response).to redirect_to new_user_session_path
+      end
+    end
+
+    context "user signed in" do
+      before do
+        sign_in user
+        get users_path
+      end
+
+      it "render show_follow" do
+        expect(response.status).to eq 200
+      end
+
+      it 'have page_title of title tag' do
+        expect(response.body).to match(/<title>#{title} | #{base_title}<\/title>/i)
+      end
+    end
+  end
 end

@@ -17,7 +17,7 @@ RSpec.describe 'User signup', type: :system do
       visit root_path
       click_link "新規登録する"
       expect(page).to have_selector "h2", text: "新規登録"
-      within("form") do
+      within("form.form--common") do
         fill_in "ユーザーネーム", with: username
         fill_in "メールアドレス", with: email
         fill_in "パスワード", with: password
@@ -39,7 +39,7 @@ RSpec.describe 'User signup', type: :system do
       visit root_path
       click_link "新規登録する"
       expect(page).to have_selector "h2", text: "新規登録"
-      within("form") do
+      within("form.form--common") do
         fill_in "ユーザーネーム", with: username
         fill_in "メールアドレス", with: email
         fill_in "パスワード", with: password
@@ -47,7 +47,7 @@ RSpec.describe 'User signup', type: :system do
         click_button "新規登録"
       end
       is_expected.to be_falsey
-      within("form") do
+      within("form.form--common") do
         expect(page).to have_selector ".error_explanation"
         expect(page).to have_selector "div.field_with_errors"
       end

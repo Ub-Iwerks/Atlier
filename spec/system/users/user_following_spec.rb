@@ -59,12 +59,12 @@ RSpec.describe 'User following', type: :system do
     it "users following count change" do
       sign_in user
       visit user_path another_user
-      within("form") do
+      within(".follow_form") do
         click_button "フォロー"
       end
       expect(current_path).to eq user_path another_user
       expect(user.following.count).to eq following + 1
-      within("form") do
+      within(".follow_form") do
         click_button "フォロー中"
       end
       expect(current_path).to eq user_path another_user

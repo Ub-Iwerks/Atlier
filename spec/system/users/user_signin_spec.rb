@@ -12,7 +12,7 @@ RSpec.describe 'User signin', type: :system do
       visit root_path
       click_link "ログイン"
       expect(page).to have_selector "h2", text: "ログイン"
-      within("form") do
+      within("form.form--common") do
         fill_in "メールアドレス", with: user.email
         fill_in "パスワード", with: user.password
         click_button "ログイン"
@@ -30,7 +30,7 @@ RSpec.describe 'User signin', type: :system do
       visit root_path
       click_link "ログイン"
       expect(page).to have_selector "h2", text: "ログイン"
-      within("form") do
+      within("form.form--common") do
         fill_in "メールアドレス", with: user.email
         fill_in "パスワード", with: invalid_password
         click_button "ログイン"
