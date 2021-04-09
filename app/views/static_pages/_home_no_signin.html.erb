@@ -1,5 +1,54 @@
-<div class="center jumbotron">
-  <h1>Atlierへようこそ！</h1>
-  <h2>ここは作品記録型SNS・Atlierのホームページです。</h2>
-  <%= link_to "新規登録する", new_user_registration_path, class: "btn btn-lg btn-primary" %>
+<div class="row">
+  <section class="home">
+    <div class="home--msg_axome">
+      <div class="home--msg">
+        <h2>作品記録・共有型SNS</h2>
+        <h1>Atlier</h1>
+        <h3>作品を通してクリエイターと繋がろう!</h3>
+        <div class="home--msg__btn">
+          <%= link_to "新規登録する", new_user_registration_path, class: "btn__positive btn__sign_up" %>
+          <%= link_to "ログイン", new_user_session_path, class: "btn__positive btn__sign_in" %>
+          <div class="oauth--logos">
+            <i class="fab fa-twitter-square"></i>
+            <i class="fab fa-facebook-square"></i>
+            <i class="fab fa-google-plus-square"></i>
+            <i class="fab fa-github-square"></i>
+          </div>
+        </div>
+      </div>
+      <div class="home--axome">
+        <%= image_tag "Atlier.jpeg" %>
+      </div>
+    </div>
+    <div class="home--display_usage">
+      <span>
+        <%= image_tag "demo.png" %>
+      </span>
+    </div>
+  </section>
+  <section class="home--description">
+    <h3><span>Atlier</span>とは</h3>
+    <div>
+      <span>作品を通してクリエイターと繋がるSNSです。Atlierのコンセプトは以下の2つです。</span>
+    </div>
+    <div>
+      <h4>(1) クリエイターの為の情報共有の場を設ける</h4>
+      <p>
+        作品制作の最初のステップは、コンセプト構想や要件定義の為の<strong>情報収集</strong>です。
+        そこで、<strong>定期的に訪れる情報収集の機会を効率化・最適化できないか</strong>、と考えたことがAtlierを作るキッカケです。これらに基づき、以下のような機会を提供します。
+        <ol>
+          <li>自分の作品を記録することで、これまでの制作を客観的に見ることができる</li>
+          <li>他者の作品に触れることで、作品に関する洞察を得ることができる</li>
+        </ol>
+      </p>
+    </div>
+    <div>
+      <h4>(2) 作品の意図を正確に伝える場を提供する</h4>
+      <p>
+        建築やイラストなどの作品では、視覚的情報(画像やスケッチなど)で制作意図を伝えることが多いです。
+        しかし、作品の説明における言葉の選択や文章表現にも、同様に重点が置かれています。
+        そこで、<strong>作品の特徴</strong>や<strong>制作意図</strong>を<strong>正しく他者に伝える</strong>ことができる場を設けよう、と考えました。
+      </p>
+    </div>
+  </section>
 </div>
