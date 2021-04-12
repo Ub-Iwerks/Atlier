@@ -4,12 +4,11 @@ module ApplicationHelper
       site: 'Atlier',
       reverse: true,
       charset: 'utf-8',
-      description: "Create an account or log in to Egg - Let's refer other ideas to observe their works and
-                    understand the production intention to chat with creators , observe the trajectory of
-                    your thoughts by registering your own works.",
+      description: "作品記録・共有型SNS Atlier - Atlierはクリエイターの為のSNSです。
+                    クリエイターとの繋がりや作品の制作意図を正しく共有できる場を提供します！",
       canonical: request.original_url,
       separator: ' - ',
-      # icon: image_url("favicon.ico"),
+      icon: image_url("favicon.ico"),
       og: base_og,
     }
   end
@@ -50,7 +49,7 @@ module ApplicationHelper
       title: :full_title,
       description: :description,
       url: request.original_url,
-      # image: image_url('https://example.com/hoge.png')
+      image: image_url("card.png")
     }
   end
 end
