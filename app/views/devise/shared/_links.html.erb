@@ -1,7 +1,7 @@
 <%- if devise_mapping.omniauthable? && controller_name == 'registrations' %>
   <%- resource_class.omniauth_providers.each do |provider| %>
     <div class="field__oauth">
-      <%= link_to omniauth_authorize_path(resource_name, provider), class: "#{provider}" do %>
+      <%= link_to omniauth_authorize_path(resource_name, provider), class: "#{provider}", method: :post do %>
         <% provider = :google if provider == :google_oauth2 %>
         <span class="logo__oauth"></span><%= "#{OmniAuth::Utils.camelize(provider)}で登録" %>
       <% end %>
@@ -11,7 +11,7 @@
 <%- if devise_mapping.omniauthable? && controller_name == 'sessions' %>
   <%- resource_class.omniauth_providers.each do |provider| %>
     <div class="field__oauth">
-      <%= link_to omniauth_authorize_path(resource_name, provider), class: "#{provider}" do %>
+      <%= link_to omniauth_authorize_path(resource_name, provider), class: "#{provider}", method: :post do %>
         <% provider = :google if provider == :google_oauth2 %>
         <span class="logo__oauth"></span><%= "#{OmniAuth::Utils.camelize(provider)}でログイン" %>
       <% end %>
