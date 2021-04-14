@@ -3,8 +3,8 @@ User.create!(
   email: "test@example.com",
   description: "My name is Test_User",
   website: "http://example.com/",
-  password:              "password",
-  password_confirmation: "password",
+  password:              "foobar123",
+  password_confirmation: "foobar123",
   confirmed_at: Time.current)
 
 21.times do |n|
@@ -12,7 +12,7 @@ username  = "Test#{n+1}"
 email = "test#{n+1}@example.com"
 description = "My name is #{Faker::Movies::StarWars.character}"
 website = "http://example.com/"
-password = "password"
+password = "foobar123"
 User.create!(username:  username,
     email: email,
     description: description,
