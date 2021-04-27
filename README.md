@@ -5,20 +5,20 @@
 この記事では、成果物の概要や制作時に心掛けていた点、ポートフォリオで得た学びなど共有する目的で投稿致します。
 
 ## 2. Atlier - 作品共有型SNS
-![top](https://user-images.githubusercontent.com/72424114/114150305-df729e00-9956-11eb-89ad-a662b343a83f.png)
+![card](https://user-images.githubusercontent.com/72424114/116229407-6dd98300-a791-11eb-94b7-a202bd3c6a3c.png)
 
 作品共有型SNS Atlier を制作しました。
 
 ここではアプリの概要として、主となる3つの機能を紹介します
 
 **1. 自分の作品を記録する**
-![output](https://user-images.githubusercontent.com/72424114/114150628-3bd5bd80-9957-11eb-827b-8ee37e46d9cf.gif)
+![work_post](https://user-images.githubusercontent.com/72424114/116229090-0de2dc80-a791-11eb-8425-cb67fc009554.gif)
 
 **2. 他者の作品を調査する**
-![search](https://user-images.githubusercontent.com/72424114/114151222-df26d280-9957-11eb-9cb2-57c38118667f.png)
+![search](https://user-images.githubusercontent.com/72424114/116229256-3d91e480-a791-11eb-9300-72ec47156d12.gif)
 
 **3. 制作者とコミュニケーションを取る**
-![comment](https://user-images.githubusercontent.com/72424114/114150977-9a02a080-9957-11eb-9535-3fdbaa566534.png)
+![comment](https://user-images.githubusercontent.com/72424114/116229195-29e67e00-a791-11eb-91a4-c2be7b969294.gif)
 
 ## 3. アプリ開発の背景と問題意識
 
@@ -197,7 +197,7 @@ Rubocopはデフォルト設定だと少しチューニングが必要になる�
 
 ```terminal
 Add preview function before user avatar change #10
-    
+
 To enable user to check how chage image
 ```
 
@@ -228,7 +228,7 @@ PRのコメントでは、今回のPRで追加・修正された機能、その�
 - mysql 8.0
 
 ## 7. DB設計
-![Atlier_ER図](https://user-images.githubusercontent.com/72424114/114151520-2745f500-9958-11eb-9958-8f769927ef3f.png)
+![Atlier_ER図](https://user-images.githubusercontent.com/72424114/116229445-7cc03580-a791-11eb-8bb6-01c1a6cc4d82.png)
 
 ## 8. 振り返り
 
