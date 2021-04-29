@@ -15,3 +15,6 @@ avatar_size:
 default_image:
   avatar: "avatar.png"
   work: "choice_image.png"
+sample_data:
+  website: "http://example.com/"
+  password: "foobar123"
