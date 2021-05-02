@@ -79,15 +79,3 @@ product_children = product_design.children.create(
   ],
 )
 
-users = User.order(:created_at).take(6)
-5.times do
-  title = Faker::Movie.title
-  concept = Faker::Lorem.sentence(word_count: 10)
-  description = Faker::Lorem.sentence(word_count: 10)
-  category = arch_children.sample
-  users.each do |user|
-    work = user.works.build(title: title, concept: concept, description: description, category_id: category.id)
-    work.image.attach(io: File.open("app/assets/images/sample.png"), filename: 'sample.png', content_type: "image/png")
-    work.save
-  end
-end
