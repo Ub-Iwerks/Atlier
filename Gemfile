@@ -76,6 +76,7 @@ group :development do
   gem 'spring'
   gem "rubocop-airbnb"
   gem 'letter_opener_web'
+  gem 'bullet'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
