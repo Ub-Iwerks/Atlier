@@ -37,7 +37,19 @@ class User < ApplicationRecord
   end
 
   def feed
-    Work.where("user_id = ? OR user_id IN (?)", id, Relationship.where(follower_id: id).select(:followed_id))
+    Work.includes(
+      [
+        :comments,
+        :likes,
+        image_attachment: :blob,
+        user: { avatar_attachment: :blob },
+        illustrations: { photo_attachment: :blob }
+      ]
+    ).where(
+      "user_id = ? OR user_id IN (?)",
+      id,
+      Relationship.where(follower_id: id).select(:followed_id)
+    )
   end
 
   def follow(other_user)
