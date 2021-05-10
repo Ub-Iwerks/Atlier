@@ -43,7 +43,7 @@ class User < ApplicationRecord
         :likes,
         image_attachment: :blob,
         user: { avatar_attachment: :blob },
-        illustrations: { photo_attachment: :blob }
+        illustrations: { photo_attachment: :blob },
       ]
     ).where(
       "user_id = ? OR user_id IN (?)",
