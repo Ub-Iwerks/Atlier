@@ -49,7 +49,7 @@ module ApplicationHelper
       title: :full_title,
       description: :description,
       url: request.original_url,
-      image: image_url("card.png")
+      image: image_url("card.png"),
     }
   end
 end
