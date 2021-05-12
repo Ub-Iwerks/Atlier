@@ -2,10 +2,10 @@
 <div class="row">
   <aside class="col-md-3">
     <section class="user--info__aside">
-      <%= render "shared/user_info", user: @user %>
+      <%= render "shared/user_info", user: @work.user %>
     </section>
     <section class="user--sub-info__aside">
-      <%= render "shared/user_sub_info", user: @user %>
+      <%= render "shared/user_sub_info", user: @work.user %>
     </section>
     <section class="work--assessment__aside">
       <div class="assessment__by_user">
@@ -32,10 +32,10 @@
       <div class="work--comment__aside">
         <%= render "shared/comment_form", work: @work, comment: @comment %>
       </div>
-      <% if @comments.present? %>
+      <% if @work.comments.present? %>
         <div class="comment--info__aside">
           <ol class="comments">
-            <%= render @comments %>
+            <%= render @work.comments %>
           </ol>
         </div>
       <% end %>
@@ -57,10 +57,10 @@
           <p><%= @work.description %></p>
         </div>
       </section>
-      <% if @illustrations.present? %>
+      <% if @work.illustrations.present? %>
         <section class="work--sub_info">
           <ol class="illustrations">
-            <%= render @illustrations %>
+            <%= render @work.illustrations %>
           </ol>
         </section>
       <% end %>
@@ -69,15 +69,15 @@
       <div class="work--comment__aside">
         <%= render "shared/comment_form", work: @work, comment: @comment %>
       </div>
-      <% if @comments.present? %>
+      <% if @work.comments.present? %>
         <div class="comment--info__aside">
           <ol class="comments">
-            <%= render @comments %>
+            <%= render @work.comments %>
           </ol>
         </div>
       <% end %>
     </section>
-    <% if current_user?(@user) %>
+    <% if current_user?(@work.user) %>
     <div class="work--settings">
       <span class="delete_btn field__negative">
         <%= link_to "削除する", work_path(@work), method: :delete, data: { confirm: "削除してよろしいですか？" } %>
