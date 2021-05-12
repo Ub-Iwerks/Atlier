@@ -5,10 +5,14 @@ class WorksController < ApplicationController
   before_action :set_work_search, except: :index
 
   def show
-    @work = Work.find(params[:id])
-    @user = @work.user
-    @illustrations = @work.illustrations
-    @comments = @work.comments.order(created_at: "ASC")
+    @work = Work.includes(
+      [
+        :user,
+        comments: :user,
+        image_attachment: :blob,
+        illustrations: [photo_attachment: :blob],
+      ]
+    ).find(params[:id])
     @comment = current_user.comments.build
     @like = Like.new
     @liked = Like.find_by(user_id: current_user.id, work_id: params[:id])
