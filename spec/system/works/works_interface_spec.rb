@@ -1,10 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe 'Works interface', type: :system do
-  before do
-    driven_by(:rack_test)
-  end
-
   let(:user) { create(:user) }
   let!(:works) { create_list(:work, 21, user: user) }
   let!(:current_work) { works[20] }

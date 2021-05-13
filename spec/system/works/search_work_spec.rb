@@ -1,8 +1,6 @@
 require "rails_helper"
 
 RSpec.describe "Search work", type: :system do
-  before { driven_by(:rack_test) }
-
   let(:keyword) { "keyword" }
   let!(:work_with_title) { create(:work, title: keyword) }
   let!(:work_with_concept) { create(:work, concept: keyword) }
