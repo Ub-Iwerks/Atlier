@@ -1,10 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe 'User signin', type: :system do
-  before do
-    driven_by(:rack_test)
-  end
-
   let!(:user) { create(:user) }
 
   context "user has valid signin imformation" do

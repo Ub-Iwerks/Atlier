@@ -1,8 +1,6 @@
 require 'rails_helper.rb'
 
 RSpec.describe "Confirm notification", type: :system do
-  before { driven_by(:rack_test) }
-
   let(:user) { create(:user) }
   let(:second_user) { create(:user) }
   let(:third_user) { create(:user) }

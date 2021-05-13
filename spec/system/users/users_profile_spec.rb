@@ -1,10 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe 'Users profile', type: :system do
-  before do
-    driven_by(:rack_test)
-  end
-
   describe "User profile test" do
     let!(:user) { create(:user) }
     let!(:works) { create_list(:work, 21, user: user) }

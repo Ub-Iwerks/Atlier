@@ -1,10 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe 'User edit imformation', type: :system do
-  before do
-    driven_by(:rack_test)
-  end
-
   context "change user profile imformation" do
     let(:user) { create(:user) }
     let(:changed_name) { "changed_name" }

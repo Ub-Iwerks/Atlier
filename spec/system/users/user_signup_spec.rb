@@ -3,10 +3,6 @@ require 'rails_helper'
 RSpec.describe 'User signup', type: :system do
   subject { User.find_by(email: email) }
 
-  before do
-    driven_by(:rack_test)
-  end
-
   let!(:user) { build(:user) }
 
   context "user has valid imformation" do

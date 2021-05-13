@@ -1,10 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe 'User following', type: :system do
-  before do
-    driven_by(:rack_test)
-  end
-
   describe "View rendering test" do
     let!(:user) { create(:user) }
     let!(:users) { create_list(:user, 21) }
