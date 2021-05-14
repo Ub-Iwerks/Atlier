@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Layouts', type: :system do
+RSpec.describe 'Layouts', js: true, type: :system do
   let(:user) { create(:user) }
 
   context "user dont sign in" do
@@ -30,6 +30,10 @@ RSpec.describe 'Layouts', type: :system do
         expect(page).to have_link href: notifications_path
         expect(page).to have_selector "i.fa-bell"
         expect(page).to have_link href: search_works_path, class: "fa-search"
+        within("li.dropdown") do
+          expect(page).to have_link class: "dropdown-toggle"
+          click_on "#{user.username}"
+        end
         expect(page).to have_link "ログアウト", href: destroy_user_session_path
         expect(page).to have_link "プロフィール", href: user_path(user)
         expect(page).to have_link "アカウント編集", href: edit_user_registration_path
