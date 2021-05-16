@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe "Commented work", type: :system do
+RSpec.describe "Commented work", type: :system, js: true do
   let(:user) { create(:user) }
   let(:another_user) { create(:user) }
   let(:work) { create(:work, user: user) }
@@ -34,7 +34,9 @@ RSpec.describe "Commented work", type: :system do
     expect(page).not_to have_selector "p.success"
     within(".comments_to_work__aside") do
       within("li#comment-#{current_comment.id}") do
-        click_link "削除"
+        page.accept_confirm do
+          click_on "削除"
+        end
       end
     end
     expect(page).to have_selector "p.success"
