@@ -1,15 +1,13 @@
 require 'rails_helper'
 
-RSpec.describe 'User following', type: :system do
+RSpec.describe 'User following', type: :system, js: true do
   describe "View rendering test" do
     let!(:user) { create(:user) }
     let!(:users) { create_list(:user, 21) }
     let(:users_in_page) { users.take(20) }
 
     context "get following view" do
-      before do
-        users.each { |member| user.follow(member) }
-      end
+      before { users.each { |member| user.follow(member) } }
 
       it "rendering following member correctly" do
         sign_in user
@@ -27,9 +25,7 @@ RSpec.describe 'User following', type: :system do
     end
 
     context "get follower view" do
-      before do
-        users.each { |member| member.follow(user) }
-      end
+      before { users.each { |member| member.follow(user) } }
 
       it "rendering followers member correctly" do
         sign_in user
@@ -61,7 +57,9 @@ RSpec.describe 'User following', type: :system do
       expect(current_path).to eq user_path another_user
       expect(user.following.count).to eq following + 1
       within(".follow_form") do
-        click_button "フォロー中"
+        page.accept_confirm do
+          click_button "フォロー中"
+        end
       end
       expect(current_path).to eq user_path another_user
       expect(user.following.count).to eq following

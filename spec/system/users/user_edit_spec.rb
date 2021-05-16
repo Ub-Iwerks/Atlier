@@ -1,8 +1,9 @@
 require 'rails_helper'
 
-RSpec.describe 'User edit imformation', type: :system do
+RSpec.describe 'User edit imformation', type: :system, js: true do
+  let(:user) { create(:user) }
+
   context "change user profile imformation" do
-    let(:user) { create(:user) }
     let(:changed_name) { "changed_name" }
     let(:changed_website) { "https://example/example" }
     let(:changed_description) { "changed_description" }
@@ -10,6 +11,10 @@ RSpec.describe 'User edit imformation', type: :system do
     it "changed success" do
       sign_in user
       visit root_path
+      within("li.dropdown") do
+        expect(page).to have_link class: "dropdown-toggle"
+        click_on "#{user.username}"
+      end
       click_link "アカウント編集"
       expect(current_path).to eq edit_user_registration_path
       within("#edit_user") do
@@ -32,7 +37,6 @@ RSpec.describe 'User edit imformation', type: :system do
   end
 
   context "change user password" do
-    let(:user) { create(:user) }
     let(:current_password) { "#{user.password}" }
     let(:new_password) { "newpassword" }
     let(:wrong_password) { "wrongpassword" }
@@ -40,6 +44,10 @@ RSpec.describe 'User edit imformation', type: :system do
     it "changed success" do
       sign_in user
       visit root_path
+      within("li.dropdown") do
+        expect(page).to have_link class: "dropdown-toggle"
+        click_on "#{user.username}"
+      end
       click_link "アカウント編集"
       click_link "パスワードを変更する"
       expect(current_path).to eq edit_password_path
@@ -58,6 +66,10 @@ RSpec.describe 'User edit imformation', type: :system do
     it "changed false" do
       sign_in user
       visit root_path
+      within("li.dropdown") do
+        expect(page).to have_link class: "dropdown-toggle"
+        click_on "#{user.username}"
+      end
       click_link "アカウント編集"
       click_link "パスワードを変更する"
       expect(current_path).to eq edit_password_path
@@ -71,6 +83,27 @@ RSpec.describe 'User edit imformation', type: :system do
       expect(page).to have_selector ".error_explanation"
       visit current_path
       expect(page).not_to have_selector ".error_explanation"
+    end
+  end
+
+  context "delete user account" do
+    it "delete success" do
+      sign_in user
+      visit root_path
+      within("li.dropdown") do
+        expect(page).to have_link class: "dropdown-toggle"
+        click_on "#{user.username}"
+      end
+      click_link "アカウント編集"
+      within(".form--common") do
+        page.accept_confirm do
+          click_on "アカウントを削除する"
+        end
+      end
+      expect(current_path).to eq root_path
+      expect(page).to have_selector "p.success"
+      visit current_path
+      expect(page).not_to have_selector "p.success"
     end
   end
 end
