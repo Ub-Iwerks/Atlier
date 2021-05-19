@@ -1,5 +1,13 @@
 class LikesController < ApplicationController
-  before_action :authenticate_user!, only: [:create, :destroy]
+  before_action :authenticate_user!
+  def index
+    @work = Work.find(params[:work_id])
+  end
+
+  def favorites
+    @user = User.find(params[:user_id])
+  end
+
   def create
     @liked = current_user.likes.create(work_id: params[:work_id])
     @work = Work.find_by(id: params[:work_id])
