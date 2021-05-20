@@ -1,7 +1,11 @@
 class LikesController < ApplicationController
   before_action :authenticate_user!
   def index
-    @work = Work.find(params[:work_id])
+    @work = Work.includes(
+      [
+        likes: [user: [avatar_attachment: :blob]],
+      ]
+    ).find(params[:work_id])
   end
 
   def favorites
