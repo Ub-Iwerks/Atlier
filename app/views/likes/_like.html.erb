@@ -12,5 +12,7 @@
   <% end %>
 <% end %>
 <span class="likes_count">
-  <%= work.likes.count %>
+  <%= link_to work_likes_path work do %>
+    <%= work.likes.count %>
+  <% end %>
 </span>
