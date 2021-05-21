@@ -11,5 +11,10 @@
     <% else %>
       <p class="center">いいねしたユーザーはいません</p>
     <% end %>
+    <span class="back">
+      <%= link_to work_path @work do %>
+          <i class="fas fa-chevron-left left"></i>戻る
+      <% end %>
+    </span>
   </div>
 </div>

@@ -3,8 +3,11 @@ require "rails_helper"
 RSpec.describe "Liked work", type: :system do
   let(:user) { create(:user) }
   let(:another_user) { create(:user) }
+  let(:third_user) { create(:user) }
   let(:work) { create(:work, user: user) }
+  let(:another_work) { create(:work, user: user) }
   let!(:like) { create(:like, user: another_user, work: work) }
+  let!(:like_by_third_user) { create(:like, user: third_user, work: work) }
   let!(:current_count) { work.likes.count }
   let(:liked) { Like.find_by(user_id: user.id, work_id: work.id) }
 
@@ -25,5 +28,38 @@ RSpec.describe "Liked work", type: :system do
       expect(page).to have_link href: work_likes_path(work)
       expect(page).to have_selector ".likes_count", text: "#{current_count}"
     end
+  end
+
+  it "display users liking this work" do
+    sign_in another_user
+    visit work_path work
+    within("div#likes_button-#{work.id}") do
+      expect(page).to have_link href: work_likes_path(work)
+      within("span.likes_count") do
+        expect(page).to have_link href: work_likes_path(work), text: "#{current_count}"
+        click_link "#{current_count}"
+      end
+    end
+    expect(current_path).to eq work_likes_path work
+    within("ul.users") do
+      within("#user-#{another_user.id}") do
+        expect(page).to have_link href: user_path(another_user), text: "#{another_user.username}"
+      end
+      within("#user-#{third_user.id}") do
+        expect(page).to have_link href: user_path(third_user), text: "#{third_user.username}"
+      end
+    end
+    within(".back") do
+      click_link "戻る"
+    end
+    expect(current_path).to eq work_path work
+    visit work_path another_work
+    within("span.likes_count") do
+      expect(page).to have_link href: work_likes_path(another_work), text: "#{another_work.likes.count}"
+      click_link "#{another_work.likes.count}"
+    end
+    expect(current_path).to eq work_likes_path another_work
+    expect(page).not_to have_selector "ul.users"
+    expect(page).to have_selector "p.center", text: "いいねしたユーザーはいません"
   end
 end
