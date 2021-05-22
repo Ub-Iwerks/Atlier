@@ -26,7 +26,10 @@
       </div>
     </section>
     <section class="user--works">
-      <h2>作品一覧</h2>
+      <ul>
+        <li><h2><%= link_to "作品一覧", user_path(@user) %></h2></li>
+        <li><h2><%= link_to "いいね一覧", user_likes_path(@user) %></h2></li>
+      </ul>
       <% if @user.works.present? %>
         <ol class="works">
           <%= render @works %>

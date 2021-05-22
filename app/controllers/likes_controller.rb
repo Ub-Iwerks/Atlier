@@ -9,7 +9,19 @@ class LikesController < ApplicationController
   end
 
   def favorites
-    @user = User.find(params[:user_id])
+    @user = User.includes(
+      [
+        likes: [
+          work: [
+            :likes,
+            comments: :user,
+            image_attachment: :blob,
+            user: [avatar_attachment: :blob],
+            illustrations: [photo_attachment: :blob],
+          ],
+        ],
+      ]
+    ).find(params[:user_id])
   end
 
   def create
