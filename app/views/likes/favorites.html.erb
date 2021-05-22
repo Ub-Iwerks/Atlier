@@ -1,2 +1,44 @@
 <% set_meta_tags title: "いいねした作品", site: "#{@user.username}" %>
-<h1>ここにいいねした作品を表示します</h1>
+<div class="row center">
+  <div class="col-md-9">
+    <section class="user--info">
+      <div class="user__main">
+        <%= display_avatar_for @user, size: Settings.avatar_size[:in_profile] %>
+        <h1 class="username"><%= @user.username %></h1>
+      </div>
+      <div class="user__detail">
+        <div class="user__relation">
+          <%= render "shared/stats", user: @user %>
+          <%= render 'users/follow_form' if user_signed_in? %>
+          <% if current_user?(@user) %>
+            <span class="btn__current_user">
+              <%= link_to '編集する', edit_user_registration_path, class: "btn__edit" %>
+              <%= link_to new_work_path, class: "btn__create" do %>
+                新規作品<i class="fas fa-plus"></i>
+              <% end %>
+            </span>
+          <% end %>
+        </div>
+        <ul class="user__profile">
+          <li class="website"><%= text_url_to_link(h(@user.website)).html_safe %></li>
+          <li class="description"><%= @user.description %></li>
+        </ul>
+      </div>
+    </section>
+    <section class="user--works">
+      <ul>
+        <li><h2><%= link_to "作品一覧", user_path(@user) %></h2></li>
+        <li><h2><%= link_to "いいね一覧", user_likes_path(@user) %></h2></li>
+      </ul>
+      <% if @user.likes.present? %>
+        <ol class="works">
+          <% @user.likes.each do |like| %>
+            <%= render like.work %>
+          <% end %>
+        </ol>
+      <% else %>
+        <h4>いいねした作品がありません</h4>
+      <% end %>
+    </section>
+  </div>
+</div>
