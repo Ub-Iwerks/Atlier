@@ -62,4 +62,61 @@ RSpec.describe "Liked work", type: :system do
     expect(page).not_to have_selector "ul.users"
     expect(page).to have_selector "p.center", text: "いいねしたユーザーはいません"
   end
+
+  context "user had liked a work" do
+    it "display works user liked" do
+      sign_in another_user
+      visit user_path another_user
+      expect(current_path).to eq user_path another_user
+      within(".user--works") do
+        within("ul.user--works__types") do
+          expect(page).to have_link "作品一覧", href: user_path(another_user)
+          expect(page).to have_link "いいね一覧", href: user_likes_path(another_user)
+          click_link "いいね一覧"
+        end
+      end
+      expect(current_path).to eq user_likes_path another_user
+      within(".user--info") do
+        expect(page).to have_selector "img[alt='#{another_user.username}']"
+        expect(page).to have_selector "h1", text: "#{another_user.username}"
+      end
+      within("section.user--works") do
+        within("ul.user--works__types") do
+          expect(page).to have_link "作品一覧", href: user_path(another_user)
+          expect(page).to have_link "いいね一覧", href: user_likes_path(another_user)
+        end
+        within("ol.works") do
+          within("li#work-#{work.id}") do
+            expect(page).to have_link "#{work.title}", href: work_path(work)
+          end
+        end
+      end
+    end
+  end
+
+  context "user had not liked a work" do
+    it "display no works user liked" do
+      sign_in user
+      visit user_path user
+      within(".user--works") do
+        within("ul.user--works__types") do
+          expect(page).to have_link "作品一覧", href: user_path(user)
+          expect(page).to have_link "いいね一覧", href: user_likes_path(user)
+          click_link "いいね一覧"
+        end
+      end
+      expect(current_path).to eq user_likes_path user
+      within(".user--info") do
+        expect(page).to have_selector "img[alt='#{user.username}']"
+        expect(page).to have_selector "h1", text: "#{user.username}"
+      end
+      within("section.user--works") do
+        within("ul.user--works__types") do
+          expect(page).to have_link "作品一覧", href: user_path(user)
+          expect(page).to have_link "いいね一覧", href: user_likes_path(user)
+        end
+        expect(page).to have_selector "h4", text: "いいねした作品がありません"
+      end
+    end
+  end
 end
