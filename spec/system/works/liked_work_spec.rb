@@ -30,39 +30,6 @@ RSpec.describe "Liked work", type: :system do
     end
   end
 
-  it "display users liking this work" do
-    sign_in another_user
-    visit work_path work
-    within("div#likes_button-#{work.id}") do
-      expect(page).to have_link href: work_likes_path(work)
-      within("span.likes_count") do
-        expect(page).to have_link href: work_likes_path(work), text: "#{current_count}"
-        click_link "#{current_count}"
-      end
-    end
-    expect(current_path).to eq work_likes_path work
-    within("ul.users") do
-      within("#user-#{another_user.id}") do
-        expect(page).to have_link href: user_path(another_user), text: "#{another_user.username}"
-      end
-      within("#user-#{third_user.id}") do
-        expect(page).to have_link href: user_path(third_user), text: "#{third_user.username}"
-      end
-    end
-    within(".back") do
-      click_link "戻る"
-    end
-    expect(current_path).to eq work_path work
-    visit work_path another_work
-    within("span.likes_count") do
-      expect(page).to have_link href: work_likes_path(another_work), text: "#{another_work.likes.count}"
-      click_link "#{another_work.likes.count}"
-    end
-    expect(current_path).to eq work_likes_path another_work
-    expect(page).not_to have_selector "ul.users"
-    expect(page).to have_selector "p.center", text: "いいねしたユーザーはいません"
-  end
-
   context "user had liked a work" do
     it "display works user liked" do
       sign_in another_user

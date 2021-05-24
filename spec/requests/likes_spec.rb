@@ -29,32 +29,6 @@ RSpec.describe "Likes", type: :request do
     end
   end
 
-  describe "GET /works/:work_id/likes" do
-    let(:page_title) { "いいねしたユーザー" }
-    context "user dosent sign in" do
-      before { get work_likes_path work }
-
-      it "redirect_to sign in view" do
-        expect(response).to redirect_to new_user_session_path
-      end
-    end
-
-    context "user signed in" do
-      before do
-        sign_in user
-        get work_likes_path work
-      end
-
-      it "render index" do
-        expect(response.status).to eq 200
-      end
-
-      it 'have page_title of title tag' do
-        expect(response.body).to match(/<title>#{page_title} | #{work.title}<\/title>/i)
-      end
-    end
-  end
-
   describe "POST /works/:work_id/likes" do
     context "user dosent sign in" do
       before { post work_likes_path work }

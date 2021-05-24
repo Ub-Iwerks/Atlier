@@ -1266,3 +1266,50 @@ span.image {
     }
   }
 }
+
+/* ---- Modal ---- */
+.modal {
+  display: none;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 5;
+  .modal__bg {
+    background-color: $heavy-gray;
+    opacity: 0.6;
+    height: 100vh;
+    width: 100%;
+  }
+  .modal--content {
+    background: #fff;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 4px;
+    .modal--content__inner {
+      position: relative;
+      padding: 20px;
+      .modal__close {
+        position: absolute;
+        top: 15px;
+        right: 20px;
+        color: $heavy-gray;
+        &:hover { color: $accent-orange; }
+      }
+    }
+  }
+}
+@media screen and (min-width: 768px) {
+  .modal--content {
+    width: 50%;
+  }
+}
+@media screen and (max-width: 768px) {
+  .modal--content {
+    width: 90%;
+  }
+}
