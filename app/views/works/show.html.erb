@@ -86,3 +86,30 @@
     <% end %>
   </div>
 </div>
+
+<!-- Modal -->
+  <div id="liked_users" class="modal modal--js">
+    <div class="modal__bg modal--js__close"></div>
+    <div class="modal--content">
+      <div class="modal--content__inner">
+        <%= render "likes/liked_users", work: @work %>
+        <a class="modal--js__close modal__close" href="">
+          <span><i class="far fa-times-circle close__btn"></i></span>
+        </a>
+      </div>
+    </div>
+  </div>
+<script type="text/javascript">
+  $( '.modal--js__open' ).each( function() {
+      $( this ).on( 'click', function() {
+            var target = $( this ).data( 'target' );
+            var modal = document.getElementById( target );
+            $( modal ).fadeIn( 300 );
+            return false;
+      });
+  });
+  $( '.modal--js__close' ).on( 'click', function() {
+      $( '.modal--js' ).fadeOut( 300 );
+      return false;
+  });
+</script>

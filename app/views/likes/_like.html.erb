@@ -12,7 +12,7 @@
   <% end %>
 <% end %>
 <span class="likes_count">
-  <%= link_to work_likes_path work do %>
+  <%= link_to("#", class: "modal--js__open", data: { target: "liked_users"} ) do %>
     <%= work.likes.count %>
   <% end %>
 </span>

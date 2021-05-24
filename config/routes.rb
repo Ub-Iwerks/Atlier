@@ -20,7 +20,7 @@ Rails.application.routes.draw do
     end
   end
   resources :works do
-    resources :likes, only: [:create, :destroy, :index]
+    resources :likes, only: [:create, :destroy]
     collection do
       get 'get_category_children', defaults: { fomat: 'json' }
       get 'search', to: 'works#search'
