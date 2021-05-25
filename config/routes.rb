@@ -17,6 +17,7 @@ Rails.application.routes.draw do
     resources :likes, only: :index, to: "likes#favorites"
     member do
       get :following, :followers
+      post :lalaland
     end
   end
   resources :works do

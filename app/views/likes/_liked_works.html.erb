@@ -1,0 +1,9 @@
+<% if @user.likes.present? %>
+  <ol class="works">
+    <% @user.likes.each do |like| %>
+      <%= render like.work %>
+    <% end %>
+  </ol>
+<% else %>
+  <h4>いいねした作品がありません</h4>
+<% end %>

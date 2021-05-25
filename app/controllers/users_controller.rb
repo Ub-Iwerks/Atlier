@@ -53,4 +53,20 @@ class UsersController < ApplicationController
     ).page(params[:page])
     render "show_follow"
   end
+
+  def lalaland
+    @user = User.find(params[:id])
+    @works = @user.works.includes(
+      [
+        :likes,
+        :comments,
+        image_attachment: :blob,
+        illustrations: [photo_attachment: :blob],
+      ]
+    ).page(params[:page])
+    respond_to do |format|
+      format.html
+      format.js
+    end
+  end
 end

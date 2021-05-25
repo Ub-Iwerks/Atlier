@@ -29,17 +29,22 @@
       <ul class="user--works__types">
         <li><h2><%= link_to "作品一覧", user_path(@user) %></h2></li>
         <li><h2><%= link_to "いいね一覧", user_likes_path(@user) %></h2></li>
+        <%= form_tag(url_for(:action => 'lalaland'), :remote => true) do %>
+          <%= submit_tag "変更する" %>
+        <% end %>
       </ul>
-      <% if @user.works.present? %>
-        <ol class="works">
-          <%= render @works %>
-        </ol>
-        <%= paginate @works %>
-      <% elsif current_user?(@user) %>
-        <h4>自分の作品を記録しよう！</h4>
-      <% else %>
-        <h4>作品の登録がまだありません</h4>
-      <% end %>
+      <div id="user--works__collection" >
+        <% if @user.works.present? %>
+          <ol class="works">
+            <%= render @works %>
+          </ol>
+          <%= paginate @works %>
+        <% elsif current_user?(@user) %>
+          <h4>自分の作品を記録しよう！</h4>
+        <% else %>
+          <h4>作品の登録がまだありません</h4>
+        <% end %>
+      </div>
     </section>
   </div>
 </div>
