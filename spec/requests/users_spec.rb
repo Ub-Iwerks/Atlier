@@ -101,4 +101,16 @@ RSpec.describe "Users", type: :request do
       end
     end
   end
+
+  describe "POST /users/:id/favorites" do
+    let(:user) { create(:user) }
+
+    context "user doesnt sign in" do
+      before { post favorites_user_path user }
+
+      it "redirect_to sign in view" do
+        expect(response).to redirect_to new_user_session_path
+      end
+    end
+  end
 end

@@ -1,21 +1,5 @@
 class LikesController < ApplicationController
   before_action :authenticate_user!
-  def favorites
-    @user = User.includes(
-      [
-        likes: [
-          work: [
-            :likes,
-            comments: :user,
-            image_attachment: :blob,
-            user: [avatar_attachment: :blob],
-            illustrations: [photo_attachment: :blob],
-          ],
-        ],
-      ]
-    ).find(params[:user_id])
-  end
-
   def create
     @liked = current_user.likes.create(work_id: params[:work_id])
     @work = Work.find_by(id: params[:work_id])

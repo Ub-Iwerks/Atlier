@@ -17,7 +17,6 @@ RSpec.describe 'Users profile', type: :system do
       within(".user--works") do
         within("ul.user--works__types") do
           expect(page).to have_link "作品一覧", href: user_path(user)
-          expect(page).to have_link "いいね一覧", href: user_likes_path(user)
         end
         user.works.page(1) do |work|
           expect(page).to have_selector "img.avatar"
