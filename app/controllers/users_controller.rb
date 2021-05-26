@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :authenticate_user!, only: [:following, :followers, :index]
+  before_action :authenticate_user!, except: :show
   def show
     @user = User.find(params[:id])
     @works = @user.works.includes(
@@ -54,16 +54,20 @@ class UsersController < ApplicationController
     render "show_follow"
   end
 
-  def lalaland
-    @user = User.find(params[:id])
-    @works = @user.works.includes(
+  def favorites
+    @user = User.includes(
       [
-        :likes,
-        :comments,
-        image_attachment: :blob,
-        illustrations: [photo_attachment: :blob],
+        likes: [
+          work: [
+            :likes,
+            comments: :user,
+            image_attachment: :blob,
+            user: [avatar_attachment: :blob],
+            illustrations: [photo_attachment: :blob],
+          ],
+        ],
       ]
-    ).page(params[:page])
+    ).find(params[:id])
     respond_to do |format|
       format.html
       format.js

@@ -14,10 +14,9 @@ Rails.application.routes.draw do
   get  '/contact', to: 'static_pages#contact'
   get  '/tos', to: 'static_pages#terms', as: 'terms'
   resources :users, only: [:show, :index] do
-    resources :likes, only: :index, to: "likes#favorites"
     member do
       get :following, :followers
-      post :lalaland
+      post :favorites
     end
   end
   resources :works do

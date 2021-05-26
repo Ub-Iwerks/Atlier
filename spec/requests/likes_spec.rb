@@ -3,32 +3,6 @@ require 'rails_helper'
 RSpec.describe "Likes", type: :request do
   let!(:user) { create(:user) }
   let!(:work) { create(:work) }
-  describe "GET /users/:user_id/likes" do
-    let(:page_title) { "いいねした作品" }
-    context "user dosent sign in" do
-      before { get user_likes_path user }
-
-      it "redirect_to sign in view" do
-        expect(response).to redirect_to new_user_session_path
-      end
-    end
-
-    context "user signed in" do
-      before do
-        sign_in user
-        get user_likes_path user
-      end
-
-      it "render favorites" do
-        expect(response.status).to eq 200
-      end
-
-      it 'have page_title of title tag' do
-        expect(response.body).to match(/<title>#{page_title} | #{user.username}<\/title>/i)
-      end
-    end
-  end
-
   describe "POST /works/:work_id/likes" do
     context "user dosent sign in" do
       before { post work_likes_path work }
