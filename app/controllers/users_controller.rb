@@ -73,4 +73,20 @@ class UsersController < ApplicationController
       format.js
     end
   end
+
+  def my_works
+    @user = User.find(params[:id])
+    @works = @user.works.includes(
+      [
+        :likes,
+        :comments,
+        image_attachment: :blob,
+        illustrations: [photo_attachment: :blob],
+      ]
+    ).page(params[:page])
+    respond_to do |format|
+      format.html
+      format.js
+    end
+  end
 end

@@ -1,0 +1,20 @@
+<ul class="user--works__types">
+  <%= form_tag(url_for(action: 'my_works'), remote: true) do %>
+    <span class="user--works__now"><strong><%= submit_tag "作品一覧" %></strong></span>
+  <% end %>
+  <%= form_tag(url_for(action: 'favorites'), remote: true) do %>
+    <%= submit_tag "お気に入り" %>
+  <% end %>
+</ul>
+<div id="user--works__collection" >
+  <% if @user.works.present? %>
+    <ol class="works">
+      <%= render @works %>
+    </ol>
+    <%= paginate @works %>
+  <% elsif current_user?(@user) %>
+    <h4>自分の作品を記録しよう！</h4>
+  <% else %>
+    <h4>作品の登録がまだありません</h4>
+  <% end %>
+</div>

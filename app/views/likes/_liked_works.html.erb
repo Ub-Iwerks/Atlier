@@ -1,7 +1,9 @@
 <ul class="user--works__types">
-  <li><h2><%= link_to "作品一覧", user_path(@user) %></h2></li>
-  <%= form_tag(url_for(:action => 'favorites'), :remote => true) do %>
-    <%= submit_tag "変更する" %>
+  <%= form_tag(url_for(action: 'my_works'), remote: true) do %>
+    <span><%= submit_tag "作品一覧" %></span>
+  <% end %>
+  <%= form_tag(url_for(action: 'favorites'), remote: true) do %>
+    <span class="user--works__now"><strong><%= submit_tag "お気に入り" %></strong></span>
   <% end %>
 </ul>
 <% if @user.likes.present? %>
