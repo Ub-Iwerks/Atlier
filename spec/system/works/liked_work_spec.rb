@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe "Liked work", type: :system do
+RSpec.describe "Liked work", type: :system, js: true do
   let(:user) { create(:user) }
   let(:another_user) { create(:user) }
   let(:third_user) { create(:user) }
@@ -27,6 +27,31 @@ RSpec.describe "Liked work", type: :system do
     within("div#likes_button-#{work.id}") do
       expect(page).to have_link href: work_likes_path(work)
       expect(page).to have_selector ".likes_count", text: "#{current_count}"
+    end
+  end
+
+  it "change display of works" do
+    sign_in user
+    visit user_path user
+    within("section.user--works") do
+      within("#work-#{work.id}") do
+        expect(page).to have_selector ".work--title", text: "#{work.title}"
+      end
+      within(".user--works__types") do
+        expect(page).to have_selector "span.btn__my_works"
+        expect(page).to have_selector "span.btn__liked_works"
+        click_button "お気に入り"
+      end
+    end
+    within(".user--works__favorites") do
+      expect(page).to have_selector "h4", text: "いいねした作品がありません"
+    end
+    visit user_path another_user
+    within(".user--works__types") { click_button "お気に入り" }
+    within(".user--works__favorites") do
+      within("#work-#{work.id}") do
+        expect(page).to have_selector ".work--title", text: "#{work.title}"
+      end
     end
   end
 end

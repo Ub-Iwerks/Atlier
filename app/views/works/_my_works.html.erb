@@ -1,12 +1,16 @@
 <ul class="user--works__types">
-  <%= form_tag(url_for(action: 'my_works'), remote: true) do %>
-    <span class="user--works__now"><strong><%= submit_tag "作品一覧" %></strong></span>
-  <% end %>
-  <%= form_tag(url_for(action: 'favorites'), remote: true) do %>
-    <%= submit_tag "お気に入り" %>
-  <% end %>
+  <li>
+    <%= form_tag(url_for(action: 'my_works'), remote: true) do %>
+      <span class="btn__my_works user--works__now"><strong><%= submit_tag "作品一覧" %></strong></span>
+    <% end %>
+  </li>
+  <li>
+    <%= form_tag(url_for(action: 'favorites'), remote: true) do %>
+      <span class="btn__liked_works"><%= submit_tag "お気に入り" %></span>
+    <% end %>
+  </li>
 </ul>
-<div id="user--works__collection" >
+<div class="user--works__own" >
   <% if @user.works.present? %>
     <ol class="works">
       <%= render @works %>
