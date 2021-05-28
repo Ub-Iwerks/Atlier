@@ -15,6 +15,10 @@ RSpec.describe 'Users profile', type: :system do
         expect(page).to have_selector "h1", text: "#{user.username}"
       end
       within(".user--works") do
+        within(".user--works__types") do
+          expect(page).to have_selector "span.btn__my_works"
+          expect(page).to have_selector "span.btn__liked_works"
+        end
         user.works.page(1) do |work|
           expect(page).to have_selector "img.avatar"
           expect(page).to have_selector ".user", text: "#{work.user.name}"
