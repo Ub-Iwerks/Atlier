@@ -16,8 +16,7 @@ RSpec.describe 'Users profile', type: :system do
       end
       within(".user--works") do
         within(".user--works__types") do
-          expect(page).to have_selector "span.btn__my_works"
-          expect(page).to have_selector "span.btn__liked_works"
+          expect(page.all("input.btn__works").count).to eq 2
         end
         user.works.page(1) do |work|
           expect(page).to have_selector "img.avatar"

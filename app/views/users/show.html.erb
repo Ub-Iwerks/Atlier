@@ -1,6 +1,6 @@
 <% set_meta_tags title: "#{@user.username}" %>
-<div class="row center">
-  <div class="col-md-9">
+<div class="row">
+  <div class="col-md-offset-2 col-md-8">
     <section class="user--info">
       <div class="user__main">
         <%= display_avatar_for @user, size: Settings.avatar_size[:in_profile] %>

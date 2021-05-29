@@ -38,8 +38,7 @@ RSpec.describe "Liked work", type: :system, js: true do
         expect(page).to have_selector ".work--title", text: "#{work.title}"
       end
       within(".user--works__types") do
-        expect(page).to have_selector "span.btn__my_works"
-        expect(page).to have_selector "span.btn__liked_works"
+        expect(page.all("input.btn__works").count).to eq 2
         click_button "お気に入り"
       end
     end

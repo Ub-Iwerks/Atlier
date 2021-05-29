@@ -1028,6 +1028,25 @@ section.user--sub-info__aside {
     margin-top: 4vh;
     margin-bottom: 6vh;
   }
+  .user--works__types {
+    display: flex;
+    justify-content: space-around;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    .btn__works {
+      font-size: 15px;
+      border: none;
+      background-color: transparent;
+      color: $gray;
+    }
+    .user--works__now {
+      font-weight: bold;
+      color: $heavy-gray;
+    }
+  }
+}
+@media screen and (min-width: 768px) {
+  .user--works__types { padding: 10px 30vh; }
 }
 .users {
   list-style: none;
