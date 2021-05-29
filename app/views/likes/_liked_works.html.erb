@@ -1,12 +1,12 @@
 <ul class="user--works__types">
   <li>
     <%= form_tag(url_for(action: 'my_works'), remote: true) do %>
-      <span class="btn__my_works"><%= submit_tag "作品一覧" %></span>
+      <%= submit_tag "作品一覧", class: "btn__works" %>
     <% end %>
   </li>
   <li>
     <%= form_tag(url_for(action: 'favorites'), remote: true) do %>
-      <span class="btn__liked_works user--works__now"><strong><%= submit_tag "お気に入り" %></strong></span>
+      <%= submit_tag "お気に入り", class: "btn__works user--works__now" %>
     <% end %>
   </li>
 </ul>
