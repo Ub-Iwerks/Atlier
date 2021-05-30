@@ -20,10 +20,9 @@ RSpec.describe ApplicationHelper, type: :helper do
     context "user doesnt attached avatar image" do
       subject { display_avatar_for(user) }
 
-      before { user.avatar.purge }
-
       it "display default avatar with image tag" do
-        is_expected.to eq image_tag(default_avatar, alt: "#{user.username}", class: "avatar", width: "#{default_size}px")
+        is_expected.to have_selector "img[src$='#{default_avatar}']"
+        is_expected.to have_selector "img[class='avatar']"
       end
     end
   end

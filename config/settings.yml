@@ -14,6 +14,7 @@ avatar_size:
   in_profile: 150
 default_image:
   avatar: "avatar.png"
+  avatar_path: "app/assets/images/avatar.png"
   work: "choice_image.png"
 sample_data:
   website: "http://example.com/"
