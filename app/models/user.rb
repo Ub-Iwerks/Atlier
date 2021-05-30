@@ -1,5 +1,8 @@
 class User < ApplicationRecord
   before_save { self.email = email.downcase }
+  before_create do
+    avatar.attach(io: File.open("#{Settings.default_image[:avatar_path]}"), filename: "#{Settings.default_image[:avatar]}")
+  end
   has_one_attached :avatar
   has_many :works, dependent: :destroy
   has_many :comments, dependent: :destroy
