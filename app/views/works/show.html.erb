@@ -15,7 +15,9 @@
         <div class="work__comment">
           <%= render "shared/comment_count", work: @work %>
         </div>
-        <div>閲覧数</div>
+        <div class="work__footprints">
+          <i class="far fa-eye"></i><%= [*1..100].sample %>
+        </div>
         <div class="timestamp">
           <%= time_ago_in_words(@work.created_at) %>前
         </div>
