@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_02_073201) do
+ActiveRecord::Schema.define(version: 2021_06_03_033849) do
 
   create_table "active_storage_attachments", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
@@ -56,6 +56,17 @@ ActiveRecord::Schema.define(version: 2021_04_02_073201) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_comments_on_user_id"
     t.index ["work_id"], name: "index_comments_on_work_id"
+  end
+
+  create_table "footprints", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.integer "counts", default: 0, null: false
+    t.bigint "user_id", null: false
+    t.bigint "work_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id", "work_id"], name: "index_footprints_on_user_id_and_work_id"
+    t.index ["user_id"], name: "index_footprints_on_user_id"
+    t.index ["work_id"], name: "index_footprints_on_work_id"
   end
 
   create_table "illustrations", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -142,6 +153,8 @@ ActiveRecord::Schema.define(version: 2021_04_02_073201) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "comments", "users"
   add_foreign_key "comments", "works"
+  add_foreign_key "footprints", "users"
+  add_foreign_key "footprints", "works"
   add_foreign_key "illustrations", "works"
   add_foreign_key "likes", "users"
   add_foreign_key "likes", "works"
