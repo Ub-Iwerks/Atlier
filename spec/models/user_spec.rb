@@ -6,7 +6,7 @@ RSpec.describe User, type: :model do
 
     let(:user) { build(:user) }
 
-    context "user has valid imformation" do
+    context "user has valid information" do
       let(:user) { build(:user, username: "example", email: "test@exmpale.com") }
       it { is_expected.to be_valid }
     end
