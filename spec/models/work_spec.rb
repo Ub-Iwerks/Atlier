@@ -214,5 +214,49 @@ RSpec.describe Work, type: :model do
         end
       end
     end
+
+    describe "create_footprint_by" do
+      subject { work.create_footprint_by(user) }
+
+      context "footprint has not existed" do
+        let(:user) { create(:user) }
+        let(:work) { create(:work) }
+        let(:create_footprint) { Footprint.create(user_id: user.id, work_id: work.id) }
+        let(:footprint) { Footprint.find_by(user_id: user.id, work_id: work.id) }
+        it "create new footprint" do
+          is_expected.to equal create_footprint # メソッドを扱うことは、新しいオブジェクトを作成するのと同義
+        end
+
+        # 2回メソッドを利用すると足跡が増えてしまう。つまり、このテストは多分エラー
+        it "add new footprint object" do
+          is_expected.to change { Footprint.count }.by(1) # メソッドを扱うことでfootprintオブジェクトが1つ増えたということ
+        end
+
+        it "new footprint's counts is 1" do
+          expect(footprint.counts).to eq 1 # 新しいfootprintオブジェクトのカウントは1だということ
+        end
+      end
+
+      context "footprint has already created" do
+        let(:user) { create(:user) }
+        let(:work) { create(:work) }
+        let!(:footprint) { create(:footprint, user: user, work: work) }
+        let(:add_footprint) { "足跡を+１する動作" }
+        let(:exsiting_footprint) { Footprint.create(user_id: user.id, work_id: work.id) }
+        let!(:exsiting_footprints_counts) { footprint.counts }
+        it "add 1 to the counts" do
+          is_expected.to equal add_footprint # メソッドを扱うことは、足跡オブジェクトのカウントを+1するのと同義
+        end
+
+        it "add new footprint object" do
+          is_expected.not_to change { Footprint.count }.by(1) # メソッドを扱うことでfootprintオブジェクトの数は増えないということ。
+        end
+
+        # 2回メソッドを利用している為、カウントは+2されている筈
+        it "new footprint's counts is 1" do
+          expect(exsiting_footprint.counts).to eq exsiting_footprints_counts + 2
+        end
+      end
+    end
   end
 end
