@@ -79,11 +79,11 @@ class Work < ApplicationRecord
 
   def create_footprint_by(user)
     if Footprint.find_by(user_id: user.id, work_id: id).present?
-      # 既に足跡が存在する場合。
-      # この場合はカウントの値に+1する
+      footprint = Footprint.find_by(user_id: user.id, work_id: id)
+      counts = footprint.counts
+      footprint.update_attribute(:counts, counts + 1)
     else
-      # 足跡が存在しない場合
-      # 足跡を新たに作成する
+      Footprint.create(user_id: user.id, work_id: id)
     end
   end
 end

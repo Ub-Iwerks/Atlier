@@ -59,12 +59,12 @@ ActiveRecord::Schema.define(version: 2021_06_03_033849) do
   end
 
   create_table "footprints", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.integer "counts", default: 0, null: false
+    t.integer "counts", default: 1, null: false
     t.bigint "user_id", null: false
     t.bigint "work_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["user_id", "work_id"], name: "index_footprints_on_user_id_and_work_id"
+    t.index ["user_id", "work_id"], name: "index_footprints_on_user_id_and_work_id", unique: true
     t.index ["user_id"], name: "index_footprints_on_user_id"
     t.index ["work_id"], name: "index_footprints_on_work_id"
   end
