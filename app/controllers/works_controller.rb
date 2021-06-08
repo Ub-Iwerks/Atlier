@@ -5,16 +5,18 @@ class WorksController < ApplicationController
   before_action :set_work_search, except: :index
 
   def show
-    @work = Work.includes(
-      [
-        :user,
-        comments: :user,
-        image_attachment: :blob,
-        illustrations: [photo_attachment: :blob],
-      ]
-    ).find(params[:id])
-    # ここで足跡を作成する。
-    # @work.create_footprint_by(current_user)
+    @work = Work.
+      # select( "works.*, SUM(footprints.counts) as total_footprints").
+      # joins(:footprints).
+      includes(
+        [
+          :user,
+          comments: :user,
+          image_attachment: :blob,
+          illustrations: [photo_attachment: :blob],
+        ]
+      ).find(params[:id])
+    @work.create_footprint_by(current_user)
     @comment = current_user.comments.build
     @like = Like.new
     @liked = Like.find_by(user_id: current_user.id, work_id: params[:id])
