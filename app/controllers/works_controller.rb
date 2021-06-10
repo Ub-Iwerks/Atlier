@@ -17,6 +17,7 @@ class WorksController < ApplicationController
         ]
       ).find(params[:id])
     @work.create_footprint_by(current_user)
+    @footprints = Footprint.select("SUM(footprints.counts) as total").find_by(work_id: @work.id)
     @comment = current_user.comments.build
     @like = Like.new
     @liked = Like.find_by(user_id: current_user.id, work_id: params[:id])
