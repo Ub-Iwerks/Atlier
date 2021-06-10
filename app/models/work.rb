@@ -1,5 +1,6 @@
 class Work < ApplicationRecord
   default_scope -> { order(created_at: :desc) }
+  after_create { Footprint.create(user_id: user_id, work_id: id, counts: 0) }
   has_one_attached :image
   belongs_to :user
   belongs_to :category

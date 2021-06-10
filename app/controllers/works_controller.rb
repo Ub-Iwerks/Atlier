@@ -6,8 +6,8 @@ class WorksController < ApplicationController
 
   def show
     @work = Work.
-      # select( "works.*, SUM(footprints.counts) as total_footprints").
-      # joins(:footprints).
+      select("works.*, SUM(footprints.counts) + 1 as total_footprints_count").
+      joins(:footprints).
       includes(
         [
           :user,

@@ -16,7 +16,7 @@
           <%= render "shared/comment_count", work: @work %>
         </div>
         <div class="work__footprints">
-          <i class="far fa-eye"></i><%#= @work.total_footprints %>
+          <i class="far fa-eye"></i><%= @work.total_footprints_count %>
         </div>
         <div class="timestamp">
           <%= time_ago_in_words(@work.created_at) %>前
