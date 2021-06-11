@@ -5,6 +5,9 @@ RSpec.describe 'Works interface', type: :system do
   let!(:works) { create_list(:work, 21, user: user) }
   let!(:current_work) { works[20] }
   let!(:illustrations) { create_list(:illustration, 5, work: current_work) }
+  # let(:footprint) do
+  #   Footprint.select("SUM(footprints.counts) as total_count").where(work_id: current_work.id)
+  # end
 
   it "check work feed has links correctly" do
     sign_in user
@@ -30,6 +33,9 @@ RSpec.describe 'Works interface', type: :system do
       expect(page).to have_selector "img[alt$='#{user.username}']"
       expect(page).to have_selector ".username", text: "#{current_work.user.username}"
     end
+    # within("section.work--assessment__aside") do
+    #   expect(page).to have_selector "div.work__footprints", text: "#{footprint.total_count}"
+    # end
     within(".work--all__information") do
       within(".work--main_info") do
         expect(page).to have_selector "h3", text: "#{current_work.title}"

@@ -229,40 +229,25 @@ RSpec.describe Work, type: :model do
     end
 
     describe "create_footprint_by" do
-      context "create new footprint" do
-        let!(:footprint_count_before) { Footprint.count }
-        let!(:work) { create(:work, user: works_user) }
+      context "footprint has never created" do
+        let!(:work) { create(:work) }
         let(:other_user) { create(:user) }
-        let(:works_user) { create(:user) }
-        let(:own_footprint) { Footprint.find_by(user: works_user, work: work) }
-        let(:other_footprint) { Footprint.find_by(user: other_user, work: work) }
 
-        it "add new footprint and a count to own footprint" do
-          expect(Footprint.count).to eq footprint_count_before + 1
-          work.create_footprint_by(works_user)
-          expect(own_footprint.counts).to eq 1
-        end
-
-        it "add a count to other footprint" do
-          work.create_footprint_by(other_user)
-          expect(other_footprint.counts).to eq 1
+        it "add new object to FootprintModel" do
+          expect { work.create_footprint_by(other_user) }.to change { Footprint.count }
         end
       end
 
       context "footprint has already created" do
-        before do
-          Footprint.create(user: user, work: work)
-          work.create_footprint_by(user)
-        end
+        let!(:work) { create(:work, user_id: works_user.id) }
+        let(:works_user) { create(:user) }
 
-        let(:user) { create(:user) }
-        let(:work) { create(:work) }
-        let!(:footprint_count_before) { Footprint.count }
-        let(:footprint_finded) { Footprint.find_by(user_id: user.id, work_id: work.id) }
-
-        it "does'nt add new footprint object" do
-          expect(Footprint.count).to eq footprint_count_before
-          expect(footprint_finded.counts).to eq 2
+        it "add new object to FootprintModel" do
+          present_counts = Footprint.find_by(work_id: work.id, user_id: works_user.id).counts
+          expect {
+            work.create_footprint_by(works_user)
+            present_counts = Footprint.find_by(work_id: work.id, user_id: works_user.id).counts
+          }.to change { present_counts }.from(0).to(1)
         end
       end
     end
