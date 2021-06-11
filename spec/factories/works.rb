@@ -7,6 +7,10 @@ FactoryBot.define do
       work.category_id = child_category.id
     end
 
+    after(:create) do |work|
+      Footprint.create(user_id: work.user.id, work_id: work.id, counts: 0)
+    end
+
     association :user, factory: :user, strategy: :create
     association :category, factory: :category, strategy: :create
     title { "TITLE" }
