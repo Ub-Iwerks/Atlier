@@ -41,7 +41,10 @@ class User < ApplicationRecord
   end
 
   def feed
-    Work.includes(
+    Work.
+    # select("works.*, SUM(footprints.counts) AS total_footprint_counts").
+    # joins(:footprints).
+    includes(
       [
         :comments,
         :likes,
@@ -50,10 +53,10 @@ class User < ApplicationRecord
         illustrations: { photo_attachment: :blob },
       ]
     ).where(
-      "user_id = ? OR user_id IN (?)",
+      "works.user_id = ? OR works.user_id IN (?)",
       id,
       Relationship.where(follower_id: id).select(:followed_id)
-    )
+    ).distinct
   end
 
   def follow(other_user)
