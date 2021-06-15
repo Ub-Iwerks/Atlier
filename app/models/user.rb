@@ -42,21 +42,21 @@ class User < ApplicationRecord
 
   def feed
     Work.
-    # select("works.*, SUM(footprints.counts) AS total_footprint_counts").
-    # joins(:footprints).
-    includes(
-      [
-        :comments,
-        :likes,
-        image_attachment: :blob,
-        user: { avatar_attachment: :blob },
-        illustrations: { photo_attachment: :blob },
-      ]
-    ).where(
-      "works.user_id = ? OR works.user_id IN (?)",
-      id,
-      Relationship.where(follower_id: id).select(:followed_id)
-    ).distinct
+      select("works.*, SUM(footprints.counts) AS total_footprint_counts").
+      joins(:footprints).
+      includes(
+        [
+          :comments,
+          :likes,
+          image_attachment: :blob,
+          user: { avatar_attachment: :blob },
+          illustrations: { photo_attachment: :blob },
+        ]
+      ).where(
+        "works.user_id = ? OR works.user_id IN (?)",
+        id,
+        Relationship.where(follower_id: id).select(:followed_id)
+      ).group("works.id")
   end
 
   def follow(other_user)
