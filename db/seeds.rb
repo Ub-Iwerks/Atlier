@@ -10,9 +10,23 @@ User.create!(
   confirmed_at: Time.current
 )
 
-21.times do |n|
+[*2..5].each do |n|
+  username  = "Test_User#{n}"
+  email = "test#{n}@example.com"
+  description = "My name is Test_User#{n}"
+  User.create!(username:  username,
+      email: email,
+      description: description,
+      website: website,
+      password:              password,
+      password_confirmation: password,
+      confirmed_at: Time.current
+  )
+end
+
+[*6..21].each do |n|
   username  = "#{Faker::Movies::StarWars.character}"
-  email = "test#{n+1}@example.com"
+  email = "test#{n}@example.com"
   description = "My name is #{Faker::Movies::StarWars.character}"
   User.create!(username:  username,
       email: email,
