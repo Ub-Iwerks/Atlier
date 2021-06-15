@@ -1,0 +1,6 @@
+Footprint.create(user_id: 2, work_id: 1, counts: 5)
+Footprint.create(user_id: 3, work_id: 1, counts: 10)
+Footprint.create(user_id: 1, work_id: 2, counts: 15)
+Footprint.create(user_id: 3, work_id: 2, counts: 20)
+Footprint.create(user_id: 1, work_id: 3, counts: 25)
+Footprint.create(user_id: 2, work_id: 3, counts: 30)
