@@ -59,19 +59,20 @@ class UsersController < ApplicationController
   end
 
   def favorites
-    @user = User.includes(
-      [
-        likes: [
-          work: [
-            :likes,
-            comments: :user,
-            image_attachment: :blob,
-            user: [avatar_attachment: :blob],
-            illustrations: [photo_attachment: :blob],
-          ],
-        ],
-      ]
-    ).find(params[:id])
+    @user = User.includes(:likes).find(params[:id])
+    @works = Work.
+      select("works.*, likes.user_id, sum(footprints.counts) as total_footprint_counts").
+      joins(:likes, :footprints).
+      includes(
+        [
+          :comments,
+          image_attachment: :blob,
+          user: { avatar_attachment: :blob },
+          illustrations: { photo_attachment: :blob },
+        ]
+      ).where("likes.user_id = ?", @user.id).
+      group("works.id").
+      page(params[:page])
     respond_to do |format|
       format.html
       format.js
@@ -80,14 +81,18 @@ class UsersController < ApplicationController
 
   def my_works
     @user = User.find(params[:id])
-    @works = @user.works.includes(
-      [
-        :likes,
-        :comments,
-        image_attachment: :blob,
-        illustrations: [photo_attachment: :blob],
-      ]
-    ).page(params[:page])
+    @works = @user.works.
+      select("works.*, sum(footprints.counts) as total_footprint_counts").
+      joins(:footprints).
+      includes(
+        [
+          :likes,
+          :comments,
+          image_attachment: :blob,
+          illustrations: [photo_attachment: :blob],
+        ]
+      ).group("works.id").
+      page(params[:page])
     respond_to do |format|
       format.html
       format.js

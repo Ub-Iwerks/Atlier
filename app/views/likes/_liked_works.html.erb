@@ -13,10 +13,9 @@
 <div class="user--works__favorites">
   <% if @user.likes.present? %>
     <ol class="works">
-      <% @user.likes.each do |like| %>
-        <%= render like.work %>
-      <% end %>
+      <%= render @works %>
     </ol>
+    <%= paginate @works %>
   <% else %>
     <h4>いいねした作品がありません</h4>
   <% end %>
