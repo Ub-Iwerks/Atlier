@@ -2,14 +2,18 @@ class UsersController < ApplicationController
   before_action :authenticate_user!, except: :show
   def show
     @user = User.find(params[:id])
-    @works = @user.works.includes(
-      [
-        :likes,
-        :comments,
-        image_attachment: :blob,
-        illustrations: [photo_attachment: :blob],
-      ]
-    ).page(params[:page])
+    @works = @user.works.
+      select("works.*, SUM(footprints.counts) AS total_footprint_counts").
+      joins(:footprints).
+      includes(
+        [
+          :likes,
+          :comments,
+          image_attachment: :blob,
+          illustrations: [photo_attachment: :blob],
+        ]
+      ).group("works.id").
+      page(params[:page])
   end
 
   def index

@@ -39,7 +39,7 @@
         <span class="work__comment"><i class="far fa-comment"></i><%= work.comments.count if work.comments.present? %></span>
       </div>
       <div>
-        <span class="work__footprints"><i class="far fa-eye"></i><%= [*1..100].sample %></span>
+        <span class="work__footprints"><i class="far fa-eye"></i><%= work.total_footprint_counts %></span>
       </div>
       <div>
         <span class="timestamp">

@@ -18,44 +18,55 @@ class WorkSearch
     end
     if keyword.present?
       if serarch_category.present?
-        Work.includes(
-          [
-            :comments,
-            :likes,
-            image_attachment: :blob,
-            user: { avatar_attachment: :blob },
-            illustrations: { photo_attachment: :blob },
-          ]
-        ).where(
-          'title like ? OR concept like ?',
-          "%#{keyword}%",
-          "%#{keyword}%",
-        ).where(category_id: serarch_category)
+        Work.
+          select("works.*, SUM(footprints.counts) AS total_footprint_counts").
+          joins(:footprints).
+          includes(
+            [
+              :comments,
+              :likes,
+              image_attachment: :blob,
+              user: { avatar_attachment: :blob },
+              illustrations: { photo_attachment: :blob },
+            ]
+          ).where(
+            'title like ? OR concept like ?',
+            "%#{keyword}%",
+            "%#{keyword}%",
+          ).where(category_id: serarch_category).
+          group("works.id")
       else
-        Work.includes(
-          [
-            :comments,
-            :likes,
-            image_attachment: :blob,
-            user: { avatar_attachment: :blob },
-            illustrations: { photo_attachment: :blob },
-          ]
-        ).where(
-          'title like ? OR concept like ?',
-          "%#{keyword}%",
-          "%#{keyword}%",
-        )
+        Work.
+          select("works.*, SUM(footprints.counts) AS total_footprint_counts").
+          joins(:footprints).
+          includes(
+            [
+              :comments,
+              :likes,
+              image_attachment: :blob,
+              user: { avatar_attachment: :blob },
+              illustrations: { photo_attachment: :blob },
+            ]
+          ).where(
+            'title like ? OR concept like ?',
+            "%#{keyword}%",
+            "%#{keyword}%",
+          ).group("works.id")
       end
     else
-      Work.includes(
-        [
-          :comments,
-          :likes,
-          image_attachment: :blob,
-          user: { avatar_attachment: :blob },
-          illustrations: { photo_attachment: :blob },
-        ]
-      ).where(category_id: serarch_category)
+      Work.
+        select("works.*, SUM(footprints.counts) AS total_footprint_counts").
+        joins(:footprints).
+        includes(
+          [
+            :comments,
+            :likes,
+            image_attachment: :blob,
+            user: { avatar_attachment: :blob },
+            illustrations: { photo_attachment: :blob },
+          ]
+        ).where(category_id: serarch_category).
+        group("works.id")
     end
   end
 end
