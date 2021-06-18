@@ -10,6 +10,7 @@ avatar_size:
   in_part: 20
   in_header: 22
   in_feed: 32
+  in_card: 50
   in_aside: 78
   in_profile: 150
 default_image:
