@@ -42,6 +42,33 @@
         </div>
       <% end %>
     </section>
+    <section class="recommended_works__aside">
+      <h4>おすすめの作品</h4>
+      <ul class="work--parts">
+        <% @recommended_works.each do |recommended_work| %>
+          <%= link_to work_path(recommended_work), class: "recommended_work_link" do %>
+            <li class="work--part">
+              <span class="work__title">
+                <%= recommended_work.title %>
+              </span>
+              <div class="work__info">
+                <span class="work__image">
+                  <%= image_tag recommended_work.display_image_square(size: 600, main: false) %>
+                </span>
+                <div class="work--user__info">
+                  <span class="work__user_avatar">
+                    <%= display_avatar_for recommended_work.user, size: Settings.avatar_size[:in_card] %>
+                  </span>
+                  <span class="work__user_username">
+                    <%=  recommended_work.user.username %>
+                  </span>
+                </div>
+              </div>
+            </li>
+          <% end %>
+        <% end %>
+      </ul>
+    </section>
   </aside>
   <div class="col-md-9">
     <div class="work--all__information">

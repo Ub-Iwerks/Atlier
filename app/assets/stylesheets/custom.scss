@@ -913,6 +913,35 @@ section.user--sub-info__aside {
     section { padding: 2vw 15px; }
   }
 }
+.recommended_works__aside {
+  color: #4d4d4d;
+  .recommended_work_link {
+    color: #4d4d4d;
+    &:active { color: #4d4d4d; }
+  }
+  h4 { text-align: center; }
+}
+.work--parts {
+  .work--part {
+    margin-bottom: 20px;
+    border: 1px solid $light-gray;
+    background-color: white;
+    border-radius: 4px;
+    padding: 4px 10px;
+    .work__title {
+      font-size: 16px;
+      padding-bottom: 3px;
+    }
+    .work__info {
+      display: flex;
+      align-items: center;
+      .work__image {
+        padding-right: 20px;
+        img { width: 15vh; }
+      }
+    }
+  }
+}
 
 
 /* ---- User ---- */
