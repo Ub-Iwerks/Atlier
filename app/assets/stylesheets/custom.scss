@@ -915,14 +915,14 @@ section.user--sub-info__aside {
 }
 .recommended_works__aside {
   color: #4d4d4d;
-  .recommended_work_link {
-    color: #4d4d4d;
-    &:active { color: #4d4d4d; }
-  }
   h4 { text-align: center; }
 }
-.work--parts {
-  .work--part {
+.work_link {
+  color: #4d4d4d;
+  &:active { color: #4d4d4d; }
+}
+.work_parts {
+  .work_part {
     margin-bottom: 20px;
     border: 1px solid $light-gray;
     background-color: white;

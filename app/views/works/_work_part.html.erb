@@ -1,0 +1,20 @@
+<%= link_to work_path(work), class: "work_link" do %>
+  <li class="work_part">
+    <span class="work__title">
+      <%= work.title %>
+    </span>
+    <div class="work__info">
+      <span class="work__image">
+        <%= image_tag work.display_image_square(size: 600, main: false) %>
+      </span>
+      <div class="work--user__info">
+        <span class="work__user_avatar">
+          <%= display_avatar_for work.user, size: Settings.avatar_size[:in_card] %>
+        </span>
+        <span class="work__user_username">
+          <%=  work.user.username %>
+        </span>
+      </div>
+    </div>
+  </li>
+<% end %>
