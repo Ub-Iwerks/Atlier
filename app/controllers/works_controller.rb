@@ -23,6 +23,20 @@ class WorksController < ApplicationController
         image_attachment: :blob,
         user: [avatar_attachment: :blob],
       ).where("works.id in (?)", [1, 2, 3, 4])
+      @recommended_works = Work.
+        where("works.id in (?)",
+          Footprint.
+            select(:work_id).
+            joins(:work).
+            where.not("works.user_id = footprints.user_id", ).
+            where("user_id in (?)",
+              User.
+                select(:id).
+                joins(:footprints).
+                where.not("users.id = ?", @work.user.id).
+                where("footprints.work_id = ?", @work.id)
+            )
+        )
     @comment = current_user.comments.build
     @like = Like.new
     @liked = Like.find_by(user_id: current_user.id, work_id: params[:id])
