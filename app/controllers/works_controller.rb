@@ -18,25 +18,18 @@ class WorksController < ApplicationController
       ).find(params[:id])
     @work.create_footprint_by(current_user)
     @recommended_works = Work.
-      select("works.*").
-      includes(
-        image_attachment: :blob,
-        user: [avatar_attachment: :blob],
-      ).where("works.id in (?)", [1, 2, 3, 4])
-      @recommended_works = Work.
-        where("works.id in (?)",
-          Footprint.
-            select(:work_id).
-            joins(:work).
-            where.not("works.user_id = footprints.user_id", ).
-            where("user_id in (?)",
-              User.
-                select(:id).
-                joins(:footprints).
-                where.not("users.id = ?", @work.user.id).
-                where("footprints.work_id = ?", @work.id)
-            )
-        )
+      where("works.id in (?)",
+            Footprint.
+              select(:work_id).
+              joins(:work).
+              where.not("footprints.work_id = ?", @work.id).        # 現在閲覧している作品の閲覧履歴は除く
+              where.not("footprints.user_id = works.user_id").      # 現在閲覧しているユーザー自身が作成した作品は除く
+              where("footprints.user_id in (?)",
+                    User.                                           # ユーザーのid群を抽出
+                      select(:id).
+                      joins(:footprints).
+                      where.not("users.id = ?", @work.user.id).     # 現在閲覧している作品を作成したユーザーのidは除外
+                      where("footprints.work_id = ?", @work.id)))   # 現在閲覧している作品を閲覧しているユーザーのid群を抽出
     @comment = current_user.comments.build
     @like = Like.new
     @liked = Like.find_by(user_id: current_user.id, work_id: params[:id])
