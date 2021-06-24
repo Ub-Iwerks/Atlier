@@ -1,23 +1,27 @@
 version: '3'
 services:
-  db:
-    image: mysql:8.0
-    environment:
-      MYSQL_ROOT_PASSWORD: password
-    ports:
-      - '3306:3306'
-    command: --default-authentication-plugin=mysql_native_password
-  web:
+  app:
+    container_name: atlier_dev
     build: .
+    image: atlier_dev
     command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
     volumes:
       - ~/git/github/Atlier:/var/www/app
     ports:
       - "3000:3000"
+    tty: true
+    stdin_open: true
     depends_on:
       - db
-    stdin_open: true
-    tty: true
-volumes:
-  mysql-data:
-    driver: local
+  db:
+    container_name: atlier_db_dev
+    build: ./mysql/
+    image: atlier_db_dev
+    ports:
+      - '3306:3306'
+    environment:
+      MYSQL_DATABASE: app
+      MYSQL_ROOT_PASSWORD: password
+      TZ: "Asia/Tokyo"
+    volumes:
+      - ./mysql/db_data:/var/lib/mysql
