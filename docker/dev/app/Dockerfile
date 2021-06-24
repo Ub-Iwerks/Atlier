@@ -27,6 +27,18 @@ RUN apt-get update -qq && \
 
 RUN gem install bundler
 
+RUN apt-get update && apt-get install -y unzip && \
+    CHROME_DRIVER_VERSION=`curl -sS chromedriver.storage.googleapis.com/LATEST_RELEASE` && \
+    wget -N http://chromedriver.storage.googleapis.com/$CHROME_DRIVER_VERSION/chromedriver_linux64.zip -P ~/ && \
+    unzip ~/chromedriver_linux64.zip -d ~/ && \
+    rm ~/chromedriver_linux64.zip && \
+    chown root:root ~/chromedriver && \
+    chmod 755 ~/chromedriver && \
+    mv ~/chromedriver /usr/bin/chromedriver && \
+    sh -c 'wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add -' && \
+    sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list' && \
+    apt-get update && apt-get install -y google-chrome-stable
+
 # yarn install Preparation
 RUN npm install n -g
 RUN n 12.18.4
@@ -35,7 +47,7 @@ RUN n 12.18.4
 RUN groupadd nginx
 RUN useradd -g nginx nginx
 ADD nginx/nginx.conf /etc/nginx/nginx.conf
-ADD nginx/dev.adachin.com.conf /etc/nginx/conf.d/dev.adachin.com.conf
+ADD nginx/dev.atlier.work.conf /etc/nginx/conf.d/dev.atlier.work.conf
 
 ## supervisor
 RUN mkdir -p /var/log/supervisor

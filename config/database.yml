@@ -10,11 +10,10 @@ default: &default
 
 development:
   <<: *default
-  database: myapp_development
 
 test:
   <<: *default
-  database: myapp_test
+  database: app_test
 
 production:
   <<: *default
