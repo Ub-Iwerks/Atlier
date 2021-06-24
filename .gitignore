@@ -42,4 +42,4 @@ config/environments/*.local.yml
 /.env.development
 /.env.production
 
-/mysql/db_data
+/docker/dev/mysql/db_data
