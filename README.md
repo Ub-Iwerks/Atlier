@@ -1,8 +1,43 @@
-## 0. 現状
+## 0. 開発環境構築手順
 
-現在は、SQLの学習( 8-(2)-③ )を目的に、アプリケーションの改善として、「この作品を見た人はこの作品にも興味があります」機能の実装中。
+![開発環境](https://user-images.githubusercontent.com/72424114/123368372-aab9ce80-d5b6-11eb-9fef-dd9144c33bf3.png)
 
- ## 1. はじめに
+1. localhostの追加
+
+```bash
+sudo vim /etc/hosts
+127.0.0.1 dev.atlier.work
+```
+
+2. `.env` ファイルの追加
+
+```
+MYSQL_HOST="db"
+MYSQL_NAME="app"
+MYSQL_USERNAME="root"
+MYSQL_PASSWORD="password"
+```
+
+3. dockerコンテナの立ち上げ
+
+```bash
+cd docker/dev
+docker-compose up -d
+```
+
+4. コンテナに入り、アプリケーションサーバーを立ち上げる
+
+```bash
+docker exec -it atlier_dev bash
+
+bundle install
+rails db:migrate
+/usr/bin/supervisorctl start app
+```
+
+5. [http://dev.atlier.work/](http://dev.adachin.com/)にアクセス
+
+## 1. はじめに
 
 初めまして、10月26日からエンジニアとして勉強を始めました、あいくと申します。元々は建築学部の学生でした。学習の一区切りとして、主にRubyとRails用いてポートフォリオを制作しました。
 
@@ -284,7 +319,7 @@ RSpecの統合テスト実行環境のドライバーに`:remote_chrome`を指�
 
 　(2) 「関連作品表示」機能の追加
 　カテゴリーテーブルを活用し、「関連性の高い作品」の表示を行う。
- 
+
 #### ④Circle CIを用いた継続的デプロイ
 
 私は一度CircleCIを用いた開発に携わった経験があります。CircleCIを用いた快適なデプロイは安定感があり、開発者の無駄を大きく省いてくれると感じました。
