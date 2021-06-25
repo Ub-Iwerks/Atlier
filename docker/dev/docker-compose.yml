@@ -1,0 +1,31 @@
+version: '2'
+services:
+  app:
+    container_name: atlier_dev
+    build: ./app/
+    image: atlier_dev
+    ports:
+      - "80:80"
+    volumes:
+      - ~/git/github/Atlier:/var/www/app
+    tty: true
+    stdin_open: true
+    depends_on:
+      - db
+      - chrome
+  db:
+    container_name: atlier_db_dev
+    build: ./mysql/
+    image: atlier_db_dev
+    ports:
+      - '3308:3306'
+    environment:
+      MYSQL_DATABASE: app
+      MYSQL_ROOT_PASSWORD: password
+      TZ: "Asia/Tokyo"
+    volumes:
+      - ./mysql/db_data:/var/lib/mysql
+  chrome:
+    image: selenium/standalone-chrome:latest
+    ports:
+      - 4444:4444
