@@ -2,7 +2,7 @@
 
 開発環境の構築手順を以下に記載します。
 
-![開発環境構成図](https://user-images.githubusercontent.com/72424114/123371474-ccb64f80-d5bc-11eb-91a1-47e25bb68fd5.png)
+![開発環境](https://user-images.githubusercontent.com/72424114/123391803-56731680-d5d7-11eb-9ab0-3596397422af.png)
 
 1. localhostの追加
 
