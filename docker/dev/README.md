@@ -37,4 +37,4 @@ rails db:migrate
 /usr/bin/supervisorctl start app
 ```
 
-5. [http://dev.atlier.work/](http://dev.adachin.com/)にアクセス
+5. [http://dev.atlier.online/](http://dev.atlier.online/)にアクセス
