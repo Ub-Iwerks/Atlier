@@ -2,11 +2,11 @@
 
 ![開発環境](https://user-images.githubusercontent.com/72424114/123391803-56731680-d5d7-11eb-9ab0-3596397422af.png)
 
-1. localhostの追加
+1. hostsファイルにドメイン名とIPアドレスを追加
 
 ```bash
 sudo vim /etc/hosts
-127.0.0.1 dev.atlier.work
+127.0.0.1 dev.atlier.online
 ```
 
 2. `.env` ファイルの追加
@@ -39,7 +39,7 @@ rails db:migrate
 
 ## 1. はじめに
 
-初めまして、10月26日からエンジニアとして勉強を始めました、あいくと申します。元々は建築学部の学生でした。学習の一区切りとして、主にRubyとRails用いてポートフォリオを制作しました。
+初めまして、11月からエンジニアとして勉強を始めました、大平紘基と申します。元々は建築学部の学生でした。学習の一区切りとして、主にRubyとRails用いてポートフォリオを制作しました。
 
 
 ## 2. Atlier - 作品共有型SNS

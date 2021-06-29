@@ -7,7 +7,7 @@ jobs:
       - add_ssh_keys:
           fingerprints:
             - "51:d9:c4:12:80:e5:eb:b5:aa:3f:fc:60:74:00:8f:63"
-      - run: ssh -p $SSH_PORT $SSH_USER@$SSH_HOST "/var/www/Atlier/deploy-me.sh"
+      - run: ssh -p $SSH_PORT $SSH_USER@$SSH_HOST "/home/ec2-user/var/www/Atlier/deploy-me.sh"
 
 workflows:
   version: 2

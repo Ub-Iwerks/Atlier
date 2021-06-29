@@ -8,7 +8,7 @@
 
 ```bash
 sudo vim /etc/hosts
-127.0.0.1 dev.atlier.work
+127.0.0.1 dev.atlier.online
 ```
 
 2. `.env` ファイルの追加
