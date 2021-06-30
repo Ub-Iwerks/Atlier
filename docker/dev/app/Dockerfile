@@ -22,13 +22,12 @@ RUN apt-get update -qq && \
     supervisor \
     mariadb-client \
     imagemagick \
-    graphviz && \
-    rm -rf /var/cache/apt/archives/* /var/lib/apt/lists/*
+    graphviz \
+    unzip
 
 RUN gem install bundler
 
-RUN apt-get update && apt-get install -y unzip && \
-    CHROME_DRIVER_VERSION=`curl -sS chromedriver.storage.googleapis.com/LATEST_RELEASE` && \
+RUN CHROME_DRIVER_VERSION=`curl -sS chromedriver.storage.googleapis.com/LATEST_RELEASE` && \
     wget -N http://chromedriver.storage.googleapis.com/$CHROME_DRIVER_VERSION/chromedriver_linux64.zip -P ~/ && \
     unzip ~/chromedriver_linux64.zip -d ~/ && \
     rm ~/chromedriver_linux64.zip && \
@@ -39,6 +38,8 @@ RUN apt-get update && apt-get install -y unzip && \
     sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list' && \
     apt-get update && apt-get install -y google-chrome-stable
 
+RUN rm -rf /var/cache/apt/archives/* /var/lib/apt/lists/*
+
 # yarn install Preparation
 RUN npm install n -g
 RUN n 12.18.4
@@ -47,7 +48,7 @@ RUN n 12.18.4
 RUN groupadd nginx
 RUN useradd -g nginx nginx
 ADD nginx/nginx.conf /etc/nginx/nginx.conf
-ADD nginx/dev.atlier.work.conf /etc/nginx/conf.d/dev.atlier.work.conf
+ADD nginx/dev.atlier.online.conf /etc/nginx/conf.d/dev.atlier.online.conf
 
 ## supervisor
 RUN mkdir -p /var/log/supervisor
