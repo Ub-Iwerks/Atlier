@@ -2,13 +2,13 @@
 
 開発環境の構築手順を以下に記載します。
 
-![開発環境](https://user-images.githubusercontent.com/72424114/123368372-aab9ce80-d5b6-11eb-9fef-dd9144c33bf3.png)
+![開発環境](https://user-images.githubusercontent.com/72424114/123391803-56731680-d5d7-11eb-9ab0-3596397422af.png)
 
 1. localhostの追加
 
 ```bash
 sudo vim /etc/hosts
-127.0.0.1 dev.atlier.work
+127.0.0.1 dev.atlier.online
 ```
 
 2. `.env` ファイルの追加
@@ -37,4 +37,4 @@ rails db:migrate
 /usr/bin/supervisorctl start app
 ```
 
-5. [http://dev.atlier.work/](http://dev.adachin.com/)にアクセス
+5. [http://dev.atlier.online/](http://dev.atlier.online/)にアクセス
