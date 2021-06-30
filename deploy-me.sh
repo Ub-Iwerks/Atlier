@@ -1,3 +1,3 @@
 #!/bin/bash
 
-cd /var/www/Atlier/ && git pull
+cd /var/www/Atlier/ && git pull origin develop
