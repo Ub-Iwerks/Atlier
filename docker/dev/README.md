@@ -1,8 +1,8 @@
-## 0. atlier_dev
+## 0. 開発環境構築手順
 
 開発環境の構築手順を以下に記載します。
 
-![開発環境](https://user-images.githubusercontent.com/72424114/123391803-56731680-d5d7-11eb-9ab0-3596397422af.png)
+![開発環境構成図](https://user-images.githubusercontent.com/72424114/124074758-ec4aed80-da7e-11eb-8a76-48a2f8a2f35a.png)
 
 1. localhostの追加
 
@@ -34,6 +34,7 @@ docker exec -it atlier_dev bash
 
 bundle install
 rails db:migrate
+rails assets:precompile
 /usr/bin/supervisorctl start app
 ```
 

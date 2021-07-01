@@ -1,6 +1,10 @@
-## 0. 開発環境構築手順
+## 0.アプリケーション全体構成図
 
-![開発環境](https://user-images.githubusercontent.com/72424114/123391803-56731680-d5d7-11eb-9ab0-3596397422af.png)
+https://atlier.online/
+
+![全体構成図](https://user-images.githubusercontent.com/72424114/124074593-aee66000-da7e-11eb-96f5-1442f8b5017e.png)
+
+### 開発環境構築手順
 
 1. hostsファイルにドメイン名とIPアドレスを追加
 
@@ -32,6 +36,7 @@ docker exec -it atlier_dev bash
 
 bundle install
 rails db:migrate
+rails assets:precompile
 /usr/bin/supervisorctl start app
 ```
 
@@ -253,17 +258,21 @@ PRのコメントでは、今回のPRで追加・修正された機能、その�
 
 バックエンド
 
-- Ruby 2.6.6
+- Ruby 2.6.7
 - Rails 6.1.3
-- RSpec
-- Rubocop
+- RSpec 3.10
+- Rubocop 0.76.0
 
 インフラ
 
-- docker 3.0
-- heroku
+- docker 2.0
+- AWS VPC
+- AWS EC2
 - AWS S3
-- mysql 8.0
+- Nginx
+- Unicorn
+- Supervisor
+- mysql 5.6
 
 ## 7. DB設計
 ![Atlier_ER図](https://user-images.githubusercontent.com/72424114/116229445-7cc03580-a791-11eb-8bb6-01c1a6cc4d82.png)
