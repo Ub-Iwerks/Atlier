@@ -265,7 +265,7 @@ PRのコメントでは、今回のPRで追加・修正された機能、その�
 
 インフラ
 
-- docker 2.0
+- Docker 2.0
 - AWS VPC
 - AWS EC2
 - AWS S3
