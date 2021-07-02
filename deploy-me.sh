@@ -1,4 +1,4 @@
 #!/bin/bash
 
 cd /var/www/Atlier/ && git pull
-bundle install install RAILS_ENV=production
+bundle install RAILS_ENV=production
