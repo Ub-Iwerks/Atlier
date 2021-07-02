@@ -254,7 +254,7 @@ PRのコメントでは、今回のPRで追加・修正された機能、その�
 - CSS
 - Sass
 - Bootstrap
-- Javascript (jquery)
+- Javascript (jQuery)
 
 バックエンド
 
