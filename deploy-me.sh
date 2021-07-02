@@ -1,4 +1,4 @@
 #!/bin/bash
 
 cd /var/www/Atlier/ && git pull origin master
-bundle install
+cd /var/www/Atlier/ && bundle install
