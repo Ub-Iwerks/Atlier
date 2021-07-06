@@ -43,3 +43,5 @@ config/environments/*.local.yml
 /.env.production
 
 /docker/dev/mysql/db_data
+
+/terraform/aws/aws_region.tf
