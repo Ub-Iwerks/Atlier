@@ -2,7 +2,7 @@
 resource "aws_security_group" "atlier-web_tf" {
   name        = "atlier-web_tf"
   description = "atlier-web_tf"
-  vpc_id      = "${aws_vpc.atlier-web_vpc_tf.id}"
+  vpc_id      = aws_vpc.atlier-web_vpc_tf.id
 
   ingress {
     from_port   = 80

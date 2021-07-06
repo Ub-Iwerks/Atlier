@@ -44,4 +44,5 @@ config/environments/*.local.yml
 
 /docker/dev/mysql/db_data
 
-/terraform/aws/aws_region.tf
+/terraform/aws/.terraform.lock.hcl
+/terraform/aws/.terraform
