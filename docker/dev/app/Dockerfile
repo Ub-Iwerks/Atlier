@@ -1,4 +1,4 @@
-FROM ruby:2.6
+FROM ruby:2.6.7
 ENV APP_ROOT /var/www/app
 WORKDIR $APP_ROOT
 

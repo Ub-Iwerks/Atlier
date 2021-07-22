@@ -15,6 +15,7 @@ class User < ApplicationRecord
   has_many :following, through: :active_relationships, source: :followed
   has_many :followers, through: :passive_relationships, source: :follower
   has_many :footprints, dependent: :destroy
+  has_many :stocks, dependent: :destroy
   devise :database_authenticatable, :registerable, :recoverable,
          :rememberable, :confirmable, :omniauthable, :validatable, password_length: 8..128
   validates :username, presence: true, length: { maximum: 50 }

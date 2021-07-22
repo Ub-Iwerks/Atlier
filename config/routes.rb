@@ -30,6 +30,7 @@ Rails.application.routes.draw do
   resources :comments, only: [:create, :destroy]
   resources :relationships, only: [:create, :destroy]
   resources :notifications, only: :index
+  resources :stocks
   if Rails.env.development?
     mount LetterOpenerWeb::Engine, at: "/letter_opener"
   end
