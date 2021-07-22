@@ -10,6 +10,7 @@ class Work < ApplicationRecord
   has_many :liked_users, through: :likes, source: :user
   has_many :notifications, dependent: :destroy
   has_many :footprints, dependent: :destroy
+  has_many :stocks, dependent: :destroy
   validates :user_id, presence: true
   validates :title, presence: true, length: { maximum: 50 }
   validates :concept, length: { maximum: 300 }
