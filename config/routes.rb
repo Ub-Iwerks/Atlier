@@ -18,6 +18,7 @@ Rails.application.routes.draw do
       get :following, :followers
       post :favorites
       post :my_works
+      get :stocks
     end
   end
   resources :works do
@@ -30,7 +31,6 @@ Rails.application.routes.draw do
   resources :comments, only: [:create, :destroy]
   resources :relationships, only: [:create, :destroy]
   resources :notifications, only: :index
-  resources :stocks
   if Rails.env.development?
     mount LetterOpenerWeb::Engine, at: "/letter_opener"
   end

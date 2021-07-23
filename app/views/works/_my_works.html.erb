@@ -9,6 +9,9 @@
       <%= submit_tag "お気に入り", class: "btn__works" %>
     <% end %>
   </li>
+  <li>
+    <%= link_to "保存した作品", stocks_user_path(@user), class: "btn__works" %>
+  </li>
 </ul>
 <div class="user--works__own" >
   <% if @user.works.present? %>

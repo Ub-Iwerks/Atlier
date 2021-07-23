@@ -98,4 +98,23 @@ class UsersController < ApplicationController
       format.js
     end
   end
+
+  def stocks
+    @user = User.find(params[:id])
+    @works = @works = Work.
+      select("works.*, stocks.user_id, sum(footprints.counts) as total_footprint_counts").
+      joins(:stocks, :footprints).
+      includes(
+        [
+          :comments,
+          :likes,
+          image_attachment: :blob,
+          user: { avatar_attachment: :blob },
+          illustrations: { photo_attachment: :blob },
+        ]
+      ).where("stocks.user_id = ?", @user.id).
+      group("works.id").
+      page(params[:page])
+    render "works/stocks"
+  end
 end
