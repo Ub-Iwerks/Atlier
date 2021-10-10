@@ -10,7 +10,9 @@
     <% end %>
   </li>
   <li>
-    <%= link_to "保存した作品", stocks_user_path(@user), class: "btn__works" %>
+    <%= form_tag(stocks_user_path(@user), method: :get) do %>
+      <%= submit_tag "保存した作品", class: "btn__works" %>
+    <% end %>
   </li>
 </ul>
 <div class="user--works__own" >
