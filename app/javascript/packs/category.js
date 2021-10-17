@@ -1,18 +1,14 @@
 $(document).on('turbolinks:load', function () {
   $(function(){
-    function appendOption(category){
+    function getOption(category){
       var html = `<option value="${category.id}">${category.name}</option>`;
       return html;
     }
-    function appendChildrenBox(insertHTML){
-      var childSelectHtml = "";
-      childSelectHtml = `<div class="category__child category__select" id="children_wrapper">
-                          <select class="select_field" name="work_create[category_id]" id="child__category">
-                            <option value="">&emsp;サブカテゴリー&emsp;</option>
-                            ${insertHTML}
-                          </select>
-                        </div>`;
-      $('.field--category').append(childSelectHtml);
+    function removeOptions(select_id){
+      var options = document.getElementById(select_id).children;
+      for (let count = options.length; count > 1; count--) {
+        options[1].remove();
+      }
     }
     $("#parent_category_id").on('change',function(){
       var parentId = document.getElementById('parent_category_id').value;
@@ -24,22 +20,23 @@ $(document).on('turbolinks:load', function () {
           dataType: 'json'
         })
         .done(function(children){
-          $('#children_wrapper').remove();
+          removeOptions('work_create_category_id');
+          var first_option = document.getElementById('work_create_category_id').children[0];
           var insertHTML = '';
           children.forEach(function(child){
-            insertHTML += appendOption(child);
+            insertHTML += getOption(child);
           });
-          appendChildrenBox(insertHTML);
+          first_option.insertAdjacentHTML('afterend', insertHTML);
         })
         .fail(function(){
           alert('カテゴリー取得に失敗しました');
         })
       }else{
-        $('#children_wrapper').remove();
+        removeOptions('work_create_category_id');
       }
     });
   });
-
+/*
   $(function(){
     function appendOption(category){
       var html = `<option value="${category.id}">${category.name}</option>`;
@@ -80,4 +77,5 @@ $(document).on('turbolinks:load', function () {
       }
     });
   });
+*/
 });
