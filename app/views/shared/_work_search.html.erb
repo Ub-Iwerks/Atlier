@@ -8,7 +8,10 @@
     <div class="field--category">
       <%= f.label :category_id, "作品カテゴリー", class: "f-control" %>
       <span class="category__parent category__select">
-        <%= select_tag "work_search[parent_category_id]", options_from_collection_for_select(category_parent_array, :id, :name), include_blank: "指定なし", class:"select_field", id: "work_search_parent_category_id" %>
+        <%= select_tag "work_search[parent_category_id]", options_from_collection_for_select(category_parent_array, :id, :name), include_blank: "指定なし", class:"select_field" %>
+      </span>
+      <span class="category__child category__select" id="children_wrapper">
+        <%= f.select :category_id, [], { include_blank: "サブカテゴリー" }, { class: "select_field" } %>
       </span>
     </div>
     <div class="actions">
