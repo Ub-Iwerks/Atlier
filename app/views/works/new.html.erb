@@ -13,7 +13,10 @@
       <%= form.label :category_id, "作品カテゴリー", class: "f-control" %>
       <div class="field--category">
         <div class="category__parent category__select">
-          <%= select_tag "parent_category_id", options_from_collection_for_select(@category_parent_array, :id, :name), include_blank: "選択してください", class:"select_field" %>
+          <%= select_tag "parent_category_id", options_from_collection_for_select(@category_parent_array, :id, :name), include_blank: "メインカテゴリー(必須)", class:"select_field" %>
+        </div>
+        <div class="category__child category__select" id="children_wrapper">
+          <%= form.select :category_id, [], { include_blank: "サブカテゴリー(必須)" }, { class:"select_field" } %>
         </div>
       </div>
       <div class="field">
