@@ -6,4 +6,5 @@ require("bootstrap")
 require("jquery")
 require('./image_preview')
 require('./category')
+require('./alert')
 import "bootstrap"
