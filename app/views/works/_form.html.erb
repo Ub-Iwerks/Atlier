@@ -1,0 +1,76 @@
+<%= f.hidden_field :user_id, value: current_user.id %>
+
+<div class="field">
+  <%= f.label :title, "作品タイトル", class: "f-control" %>
+  <%= f.text_field :title %>
+  <div class="form__underline"></div>
+</div>
+
+<div class="field">
+  <%= f.label :category_id, "作品カテゴリー", class: "f-control" %>
+  <div class="field--category">
+    <div class="category__parent category__select">
+      <%= select_tag "parent_category_id", options_from_collection_for_select(@category_parent_array, :id, :name), include_blank: "メインカテゴリー(必須)", class:"select_field" %>
+    </div>
+    <div class="category__child category__select" id="children_wrapper">
+      <%= f.select :category_id, [], { include_blank: "サブカテゴリー(必須)" }, { class:"select_field" } %>
+    </div>
+  </div>
+</div>
+
+<div class="field">
+  <strong>作品メイン画像</strong>
+  <%= f.label :image, class: 'image_label f-control' do %>
+    <div class="prev-contents">
+      <div class="prev-content">
+        <%= image_tag(Settings.default_image[:work], alt: "preview", class: "prev-work") %>
+        <%= f.file_field :image, class: 'hidden_work hidden__field image__field', accept: "image/jpeg,image/gif,image/png" %>
+      </div>
+    </div>
+  <% end %>
+</div>
+
+<div class="field">
+  <%= f.label :concept, "コンセプト", class: "f-control" %>
+  <%= f.text_area :concept %>
+  <div class="form__underline"></div>
+</div>
+
+<div class="field">
+  <%= f.label :description, "作品説明", class: "f-control" %>
+  <%= f.text_area :description %>
+  <div class="form__underline"></div>
+</div>
+
+<% count = 0 %>
+<%= f.fields_for :illustrations do |ff| %>
+  <div class="illustration--package">
+    <h4 class="illustration__label">サブ画像<%= count + 1 %>&nbsp;&nbsp;<span>(任意)</span></h4>
+
+    <div class="field sub_field sub_field__name">
+      <%= ff.label :name, class: "f-control label__invisible" %>
+      <%= ff.text_field :name, placeholder: "サブ画像#{count + 1}の名前" %>
+      <div class="form__underline"></div>
+    </div>
+
+    <div class="illustration--box">
+      <div class="field sub_field sub_field__photo">
+        <%= ff.label :photo, class: 'image_label f-control' do %>
+          <div class="prev-contents">
+            <div class="prev-content">
+              <%= image_tag(Settings.default_image[:work], alt: "preview", class: "prev-#{count}") %>
+              <%= ff.file_field :photo, class: "hidden_photo#{count} hidden__field image__field", accept: "image/jpeg,image/gif,image/png" %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+
+      <div class="field sub_field sub_field__description">
+        <%= ff.label :description, class: "f-control label__invisible" %>
+        <%= ff.text_area :description, placeholder: "サブ画像#{count + 1}の説明..." %>
+        <div class="form__underline"></div>
+      </div>
+    </div>
+    <% count += 1 %>
+  </div>
+<% end %>
