@@ -11,6 +11,19 @@ $(function(){
   // document.getElementByClassName('~')で取得できるプロトタイプは、HTMLcollection
   // 変更で必要なターゲットは、HTMLcollection(0)である、要素そのもの。
 
+  // var imageField = document.querySelector('#work_create_image');
+  // var preview = document.querySelector('.prev-work');
+  // imageField.addEventListener('change', function() {
+  //   var file = this.files[0];
+  //   var reader = new FileReader();
+  //   // 画像が変更され、その読み込みが行われるタイミング（readAsDataURL）で発火。
+  //   reader.addEventListener("load", function () {
+  //     imageURL = reader.result
+  //     preview.setAttribute('src', imageURL);
+  //   }, false);
+
+  //   if (file) reader.readAsDataURL(file);
+  // })
 
 
 
@@ -67,31 +80,31 @@ $(function(){
   // これがメイン画像のセレクトタグ
   // document.querySelectorAll("#work_create_image");
 
-  $(function () {
-    function buildHTML(image) {
-      var html =
-        `
-        <div class="prev-content">
-          <img src="${image}", alt="preview" class="prev-work">
-        </div>
-        `
-      return html;
-    }
-    $(document).on('change', '#work_create_image', function () {
-      var file = this.files[0];
-      var reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onload = function () {
-        var image = this.result;
-        if ($('.prev-content').length == 0) {
-          var html = buildHTML(image)
-          $('.prev-contents').prepend(html);
-        } else {
-          $('.prev-content .prev-work').attr({ src: image });
-        }
-      }
-    });
-  });
+  // $(function () {
+  //   function buildHTML(image) {
+  //     var html =
+  //       `
+  //       <div class="prev-content">
+  //         <img src="${image}", alt="preview" class="prev-work">
+  //       </div>
+  //       `
+  //     return html;
+  //   }
+  //   $(document).on('change', '#work_create_image', function () {
+  //     var file = this.files[0];
+  //     var reader = new FileReader();
+  //     reader.readAsDataURL(file);
+  //     reader.onload = function () {
+  //       var image = this.result;
+  //       if ($('.prev-content').length == 0) {
+  //         var html = buildHTML(image)
+  //         $('.prev-contents').prepend(html);
+  //       } else {
+  //         $('.prev-content .prev-work').attr({ src: image });
+  //       }
+  //     }
+  //   });
+  // });
 
   // $(function () {
   //   function buildHTML(image) {
