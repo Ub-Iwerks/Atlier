@@ -4,7 +4,6 @@ require("@rails/activestorage").start()
 require("channels")
 require("bootstrap")
 require("jquery")
-require('./image_preview')
 require('./category')
-require('./alert')
+require('./image')
 import "bootstrap"
