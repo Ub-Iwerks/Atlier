@@ -31,7 +31,13 @@
 </div>
 
 <div class="field">
-  <%= f.label :concept, "コンセプト", class: "f-control" %>
+  <div class='label--wrapper'>
+    <%= f.label :concept, "コンセプト", class: "f-control" %>
+    <div class='width40 display_flex'>
+      <%= check_box_tag :pending, true, false, class: 'in_label__checkbox' %>
+      <span>コンセプト未定</span>
+    </div>
+  </div>
   <%= f.text_area :concept %>
   <div class="form__underline"></div>
 </div>
