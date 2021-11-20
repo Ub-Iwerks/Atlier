@@ -5,5 +5,6 @@ require("channels")
 require("bootstrap")
 require("jquery")
 require('./category')
+require('./form')
 require('./image')
 import "bootstrap"
