@@ -1,7 +1,8 @@
 class WorksController < ApplicationController
   before_action :authenticate_user!, only: [:create, :destroy, :new, :show]
-  before_action :correct_user, only: [:destroy]
+  before_action :correct_user, only: :destroy
   before_action :set_categories, only: [:new, :create, :index, :search]
+  before_action :check_work_create_params, only: :create
   before_action :set_work_search, except: :index
 
   def show
@@ -93,6 +94,10 @@ class WorksController < ApplicationController
       :category_id,
       :parent_category_id,
     )
+  end
+
+  def check_work_create_params
+    params[:work_create][:concept] = 'コンセプト未定' if params[:pending]
   end
 
   def correct_user
