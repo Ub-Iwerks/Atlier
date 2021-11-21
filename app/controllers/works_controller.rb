@@ -3,7 +3,7 @@ class WorksController < ApplicationController
   before_action :correct_user, only: :destroy
   before_action :set_categories, only: [:new, :create, :index, :search]
   before_action :check_work_create_params, only: :create
-  before_action :set_work_search, except: :index
+  skip_before_action :set_work_search, only: :index
 
   def show
     @work = Work.
@@ -63,8 +63,13 @@ class WorksController < ApplicationController
   end
 
   def index
-    @work_search = WorkSearch.new(work_search_params)
-    @works = @work_search.search.page(params[:page])
+    if params[:work_search]
+      @work_search = WorkSearch.new(work_search_params)
+      @works = @work_search.search.page(params[:page])
+    else
+      @work_search = WorkSearch.new
+      @works = nil
+    end
   end
 
   def search
