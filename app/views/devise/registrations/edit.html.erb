@@ -18,7 +18,7 @@
               <% else %>
                 <%= image_tag(Settings.default_image[:avatar], alt: "preview", class: "prev-image  avatar") %>
               <% end %>
-              <%= f.file_field :avatar, accept: "image/jpeg,image/gif,image/png", class: 'hidden_file' %>
+              <%= f.file_field :avatar, accept: "image/jpeg,image/gif,image/png", class: 'hidden_file image__field' %>
             </div>
           </div>
         <% end %>
