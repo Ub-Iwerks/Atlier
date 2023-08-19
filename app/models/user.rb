@@ -90,4 +90,9 @@ class User < ApplicationRecord
       notification.save if notification.valid?
     end
   end
+
+  # メール認証をせずともログインできるようにする
+  def confirmation_required?
+    false
+  end
 end
