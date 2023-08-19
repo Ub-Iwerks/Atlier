@@ -13,11 +13,8 @@ sudo vim /etc/hosts
 
 2. `.env` ファイルの追加
 
-```
-MYSQL_HOST="db"
-MYSQL_NAME="app"
-MYSQL_USERNAME="root"
-MYSQL_PASSWORD="password"
+```bash
+cp .env.example .env
 ```
 
 3. dockerコンテナの立ち上げ
@@ -35,7 +32,7 @@ docker exec -it atlier_dev bash
 bundle install
 rails db:migrate
 rails assets:precompile
-/usr/bin/supervisorctl start app
+/usr/bin/supervisorctl restart app
 ```
 
 5. [http://dev.atlier.online/](http://dev.atlier.online/)にアクセス
