@@ -12,7 +12,7 @@ services:
     stdin_open: true
     depends_on:
       - db
-      - chrome
+      # - chrome
   db:
     container_name: atlier_db_dev
     build: ./mysql/
@@ -25,7 +25,7 @@ services:
       TZ: "Asia/Tokyo"
     volumes:
       - ./mysql/db_data:/var/lib/mysql
-  chrome:
-    image: selenium/standalone-chrome:latest
-    ports:
-      - 4444:4444
+  # chrome:
+  #   image: selenium/standalone-chrome:latest
+  #   ports:
+  #     - 4444:4444
