@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!, except: :show
+
   def show
     @user = User.find(params[:id])
     @works = @user.works.
@@ -73,8 +74,8 @@ class UsersController < ApplicationController
       ).where("likes.user_id = ?", @user.id).
       group("works.id").
       page(params[:page])
+
     respond_to do |format|
-      format.html
       format.js
     end
   end
@@ -93,8 +94,8 @@ class UsersController < ApplicationController
         ]
       ).group("works.id").
       page(params[:page])
+
     respond_to do |format|
-      format.html
       format.js
     end
   end

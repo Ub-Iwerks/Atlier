@@ -1,11 +1,13 @@
 <% set_meta_tags title: "#{@user.username}" %>
 <div class="row">
   <div class="col-md-offset-2 col-md-8">
+
     <section class="user--info">
       <div class="user__main">
         <%= display_avatar_for @user, size: Settings.avatar_size[:in_profile] %>
         <h1 class="username"><%= @user.username %></h1>
       </div>
+
       <div class="user__detail">
         <div class="user__relation">
           <%= render "shared/stats", user: @user %>
@@ -25,6 +27,7 @@
         </ul>
       </div>
     </section>
+
     <section class="user--works">
       <%= render "works/my_works" %>
     </section>
