@@ -59,7 +59,7 @@ class UsersController < ApplicationController
     render "show_follow"
   end
 
-  def get_works
+  def get_works_owned
     @user = User.find(params[:id])
     @works = @user.works.
       select("works.*, sum(footprints.counts) as total_footprint_counts").

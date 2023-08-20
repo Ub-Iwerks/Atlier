@@ -1,6 +1,6 @@
 <ul class="user--works__types">
   <li>
-    <%= form_tag(url_for(action: 'get_works'), remote: true, method: :get) do %>
+    <%= form_tag(url_for(action: 'get_works_owned'), remote: true, method: :get) do %>
       <%= submit_tag "作品一覧", class: "btn__works" %>
     <% end %>
   </li>
