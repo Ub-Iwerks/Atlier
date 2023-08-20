@@ -1,0 +1,12 @@
+<div class="user--works__own" >
+  <% if @works.present? %>
+    <ol class="works">
+      <%= render @works %>
+    </ol>
+    <%= paginate @works %>
+  <% elsif current_user?(@user) %>
+    <h4>自分の作品を記録しよう！</h4>
+  <% else %>
+    <h4>作品の登録がまだありません</h4>
+  <% end %>
+</div>

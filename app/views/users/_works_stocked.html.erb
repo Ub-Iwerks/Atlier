@@ -1,0 +1,10 @@
+<div class="user--works__favorites">
+  <% if @works.present? %>
+    <ol class="works">
+      <%= render @works %>
+    </ol>
+    <%= paginate @works %>
+  <% else %>
+    <h4>保存した作品がありません</h4>
+  <% end %>
+</div>

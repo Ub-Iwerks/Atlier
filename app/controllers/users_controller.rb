@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!, except: :show
+
   def show
     @user = User.find(params[:id])
     @works = @user.works.
@@ -58,7 +59,27 @@ class UsersController < ApplicationController
     render "show_follow"
   end
 
-  def favorites
+  def get_works_owned
+    @user = User.find(params[:id])
+    @works = @user.works.
+      select("works.*, sum(footprints.counts) as total_footprint_counts").
+      joins(:footprints).
+      includes(
+        [
+          :likes,
+          :comments,
+          image_attachment: :blob,
+          illustrations: [photo_attachment: :blob],
+        ]
+      ).group("works.id").
+      page(params[:page])
+
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  def get_works_liked
     @user = User.includes(:likes).find(params[:id])
     @works = Work.
       select("works.*, likes.user_id, sum(footprints.counts) as total_footprint_counts").
@@ -73,35 +94,15 @@ class UsersController < ApplicationController
       ).where("likes.user_id = ?", @user.id).
       group("works.id").
       page(params[:page])
+
     respond_to do |format|
-      format.html
       format.js
     end
   end
 
-  def my_works
+  def get_works_stocked
     @user = User.find(params[:id])
-    @works = @user.works.
-      select("works.*, sum(footprints.counts) as total_footprint_counts").
-      joins(:footprints).
-      includes(
-        [
-          :likes,
-          :comments,
-          image_attachment: :blob,
-          illustrations: [photo_attachment: :blob],
-        ]
-      ).group("works.id").
-      page(params[:page])
-    respond_to do |format|
-      format.html
-      format.js
-    end
-  end
-
-  def stocks
-    @user = User.find(params[:id])
-    @works = @works = Work.
+    @works = Work.
       select("works.*, stocks.user_id, sum(footprints.counts) as total_footprint_counts").
       joins(:stocks, :footprints).
       includes(
@@ -115,6 +116,9 @@ class UsersController < ApplicationController
       ).where("stocks.user_id = ?", @user.id).
       group("works.id").
       page(params[:page])
-    render "works/stocks"
+
+      respond_to do |format|
+        format.js
+      end
   end
 end

@@ -1,11 +1,13 @@
 <% set_meta_tags title: "#{@user.username}" %>
 <div class="row">
   <div class="col-md-offset-2 col-md-8">
+
     <section class="user--info">
       <div class="user__main">
         <%= display_avatar_for @user, size: Settings.avatar_size[:in_profile] %>
         <h1 class="username"><%= @user.username %></h1>
       </div>
+
       <div class="user__detail">
         <div class="user__relation">
           <%= render "shared/stats", user: @user %>
@@ -25,8 +27,29 @@
         </ul>
       </div>
     </section>
+
     <section class="user--works">
-      <%= render "works/my_works" %>
+      <ul class="user--works__types">
+        <li class='user--works_owned'>
+          <%= form_tag(url_for(action: 'get_works_owned'), remote: true, method: :get) do %>
+            <%= submit_tag "作品一覧", class: "btn__works user--works__now" %>
+          <% end %>
+        </li>
+        <li class='user--works_liked'>
+          <%= form_tag(url_for(action: 'get_works_liked'), remote: true, method: :get) do %>
+            <%= submit_tag "お気に入り", class: "btn__works" %>
+          <% end %>
+        </li>
+        <li class='user--works_stocked'>
+          <%= form_tag(url_for(action: 'get_works_stocked'), remote: true, method: :get) do %>
+            <%= submit_tag "保存した作品", class: "btn__works" %>
+          <% end %>
+        </li>
+      </ul>
+
+      <span id='js-user--works'>
+        <%= render "works_owned" %>
+      </span>
     </section>
   </div>
 </div>
