@@ -1,11 +1,11 @@
 <ul class="user--works__types">
   <li>
-    <%= form_tag(url_for(action: 'my_works'), remote: true) do %>
+    <%= form_tag(url_for(action: 'my_works'), remote: true, method: :get) do %>
       <%= submit_tag "作品一覧", class: "btn__works" %>
     <% end %>
   </li>
   <li>
-    <%= form_tag(url_for(action: 'favorites'), remote: true) do %>
+    <%= form_tag(url_for(action: 'favorites'), remote: true, method: :get) do %>
       <%= submit_tag "お気に入り", class: "btn__works user--works__now" %>
     <% end %>
   </li>
