@@ -1,5 +1,7 @@
 class User < ApplicationRecord
   before_save { self.email = email.downcase }
+  # TODO: 画像がアタッチされてない場合はデフォルトの画像を返す、という構成にした方が良い
+  # 保存前に画像がアタッチされる
   before_create do
     avatar.attach(io: File.open("#{Settings.default_image[:avatar_path]}"), filename: "#{Settings.default_image[:avatar]}")
   end

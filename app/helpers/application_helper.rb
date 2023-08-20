@@ -29,11 +29,19 @@ module ApplicationHelper
   def display_avatar_for(user, size: Settings.avatar_size[:in_feed])
     resize = "#{size}x#{size}^"
     crop = "#{size}x#{size}+0+0"
-    image_tag(user.avatar.variant(
-      gravity: :center,
-      resize: resize,
-      crop: crop,
-    ).processed, alt: "#{user.username}", class: "avatar")
+
+    if user.avatar.attached?
+      image = user.avatar.variant(
+        gravity: :center,
+        resize: resize,
+        crop: crop,
+      ).processed
+      alt = user.username
+
+      return image_tag(image, alt: alt, class: "avatar")
+    else
+      return image_tag("avatar.png", alt: "default", class: "avatar", size: resize)
+    end
   end
 
   def unchecked_notifications
