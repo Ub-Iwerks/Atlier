@@ -1,27 +1,10 @@
-<ul class="user--works__types">
-  <li class='user--works_owned'>
-    <%= form_tag(url_for(action: 'get_works_owned'), remote: true, method: :get) do %>
-      <%= submit_tag "作品一覧", class: "btn__works" %>
-    <% end %>
-  </li>
-  <li class='user--works_liked'>
-    <%= form_tag(url_for(action: 'get_works_liked'), remote: true, method: :get) do %>
-      <%= submit_tag "お気に入り", class: "btn__works" %>
-    <% end %>
-  </li>
-  <li class='user--works_stocked'>
-    <%= form_tag(url_for(action: 'get_works_stocked'), remote: true, method: :get) do %>
-      <%= submit_tag "保存した作品", class: "btn__works" %>
-    <% end %>
-  </li>
-</ul>
 <div class="user--works__favorites">
   <% if @works.present? %>
-      <ol class="works">
-        <%= render @works %>
-      </ol>
-      <%= paginate @works %>
-    <% else %>
-      <h4>保存した作品がありません</h4>
-    <% end %>
+    <ol class="works">
+      <%= render @works %>
+    </ol>
+    <%= paginate @works %>
+  <% else %>
+    <h4>保存した作品がありません</h4>
+  <% end %>
 </div>

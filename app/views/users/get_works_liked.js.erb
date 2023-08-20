@@ -1,3 +1,3 @@
-$('.user--works').html("<%= escape_javascript(render('works_liked')) %>");
+$('#js-user--works').html("<%= escape_javascript(render('works_liked')) %>");
 $('.user--works__types').find('.user--works__now').removeClass("user--works__now");
 $('.user--works_liked').find('input').addClass("user--works__now");
