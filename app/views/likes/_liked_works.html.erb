@@ -10,13 +10,13 @@
     <% end %>
   </li>
   <li>
-    <%= form_tag(stocks_user_path(@user), method: :get) do %>
+    <%= form_tag(url_for(action: 'stocks'), remote: true, method: :get) do %>
       <%= submit_tag "保存した作品", class: "btn__works" %>
     <% end %>
   </li>
 </ul>
 <div class="user--works__favorites">
-  <% if @user.likes.present? %>
+  <% if @works.present? %>
     <ol class="works">
       <%= render @works %>
     </ol>

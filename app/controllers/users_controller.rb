@@ -102,7 +102,7 @@ class UsersController < ApplicationController
 
   def stocks
     @user = User.find(params[:id])
-    @works = @works = Work.
+    @works = Work.
       select("works.*, stocks.user_id, sum(footprints.counts) as total_footprint_counts").
       joins(:stocks, :footprints).
       includes(
@@ -116,6 +116,9 @@ class UsersController < ApplicationController
       ).where("stocks.user_id = ?", @user.id).
       group("works.id").
       page(params[:page])
-    render "works/stocks"
+
+      respond_to do |format|
+        format.js
+      end
   end
 end

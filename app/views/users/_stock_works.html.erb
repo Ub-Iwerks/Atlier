@@ -1,7 +1,7 @@
 <ul class="user--works__types">
   <li>
     <%= form_tag(url_for(action: 'my_works'), remote: true, method: :get) do %>
-      <%= submit_tag "作品一覧", class: "btn__works user--works__now" %>
+      <%= submit_tag "作品一覧", class: "btn__works" %>
     <% end %>
   </li>
   <li>
@@ -11,20 +11,17 @@
   </li>
   <li>
     <%= form_tag(url_for(action: 'stocks'), remote: true, method: :get) do %>
-      <%= submit_tag "保存した作品", class: "btn__works" %>
+      <%= submit_tag "保存した作品", class: "btn__works user--works__now" %>
     <% end %>
   </li>
 </ul>
-
-<div class="user--works__own" >
+<div class="user--works__favorites">
   <% if @works.present? %>
-    <ol class="works">
-      <%= render @works %>
-    </ol>
-    <%= paginate @works %>
-  <% elsif current_user?(@user) %>
-    <h4>自分の作品を記録しよう！</h4>
-  <% else %>
-    <h4>作品の登録がまだありません</h4>
-  <% end %>
+      <ol class="works">
+        <%= render @works %>
+      </ol>
+      <%= paginate @works %>
+    <% else %>
+      <h4>保存した作品がありません</h4>
+    <% end %>
 </div>
