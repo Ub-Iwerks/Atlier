@@ -1,1 +1,3 @@
 $('.user--works').html("<%= escape_javascript(render('works_owned')) %>");
+$('.user--works__types').find('.user--works__now').removeClass("user--works__now");
+$('.user--works_owned').find('input').addClass("user--works__now");

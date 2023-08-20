@@ -1,1 +1,3 @@
 $('.user--works').html("<%= escape_javascript(render('works_stocked')) %>");
+$('.user--works__types').find('.user--works__now').removeClass("user--works__now");
+$('.user--works_stocked').find('input').addClass("user--works__now");
