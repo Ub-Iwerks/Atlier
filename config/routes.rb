@@ -23,9 +23,9 @@ Rails.application.routes.draw do
   resources :users, only: [:show, :index] do
     member do
       get :following, :followers
-      get :favorites
-      get :my_works
-      get :stocks
+      get :get_works
+      get :get_works_liked
+      get :get_works_stocked
     end
   end
 

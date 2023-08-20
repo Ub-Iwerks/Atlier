@@ -59,7 +59,27 @@ class UsersController < ApplicationController
     render "show_follow"
   end
 
-  def favorites
+  def get_works
+    @user = User.find(params[:id])
+    @works = @user.works.
+      select("works.*, sum(footprints.counts) as total_footprint_counts").
+      joins(:footprints).
+      includes(
+        [
+          :likes,
+          :comments,
+          image_attachment: :blob,
+          illustrations: [photo_attachment: :blob],
+        ]
+      ).group("works.id").
+      page(params[:page])
+
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  def get_works_liked
     @user = User.includes(:likes).find(params[:id])
     @works = Work.
       select("works.*, likes.user_id, sum(footprints.counts) as total_footprint_counts").
@@ -80,27 +100,7 @@ class UsersController < ApplicationController
     end
   end
 
-  def my_works
-    @user = User.find(params[:id])
-    @works = @user.works.
-      select("works.*, sum(footprints.counts) as total_footprint_counts").
-      joins(:footprints).
-      includes(
-        [
-          :likes,
-          :comments,
-          image_attachment: :blob,
-          illustrations: [photo_attachment: :blob],
-        ]
-      ).group("works.id").
-      page(params[:page])
-
-    respond_to do |format|
-      format.js
-    end
-  end
-
-  def stocks
+  def get_works_stocked
     @user = User.find(params[:id])
     @works = Work.
       select("works.*, stocks.user_id, sum(footprints.counts) as total_footprint_counts").
