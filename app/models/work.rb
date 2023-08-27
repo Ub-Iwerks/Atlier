@@ -32,12 +32,8 @@ class Work < ApplicationRecord
     },
     size: {
       less_than: 5.megabytes, message: "5MB以下を選択してください"
-    }
-  validate :image_presence
-
-  def image_presence
-    errors.add(:image, "ファイルを添付してください。") unless image.attached?
-  end
+    },
+    presence: { message: 'を添付してください。' }
 
   def display_image_square(size: 600, main: false)
     if main
