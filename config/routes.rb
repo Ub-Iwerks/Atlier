@@ -41,6 +41,8 @@ Rails.application.routes.draw do
   resources :relationships, only: [:create, :destroy]
   resources :notifications, only: :index
 
+  get 'tags/:title', to: 'tags#show', as: :tag
+
   if Rails.env.development?
     mount LetterOpenerWeb::Engine, at: "/letter_opener"
   end
