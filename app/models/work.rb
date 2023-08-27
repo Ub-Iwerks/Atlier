@@ -1,6 +1,8 @@
 class Work < ApplicationRecord
   default_scope -> { order(created_at: :desc) }
   after_create { Footprint.create(user_id: user_id, work_id: id, counts: 0) }
+
+  # Relations
   has_one_attached :image
   belongs_to :user
   belongs_to :category
@@ -11,12 +13,26 @@ class Work < ApplicationRecord
   has_many :notifications, dependent: :destroy
   has_many :footprints, dependent: :destroy
   has_many :stocks, dependent: :destroy
-  validates :user_id, presence: true
-  validates :title, presence: true, length: { maximum: 50 }
-  validates :concept, length: { maximum: 300 }
-  validates :description, length: { maximum: 300 }
-  validates :image, content_type: { in: %w(image/jpeg image/gif image/png), message: "有効なファイルを選択してください" },
-                    size: { less_than: 5.megabytes, message: "5MB以下を選択してください" }
+  has_many :taggings, dependent: :destroy
+  has_many :tags, through: :taggings
+
+  # Validation
+  validates :user_id,
+    presence: true
+  validates :title,
+    presence: true,
+    length: { maximum: 50 }
+  validates :concept,
+    length: { maximum: 300 }
+  validates :description,
+    length: { maximum: 300 }
+  validates :image,
+    content_type: {
+      in: %w(image/jpeg image/gif image/png), message: "有効なファイルを選択してください"
+    },
+    size: {
+      less_than: 5.megabytes, message: "5MB以下を選択してください"
+    }
   validate :image_presence
 
   def image_presence

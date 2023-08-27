@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_07_22_044111) do
+ActiveRecord::Schema.define(version: 2023_08_27_084006) do
 
   create_table "active_storage_attachments", charset: "utf8mb4", collation: "utf8mb4_bin", force: :cascade do |t|
     t.string "name", null: false
@@ -123,6 +123,23 @@ ActiveRecord::Schema.define(version: 2021_07_22_044111) do
     t.index ["work_id"], name: "index_stocks_on_work_id"
   end
 
+  create_table "taggings", charset: "utf8mb4", collation: "utf8mb4_bin", force: :cascade do |t|
+    t.bigint "work_id"
+    t.bigint "tag_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["tag_id"], name: "index_taggings_on_tag_id"
+    t.index ["work_id", "tag_id"], name: "index_taggings_on_work_id_and_tag_id", unique: true
+    t.index ["work_id"], name: "index_taggings_on_work_id"
+  end
+
+  create_table "tags", charset: "utf8mb4", collation: "utf8mb4_bin", force: :cascade do |t|
+    t.string "title", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["title"], name: "index_tags_on_title", unique: true
+  end
+
   create_table "users", charset: "utf8mb4", collation: "utf8mb4_bin", force: :cascade do |t|
     t.string "username"
     t.string "email", null: false
@@ -169,6 +186,8 @@ ActiveRecord::Schema.define(version: 2021_07_22_044111) do
   add_foreign_key "likes", "works"
   add_foreign_key "stocks", "users"
   add_foreign_key "stocks", "works"
+  add_foreign_key "taggings", "tags"
+  add_foreign_key "taggings", "works"
   add_foreign_key "works", "categories"
   add_foreign_key "works", "users"
 end
