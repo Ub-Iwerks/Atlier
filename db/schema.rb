@@ -137,6 +137,7 @@ ActiveRecord::Schema.define(version: 2023_08_27_084006) do
     t.string "title", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["title"], name: "index_tags_on_title", unique: true
   end
 
   create_table "users", charset: "utf8mb4", collation: "utf8mb4_bin", force: :cascade do |t|
