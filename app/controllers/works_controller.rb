@@ -46,6 +46,7 @@ class WorksController < ApplicationController
 
   def create
     @form = WorkCreate.new(work_create_params)
+    # TODO: 例外をキャッチするようにする
     answer = @form.save
     if answer[0]
       flash[:success] = "投稿に成功しました"
@@ -85,7 +86,7 @@ class WorksController < ApplicationController
       :user_id,
       :concept,
       :description,
-      illustrations_attributes: [
+      illustrations: [
         :name,
         :description,
         :photo,
