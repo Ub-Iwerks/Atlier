@@ -46,13 +46,19 @@ class WorksController < ApplicationController
 
   def create
     @form = WorkCreate.new(work_create_params)
-    # TODO: 例外をキャッチするようにする
-    answer = @form.save
-    if answer[0]
+
+    # Transaction
+    begin
+      save_result, @work = @form.save
+    rescue
+      flash[:danger] = "データ保存中に予期せぬエラーが発生しました。サポートにお問い合わせください。"
+      return render "new"
+    end
+
+    if save_result
       flash[:success] = "投稿に成功しました"
-      redirect_to work_path(answer[1])
+      redirect_to work_path(@work)
     else
-      @crete_errors = answer[1]
       render "new"
     end
   end

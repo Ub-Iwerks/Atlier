@@ -4,7 +4,7 @@
     <h2>新規作品投稿</h2>
 
     <%= form_with model: @form, url: works_path, method: :post, local: true, class: "form--common form--create_work" do |f| %>
-      <%= render "shared/error_messages", object: @crete_errors if @crete_errors %>
+      <%= render "shared/error_messages", object: @work if @work %>
 
       <%= render "form", f: f %>
 
