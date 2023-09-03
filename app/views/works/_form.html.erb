@@ -17,6 +17,18 @@
 </div>
 
 <div class="field">
+  <%= f.label 'tags[][title]', "タグ1", class: "f-control" %>
+  <%= f.text_field 'tags[][title]' %>
+  <div class="form__underline"></div>
+</div>
+
+<div class="field">
+  <%= f.label 'tags[][title]', "タグ2", class: "f-control" %>
+  <%= f.text_field 'tags[][title]' %>
+  <div class="form__underline"></div>
+</div>
+
+<div class="field">
   <strong>作品メイン画像</strong>
   <%= f.label :image, class: 'image_label f-control' do %>
     <div class="prev-contents">
@@ -56,7 +68,7 @@
 
       <div class="field sub_field sub_field__name">
         <%= f.label 'illustrations[][name]', class: "f-control label__invisible" %>
-        <%= f.text_field 'illustrations[][name]', placeholder: "サブ画像#{count + 1}の名前" %>
+        <%= f.text_field 'illustrations[][name]', placeholder: "サブ画像#{count}の名前" %>
         <div class="form__underline"></div>
       </div>
 
@@ -74,7 +86,7 @@
 
         <div class="field sub_field sub_field__description">
           <%= f.label 'illustrations[][description]', class: "f-control label__invisible" %>
-          <%= f.text_area 'illustrations[][description]', placeholder: "サブ画像#{count + 1}の説明..." %>
+          <%= f.text_area 'illustrations[][description]', placeholder: "サブ画像#{count }の説明..." %>
           <div class="form__underline"></div>
         </div>
       </div>

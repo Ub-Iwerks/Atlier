@@ -91,6 +91,9 @@ class WorksController < ApplicationController
       :image,
       :concept,
       :description,
+      tags: [
+        :title,
+      ],
       illustrations: [
         :name,
         :description,
