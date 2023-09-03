@@ -4,7 +4,7 @@
       <%= object.errors.count %>つのエラーが確認されました。
     </h2>
     <ul>
-  <% object.errors.full_messages.each do |msg| %>
+    <% object.errors.full_messages.each do |msg| %>
       <li><%= msg %></li>
     <% end %>
     </ul>

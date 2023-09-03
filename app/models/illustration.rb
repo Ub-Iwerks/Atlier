@@ -1,28 +1,33 @@
 class Illustration < ApplicationRecord
   before_create :add_position_count
+  # Relations
   belongs_to :work
   has_one_attached :photo
-  validates :name, length: { maximum: 50 }
-  validates :description, length: { maximum: 150 }
-  validates :photo, content_type: { in: %w(image/jpeg image/gif image/png), message: "有効なファイルを選択してください" },
-                    size: { less_than: 5.megabytes, message: "5MB以下を選択してください" }
-  validate :image_presence, :works_attached_limit
 
-  def attached_count
-    work.illustrations.count.to_i
-  end
+  # Validation
+  validates :name,
+    length: { maximum: 50 }
+  validates :description,
+    length: { maximum: 150 }
+  validates :photo,
+    content_type: {
+      in: %w(image/jpeg image/gif image/png),
+      message: "有効なファイルを選択してください"
+    },
+    size: {
+      less_than: 5.megabytes,
+      message: "5MB以下を選択してください"
+    },
+    presence: { message: 'を添付してください。' }
+  validate :works_attached_limit
 
   def add_position_count
-    position_count = attached_count + Settings.attached_count[:addition]
+    position_count = work.illustrations.count.to_i + Settings.attached_count[:addition]
     self.position = position_count
   end
 
-  def image_presence
-    errors.add(:photo, "ファイルを添付してください。") unless photo.attached?
-  end
-
   def works_attached_limit
-    if attached_count >= Settings.attached_count[:maximum]
+    if work.illustrations.count.to_i >= Settings.attached_count[:maximum]
       errors.add(:work, "1つの作品添付可能なファイルは#{Settings.attached_count[:maximum]}つまでです。")
     end
   end

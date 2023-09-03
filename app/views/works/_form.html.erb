@@ -1,5 +1,3 @@
-<%= f.hidden_field :user_id, value: current_user.id %>
-
 <div class="field">
   <%= f.label :title, "作品タイトル", class: "f-control" %>
   <%= f.text_field :title %>
@@ -48,35 +46,38 @@
   <div class="form__underline"></div>
 </div>
 
-<% count = 0 %>
-<%= f.fields_for :illustrations do |ff| %>
-  <div class="illustration--package">
-    <h4 class="illustration__label">サブ画像<%= count + 1 %>&nbsp;&nbsp;<span>(任意)</span></h4>
+<%# TODO: 下記のname属性の指定方法だと illustraion.nameを適切に設定できない %>
+<%#       配列を適切に設定する方法があるはず %>
 
-    <div class="field sub_field sub_field__name">
-      <%= ff.label :name, class: "f-control label__invisible" %>
-      <%= ff.text_field :name, placeholder: "サブ画像#{count + 1}の名前" %>
-      <div class="form__underline"></div>
-    </div>
+<% count = 1 %>
+<% 5.times do %>
+    <div class="illustration--package">
+      <h4 class="illustration__label">サブ画像<%= count %>&nbsp;&nbsp;<span>(任意)</span></h4>
 
-    <div class="illustration--box">
-      <div class="field sub_field sub_field__photo">
-        <%= ff.label :photo, class: 'image_label f-control' do %>
-          <div class="prev-contents">
-            <div class="prev-content">
-              <%= image_tag(Settings.default_image[:work], alt: "preview", class: "prev-#{count}") %>
-              <%= ff.file_field :photo, class: "hidden_photo#{count} hidden__field image__field", accept: "image/jpeg,image/gif,image/png" %>
-            </div>
-          </div>
-        <% end %>
-      </div>
-
-      <div class="field sub_field sub_field__description">
-        <%= ff.label :description, class: "f-control label__invisible" %>
-        <%= ff.text_area :description, placeholder: "サブ画像#{count + 1}の説明..." %>
+      <div class="field sub_field sub_field__name">
+        <%= f.label 'illustrations[][name]', class: "f-control label__invisible" %>
+        <%= f.text_field 'illustrations[][name]', placeholder: "サブ画像#{count + 1}の名前" %>
         <div class="form__underline"></div>
       </div>
+
+      <div class="illustration--box">
+        <div class="field sub_field sub_field__photo">
+          <%= f.label 'illustrations[][photo]', class: 'image_label f-control' do %>
+            <div class="prev-contents">
+              <div class="prev-content">
+                <%= image_tag(Settings.default_image[:work], alt: "preview", class: "prev-#{count}") %>
+                <%= f.file_field 'illustrations[][photo]', class: "hidden_photo#{count} hidden__field image__field", accept: "image/jpeg,image/gif,image/png" %>
+              </div>
+            </div>
+          <% end %>
+        </div>
+
+        <div class="field sub_field sub_field__description">
+          <%= f.label 'illustrations[][description]', class: "f-control label__invisible" %>
+          <%= f.text_area 'illustrations[][description]', placeholder: "サブ画像#{count + 1}の説明..." %>
+          <div class="form__underline"></div>
+        </div>
+      </div>
     </div>
-    <% count += 1 %>
-  </div>
+  <% count += 1 %>
 <% end %>
