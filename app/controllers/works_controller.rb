@@ -89,7 +89,6 @@ class WorksController < ApplicationController
       :category_id,
       :title,
       :image,
-      :user_id,
       :concept,
       :description,
       illustrations: [
@@ -97,7 +96,7 @@ class WorksController < ApplicationController
         :description,
         :photo,
       ]
-    )
+    ).merge(user_id: current_user.id)
   end
 
   def work_search_params
