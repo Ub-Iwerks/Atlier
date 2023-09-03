@@ -6,6 +6,7 @@ class WorkCreate
 
   # TODO: validation
   attr_accessor :illustrations
+  attr_accessor :tags
   attribute :user_id, :integer
   attribute :category_id, :integer
   attribute :title, :string
@@ -21,6 +22,7 @@ class WorkCreate
     # Validation
     @valid = true
 
+    # Work
     @work = Work.new(
       title:       title,
       user_id:     user_id,
@@ -31,21 +33,38 @@ class WorkCreate
     @work.image.attach(image)
     @valid = @work.valid?
 
+    # Tag
+    @tags = tags.map do |tag|
+      if !tag[:title].empty?
+        tag = @work.tags.find_or_initialize_by(
+          title: tag[:title]
+        )
+
+        @valid = @valid && tag.valid?
+        tag
+      end
+    end
+    Rails.logger.debug @tags
+
+    # Illustration
     @illustrations = illustrations.map do |illustration|
       if (
-        !illustration['name'].empty? \
-        || !illustration['description'].empty? \
-        || !illustration['photo'].nil?
+        !illustration[:name].empty? \
+        || !illustration[:description].empty? \
+        || !illustration[:photo].nil?
       )
-        @illustration = @work.illustrations.new(
+        illustration = @work.illustrations.new(
           name:        illustration['name'],
           description: illustration['description'],
         )
-        @illustration.photo.attach(illustration['photo'])
+        illustration.photo.attach(illustration['photo'])
 
-        @valid = @valid && @illustration.valid?
+        @valid = @valid && illustration.valid?
+        illustration
       end
     end
+    Rails.logger.debug @illustrations
+    # /Validation
 
     if @valid === false
       return [
@@ -60,12 +79,19 @@ class WorkCreate
         @work.save!
       end
 
+      Tag.transaction do
+        @tags.map do |tag|
+          tag.save! if !tag.nil?
+        end
+      end
+
       Illustration.transaction do
         @illustrations.map do |illustration|
-          @illustration.save!
+          illustration.save! if !illustration.nil?
         end
       end
     end
+    # /Transactions end
 
     return [
       true,
